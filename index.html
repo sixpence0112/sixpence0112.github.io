@@ -141,6 +141,249 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-27T03:00:12.000Z">2019-07-27</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 440 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/27/tomcat配置IP访问/">tomcat配置IP访问;</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1、修改背景："><a href="#1、修改背景：" class="headerlink" title="1、修改背景："></a>1、修改背景：</h3><p>A、通常我们访问我们的web应用格式为：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://ip:端口号/项目名称</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:8080/projectName</span><br></pre></td></tr></table></figure>
+<p>B、如果想直接输入“本地ip”直接进入应用，该如何设置呢？如下面URL：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1</span><br></pre></td></tr></table></figure>
+<h3 id="2、修改tomcat默认端口号、默认项目（应用）名称："><a href="#2、修改tomcat默认端口号、默认项目（应用）名称：" class="headerlink" title="2、修改tomcat默认端口号、默认项目（应用）名称："></a>2、修改tomcat默认端口号、默认项目（应用）名称：</h3><p>A、先将tomcat的默认端口“8080”改为缺省的端口号“80：<em>需要修改”tomcat”根目录下的”conf”目录下的”server.xml”文件</em>”</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>把上面标签中”port”属性”8080”修改为”80”即可（访问url可以不输入端口号）。</p>
+<p>备注：tomcat默认端口号为8080，http服务的默认端口号为80。在浏览器地址栏输入ip或者域名之后，如果不输入端口号，默认就是80端口。 </p>
+<h3 id="2、设置默认应用-这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页"><a href="#2、设置默认应用-这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页" class="headerlink" title="2、设置默认应用(这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页)"></a>2、<strong>设置默认应用(这里用到一个小技巧，注释掉<context>的默认应用配置，默认输入ip就去访问Tomcat主页)</context></strong></h3><p>　　A：注释如下：</p>
+<host name="localhost" appbase="webapps" unpackwars="true" autodeploy="true" xmlvalidation="false" xmlnamespaceaware="false"><br><br><!-- SingleSignOn valve, share authentication between web applications
+Documentation at: /docs/config/valve.html --><br><!--
+<Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+--><br><br><!-- Access log processes all example.
+Documentation at: /docs/config/valve.html --><br><!--
+<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" 
+prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
+--><br><br></host>
+
+
+
+<p>备注：如果不配置<context>标签,由于没有docBase指明项目位置，则项目必须放在host配置中对应的appBase地址下（如webapps）,Tomcat启动时会加载webapps下所有项目，且没有path指引时，默认指引是项目名称。就会访问Tomcat  ROOT下的web.xml <welcome-file>index.jsp</welcome-file>  主页(index.jsp)(因为Tomacat主页是ROOT文件夹下的)。</context></p>
+<p>B：修改ROOT下的index.jsp文件</p>
+<p>&lt;%<br>response.sendRedirect(“/myProject/index.html”);//myProject这里就是我们不熟的项目名称了。<br>%&gt;</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-18T00:52:08.000Z">2019-06-18</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 155 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/18/jsp页面获取session值/">&#39;jsp页面获取session值&#39;</a>
+            
+        </h1>
+        <div class="content">
+            <p>​                                <strong>jsp页面获取session值</strong><br>java代码</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;/chkUser&quot;,method = RequestMethod.POST,produces = &quot;application/json;charset=UTF-8&quot;)</span><br><span class="line">   public String chkUserInfo(HttpServletRequest request,String userName, String userPwd)&#123;</span><br><span class="line">       if(StringUtils.isBlank(userName)||StringUtils.isBlank(userPwd))</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       UserEntity entity = chkLoginService.chkUserService(userName,userPwd);</span><br><span class="line">       if(entity==null)</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       request.getSession().setAttribute(&quot;userEntity&quot;,entity);</span><br><span class="line">       return &quot;true&quot;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>方法一</strong><br>jsp页面<br>使用 request.getSession().getAttribute(“**“) 方法 </p>
+<p><img src="E:\blog\source\images\70" alt="img"> </p>
+<p><strong>方法二</strong><br>在jsp页面 script中使用EL表达式获取<br><strong>var userEntity=’${sessionScope.userEntity.loginName}’;</strong><br>说明<br>1、sessionScope指的是session的范围，类似还有requestScope，pageScope,contextScope </p>
+<p>2、sessionScope整体的意思是获得存放在session.setAttrbute(key,value)的值即session.getAttribute(key) </p>
+<p>原文：<a href="https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244" target="_blank" rel="noopener">https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244</a> </p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-03T10:07:26.000Z">2019-06-03</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 257 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/03/js监听input框/">js监听input框</a>
+            
+        </h1>
+        <div class="content">
+            <p><code>onpropertychange</code>： IE下，当一个HTML元素的属性改变的时候，都能通过 onpropertychange来即时捕获。onchange在属性值改变时还必须使得当前元素失去焦点(onblur)才可以激活该事件。 在用js脚本改动该元素值时候亦能触发onpropertychange事件。<br><code>oninput</code>：是onpropertychange的非IE浏览器版本，支持firefox和opera等浏览器，但有一点不同，它绑定于对象时，并非该对象所有属性改变都能触发事件，它只在对象value值发生改变时奏效。</p>
+<p><code>onchange</code>： (a)当前对象属性改变，并且是由键盘或鼠标事件激发的（脚本触发无效）；(b)当前对象失去焦点(onblur) ；</p>
+<h3 id="jQuery用法"><a href="#jQuery用法" class="headerlink" title="jQuery用法"></a>jQuery用法</h3><p><code>$(&quot;#input1&quot;).bind(&quot;input propertychange&quot;,function(event){ console.log($(&quot;#input1&quot;).val()) });</code></p>
+<h3 id="原生Js用法"><a href="#原生Js用法" class="headerlink" title="原生Js用法"></a>原生Js用法</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    // Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9</span><br><span class="line">        function OnInput (event) &#123;</span><br><span class="line">            alert (&quot;The new content: &quot; + event.target.value);</span><br><span class="line">        &#125;</span><br><span class="line">    // Internet Explorer</span><br><span class="line">        function OnPropChanged (event) &#123;</span><br><span class="line">            if (event.propertyName.toLowerCase () == &quot;value&quot;) &#123;</span><br><span class="line">                alert (&quot;The new content: &quot; + event.srcElement.value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &lt;/script&gt;</span><br><span class="line"> //Input标签</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;text&quot; oninput=&quot;OnInput (event)&quot; onpropertychange=&quot;OnPropChanged (event)&quot; value=&quot;Text field&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-20T02:49:32.000Z">2019-05-20</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 84 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/20/linux命令/">&#39;linux命令&#39;&#39;</a>
+            
+        </h1>
+        <div class="content">
+            <ol>
+<li>sudo chmod -R 777  /工作目录    获取工作目录下的文件操作权限（解决permission denied问题）</li>
+<li>ps -ef |grep tomcat   产看进程，<code>grep</code>后边可跟应用名或者端口号</li>
+<li>tail -f logs/catalina.out  查看<code>tomcat</code>日志，须在<code>tomcat</code>目录下执行</li>
+<li>cp -r userfiles /home 复制文件<code>userfiles</code>到<code>/home</code>目录下 </li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-18T07:59:41.000Z">2019-05-18</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 10 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/18/intellij/">&#39;intellij&#39;</a>
+            
+        </h1>
+        <div class="content">
+            <p>ctrl+alt+t  ：try/if等快捷键</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-05-08T02:15:11.000Z">2019-05-08</time>
                 
                 
@@ -465,51 +708,25 @@
 
 
 
-    <div class="card">
+
     
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2013-12-02T07:30:16.000Z">2013-12-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/默认分类/">默认分类</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 2 words)
-                </span>
-                
-                
-            </div>
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/page/0/">Préc</a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2013/12/02/my-first-blog/">postName</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/page/2/">Suiv</a>
         </div>
-        
-        
-        
-    </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link is-current" href="/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
+            
+        </ul>
+    </nav>
 </div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -550,17 +767,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Entradas
+                        Articles
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        11
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categoria
+                        Catégorie
                     </p>
                     <p class="title has-text-weight-normal">
                         1
@@ -570,7 +787,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Etiquetas
+                        Tags
                     </p>
                     <p class="title has-text-weight-normal">
                         3
@@ -580,7 +797,7 @@
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
-                SEGUIR</a>
+                SUIVRE</a>
         </div>
         
         
@@ -629,7 +846,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            Liens
         </h3>
         <ul class="menu-list">
         
@@ -667,7 +884,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categorias
+                Catégories
             </h3>
             <ul class="menu-list">
             <li>
@@ -688,7 +905,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Nube de etiquetas
+            Nuage de tags
         </h3>
         <a href="/tags/tag1/" style="font-size: 10px;">tag1</a> <a href="/tags/tag2/" style="font-size: 10px;">tag2</a> <a href="/tags/tag3/" style="font-size: 10px;">tag3</a>
     </div>
@@ -702,21 +919,21 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Récents
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/08/开启-关闭Ubuntu防火墙/" class="media-left">
+            <a href="/2019/07/27/tomcat配置IP访问/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;开启/关闭Ubuntu防火墙&#39;">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tomcat配置IP访问;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-08T02:15:11.000Z">2019-05-08</time></div>
-                    <a href="/2019/05/08/开启-关闭Ubuntu防火墙/" class="has-link-black-ter is-size-6">&#39;开启/关闭Ubuntu防火墙&#39;</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T03:00:12.000Z">2019-07-27</time></div>
+                    <a href="/2019/07/27/tomcat配置IP访问/" class="has-link-black-ter is-size-6">tomcat配置IP访问;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -726,16 +943,16 @@
         
         <article class="media">
             
-            <a href="/2019/05/06/linux修改只读文件/" class="media-left">
+            <a href="/2019/06/18/jsp页面获取session值/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="linux修改只读文件">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;jsp页面获取session值&#39;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-06T09:22:42.000Z">2019-05-06</time></div>
-                    <a href="/2019/05/06/linux修改只读文件/" class="has-link-black-ter is-size-6">linux修改只读文件</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T00:52:08.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/jsp页面获取session值/" class="has-link-black-ter is-size-6">&#39;jsp页面获取session值&#39;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -745,16 +962,16 @@
         
         <article class="media">
             
-            <a href="/2019/04/28/README/" class="media-left">
+            <a href="/2019/06/03/js监听input框/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="js监听input框">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-28T00:44:08.073Z">2019-04-28</time></div>
-                    <a href="/2019/04/28/README/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-03T10:07:26.000Z">2019-06-03</time></div>
+                    <a href="/2019/06/03/js监听input框/" class="has-link-black-ter is-size-6">js监听input框</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -764,16 +981,16 @@
         
         <article class="media">
             
-            <a href="/2019/04/26/Mybatis-Plus学习/" class="media-left">
+            <a href="/2019/05/20/linux命令/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mybatis-Plus学习">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;linux命令&#39;&#39;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-26T08:54:25.000Z">2019-04-26</time></div>
-                    <a href="/2019/04/26/Mybatis-Plus学习/" class="has-link-black-ter is-size-6">Mybatis-Plus学习</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-20T02:49:32.000Z">2019-05-20</time></div>
+                    <a href="/2019/05/20/linux命令/" class="has-link-black-ter is-size-6">&#39;linux命令&#39;&#39;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -783,16 +1000,16 @@
         
         <article class="media">
             
-            <a href="/2019/04/24/hello-world/" class="media-left">
+            <a href="/2019/05/18/intellij/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;intellij&#39;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-24T02:36:01.797Z">2019-04-24</time></div>
-                    <a href="/2019/04/24/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-18T07:59:41.000Z">2019-05-18</time></div>
+                    <a href="/2019/05/18/intellij/" class="has-link-black-ter is-size-6">&#39;intellij&#39;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -808,9 +1025,31 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -818,7 +1057,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -854,7 +1093,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -899,21 +1138,21 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Récents
         </h3>
         
         <article class="media">
             
-            <a href="/2019/05/08/开启-关闭Ubuntu防火墙/" class="media-left">
+            <a href="/2019/07/27/tomcat配置IP访问/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;开启/关闭Ubuntu防火墙&#39;">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tomcat配置IP访问;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-08T02:15:11.000Z">2019-05-08</time></div>
-                    <a href="/2019/05/08/开启-关闭Ubuntu防火墙/" class="has-link-black-ter is-size-6">&#39;开启/关闭Ubuntu防火墙&#39;</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-27T03:00:12.000Z">2019-07-27</time></div>
+                    <a href="/2019/07/27/tomcat配置IP访问/" class="has-link-black-ter is-size-6">tomcat配置IP访问;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -923,16 +1162,16 @@
         
         <article class="media">
             
-            <a href="/2019/05/06/linux修改只读文件/" class="media-left">
+            <a href="/2019/06/18/jsp页面获取session值/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="linux修改只读文件">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;jsp页面获取session值&#39;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-06T09:22:42.000Z">2019-05-06</time></div>
-                    <a href="/2019/05/06/linux修改只读文件/" class="has-link-black-ter is-size-6">linux修改只读文件</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T00:52:08.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/jsp页面获取session值/" class="has-link-black-ter is-size-6">&#39;jsp页面获取session值&#39;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -942,16 +1181,16 @@
         
         <article class="media">
             
-            <a href="/2019/04/28/README/" class="media-left">
+            <a href="/2019/06/03/js监听input框/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="js监听input框">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-28T00:44:08.073Z">2019-04-28</time></div>
-                    <a href="/2019/04/28/README/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-03T10:07:26.000Z">2019-06-03</time></div>
+                    <a href="/2019/06/03/js监听input框/" class="has-link-black-ter is-size-6">js监听input框</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -961,16 +1200,16 @@
         
         <article class="media">
             
-            <a href="/2019/04/26/Mybatis-Plus学习/" class="media-left">
+            <a href="/2019/05/20/linux命令/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mybatis-Plus学习">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;linux命令&#39;&#39;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-26T08:54:25.000Z">2019-04-26</time></div>
-                    <a href="/2019/04/26/Mybatis-Plus学习/" class="has-link-black-ter is-size-6">Mybatis-Plus学习</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-20T02:49:32.000Z">2019-05-20</time></div>
+                    <a href="/2019/05/20/linux命令/" class="has-link-black-ter is-size-6">&#39;linux命令&#39;&#39;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -980,16 +1219,16 @@
         
         <article class="media">
             
-            <a href="/2019/04/24/hello-world/" class="media-left">
+            <a href="/2019/05/18/intellij/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="&#39;intellij&#39;">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-24T02:36:01.797Z">2019-04-24</time></div>
-                    <a href="/2019/04/24/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-18T07:59:41.000Z">2019-05-18</time></div>
+                    <a href="/2019/05/18/intellij/" class="has-link-black-ter is-size-6">&#39;intellij&#39;</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1005,9 +1244,31 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -1015,7 +1276,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1051,7 +1312,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1205,7 +1466,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="Kembali ke atas" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1251,10 +1512,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Entradas',
+                POSTS: 'Articles',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categorias',
-                TAGS: 'Etiquetas',
+                CATEGORIES: 'Catégories',
+                TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

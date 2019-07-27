@@ -2,19 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Archives: 2019 - Sixpence</title>
+<title>&#39;jsp页面获取session值&#39; - Sixpence</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Sixpence">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+    <meta name="description" content="​                                jsp页面获取session值java代码 12345678910@RequestMapping(value = &amp;quot;/chkUser&amp;quot;,method = RequestMethod.POST,produces = &amp;quot;application/json;charset=UTF-8&amp;quot;)   publ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#39;jsp页面获取session值&#39;">
+<meta property="og:url" content="http://yoursite.com/2019/06/18/jsp页面获取session值/index.html">
 <meta property="og:site_name" content="Sixpence">
+<meta property="og:description" content="​                                jsp页面获取session值java代码 12345678910@RequestMapping(value = &amp;quot;/chkUser&amp;quot;,method = RequestMethod.POST,produces = &amp;quot;application/json;charset=UTF-8&amp;quot;)   publ">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-06-18T10:12:32.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sixpence">
+<meta name="twitter:title" content="&#39;jsp页面获取session值&#39;">
+<meta name="twitter:description" content="​                                jsp页面获取session值java代码 12345678910@RequestMapping(value = &amp;quot;/chkUser&amp;quot;,method = RequestMethod.POST,produces = &amp;quot;application/json;charset=UTF-8&amp;quot;)   publ">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Sixpence" height="28">
+                <img src="/images/logo.svg" alt="&#39;jsp页面获取session值&#39;" height="28">
             
             </a>
         </div>
@@ -134,170 +138,121 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-18T00:52:08.000Z">2019-06-18</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 155 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                &#39;jsp页面获取session值&#39;
+            
+        </h1>
+        <div class="content">
+            <p>​                                <strong>jsp页面获取session值</strong><br>java代码</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;/chkUser&quot;,method = RequestMethod.POST,produces = &quot;application/json;charset=UTF-8&quot;)</span><br><span class="line">   public String chkUserInfo(HttpServletRequest request,String userName, String userPwd)&#123;</span><br><span class="line">       if(StringUtils.isBlank(userName)||StringUtils.isBlank(userPwd))</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       UserEntity entity = chkLoginService.chkUserService(userName,userPwd);</span><br><span class="line">       if(entity==null)</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       request.getSession().setAttribute(&quot;userEntity&quot;,entity);</span><br><span class="line">       return &quot;true&quot;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>方法一</strong><br>jsp页面<br>使用 request.getSession().getAttribute(“**“) 方法 </p>
+<p><img src="E:\blog\source\images\70" alt="img"> </p>
+<p><strong>方法二</strong><br>在jsp页面 script中使用EL表达式获取<br><strong>var userEntity=’${sessionScope.userEntity.loginName}’;</strong><br>说明<br>1、sessionScope指的是session的范围，类似还有requestScope，pageScope,contextScope </p>
+<p>2、sessionScope整体的意思是获得存放在session.setAttrbute(key,value)的值即session.getAttribute(key) </p>
+<p>原文：<a href="https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244" target="_blank" rel="noopener">https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244</a> </p>
 
-<div class="card widget">
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <h3 class="menu-label has-text-centered">Suka dengan artikel ini? Bantu penulis dengan donasi melalui</h3>
+        <div class="buttons is-centered">
+            
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-27T03:00:12.000Z">2019-07-27</time>
-                        <a href="/2019/07/27/tomcat配置IP访问/" class="has-link-black-ter is-size-6">tomcat配置IP访问;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-18T00:52:08.000Z">2019-06-18</time>
-                        <a href="/2019/06/18/jsp页面获取session值/" class="has-link-black-ter is-size-6">&#39;jsp页面获取session值&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-03T10:07:26.000Z">2019-06-03</time>
-                        <a href="/2019/06/03/js监听input框/" class="has-link-black-ter is-size-6">js监听input框</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-20T02:49:32.000Z">2019-05-20</time>
-                        <a href="/2019/05/20/linux命令/" class="has-link-black-ter is-size-6">&#39;linux命令&#39;&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-18T07:59:41.000Z">2019-05-18</time>
-                        <a href="/2019/05/18/intellij/" class="has-link-black-ter is-size-6">&#39;intellij&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-08T02:15:11.000Z">2019-05-08</time>
-                        <a href="/2019/05/08/开启-关闭Ubuntu防火墙/" class="has-link-black-ter is-size-6">&#39;开启/关闭Ubuntu防火墙&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-06T09:22:42.000Z">2019-05-06</time>
-                        <a href="/2019/05/06/linux修改只读文件/" class="has-link-black-ter is-size-6">linux修改只读文件</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-04-28T00:44:08.073Z">2019-04-28</time>
-                        <a href="/2019/04/28/README/" class="has-link-black-ter is-size-6"></a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-04-26T08:54:25.000Z">2019-04-26</time>
-                        <a href="/2019/04/26/Mybatis-Plus学习/" class="has-link-black-ter is-size-6">Mybatis-Plus学习</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-04-24T02:36:01.797Z">2019-04-24</time>
-                        <a href="/2019/04/24/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
         </div>
     </div>
 </div>
 
 
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/27/tomcat配置IP访问/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">tomcat配置IP访问;</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/03/js监听input框/">
+                <span class="level-item">js监听input框</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Commentaires</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/06/18/jsp页面获取session值/';
+        this.page.identifier = '2019/06/18/jsp页面获取session值/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '不能为空' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 
@@ -925,7 +880,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Sixpence" height="28">
+                    <img src="/images/logo.svg" alt="&#39;jsp页面获取session值&#39;" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -2,19 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Archives: 2019 - Sixpence</title>
+<title>tomcat配置IP访问; - Sixpence</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Sixpence">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+    <meta name="description" content="1、修改背景：A、通常我们访问我们的web应用格式为： 1http://ip:端口号/项目名称 例如： 1http://127.0.0.1:8080/projectName B、如果想直接输入“本地ip”直接进入应用，该如何设置呢？如下面URL： 1http://127.0.0.1 2、修改tomcat默认端口号、默认项目（应用）名称：A、先将tomcat的默认端口“8080”改为缺省的端口号“8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tomcat配置IP访问;">
+<meta property="og:url" content="http://yoursite.com/2019/07/27/tomcat配置IP访问/index.html">
 <meta property="og:site_name" content="Sixpence">
+<meta property="og:description" content="1、修改背景：A、通常我们访问我们的web应用格式为： 1http://ip:端口号/项目名称 例如： 1http://127.0.0.1:8080/projectName B、如果想直接输入“本地ip”直接进入应用，该如何设置呢？如下面URL： 1http://127.0.0.1 2、修改tomcat默认端口号、默认项目（应用）名称：A、先将tomcat的默认端口“8080”改为缺省的端口号“8">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-07-27T03:01:21.829Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sixpence">
+<meta name="twitter:title" content="tomcat配置IP访问;">
+<meta name="twitter:description" content="1、修改背景：A、通常我们访问我们的web应用格式为： 1http://ip:端口号/项目名称 例如： 1http://127.0.0.1:8080/projectName B、如果想直接输入“本地ip”直接进入应用，该如何设置呢？如下面URL： 1http://127.0.0.1 2、修改tomcat默认端口号、默认项目（应用）名称：A、先将tomcat的默认端口“8080”改为缺省的端口号“8">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Sixpence" height="28">
+                <img src="/images/logo.svg" alt="tomcat配置IP访问;" height="28">
             
             </a>
         </div>
@@ -134,170 +138,132 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-27T03:00:12.000Z">2019-07-27</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 440 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                tomcat配置IP访问;
+            
+        </h1>
+        <div class="content">
+            <h3 id="1、修改背景："><a href="#1、修改背景：" class="headerlink" title="1、修改背景："></a>1、修改背景：</h3><p>A、通常我们访问我们的web应用格式为：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://ip:端口号/项目名称</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:8080/projectName</span><br></pre></td></tr></table></figure>
+<p>B、如果想直接输入“本地ip”直接进入应用，该如何设置呢？如下面URL：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1</span><br></pre></td></tr></table></figure>
+<h3 id="2、修改tomcat默认端口号、默认项目（应用）名称："><a href="#2、修改tomcat默认端口号、默认项目（应用）名称：" class="headerlink" title="2、修改tomcat默认端口号、默认项目（应用）名称："></a>2、修改tomcat默认端口号、默认项目（应用）名称：</h3><p>A、先将tomcat的默认端口“8080”改为缺省的端口号“80：<em>需要修改”tomcat”根目录下的”conf”目录下的”server.xml”文件</em>”</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>把上面标签中”port”属性”8080”修改为”80”即可（访问url可以不输入端口号）。</p>
+<p>备注：tomcat默认端口号为8080，http服务的默认端口号为80。在浏览器地址栏输入ip或者域名之后，如果不输入端口号，默认就是80端口。 </p>
+<h3 id="2、设置默认应用-这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页"><a href="#2、设置默认应用-这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页" class="headerlink" title="2、设置默认应用(这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页)"></a>2、<strong>设置默认应用(这里用到一个小技巧，注释掉<context>的默认应用配置，默认输入ip就去访问Tomcat主页)</context></strong></h3><p>　　A：注释如下：</p>
+<host name="localhost" appbase="webapps" unpackwars="true" autodeploy="true" xmlvalidation="false" xmlnamespaceaware="false"><br><br><!-- SingleSignOn valve, share authentication between web applications
+Documentation at: /docs/config/valve.html --><br><!--
+<Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+--><br><br><!-- Access log processes all example.
+Documentation at: /docs/config/valve.html --><br><!--
+<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" 
+prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
+--><br><br></host>
 
-<div class="card widget">
+
+
+<p>备注：如果不配置<context>标签,由于没有docBase指明项目位置，则项目必须放在host配置中对应的appBase地址下（如webapps）,Tomcat启动时会加载webapps下所有项目，且没有path指引时，默认指引是项目名称。就会访问Tomcat  ROOT下的web.xml <welcome-file>index.jsp</welcome-file>  主页(index.jsp)(因为Tomacat主页是ROOT文件夹下的)。</context></p>
+<p>B：修改ROOT下的index.jsp文件</p>
+<p>&lt;%<br>response.sendRedirect(“/myProject/index.html”);//myProject这里就是我们不熟的项目名称了。<br>%&gt;</p>
+
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <h3 class="menu-label has-text-centered">Suka dengan artikel ini? Bantu penulis dengan donasi melalui</h3>
+        <div class="buttons is-centered">
+            
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-27T03:00:12.000Z">2019-07-27</time>
-                        <a href="/2019/07/27/tomcat配置IP访问/" class="has-link-black-ter is-size-6">tomcat配置IP访问;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-18T00:52:08.000Z">2019-06-18</time>
-                        <a href="/2019/06/18/jsp页面获取session值/" class="has-link-black-ter is-size-6">&#39;jsp页面获取session值&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-03T10:07:26.000Z">2019-06-03</time>
-                        <a href="/2019/06/03/js监听input框/" class="has-link-black-ter is-size-6">js监听input框</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-20T02:49:32.000Z">2019-05-20</time>
-                        <a href="/2019/05/20/linux命令/" class="has-link-black-ter is-size-6">&#39;linux命令&#39;&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-18T07:59:41.000Z">2019-05-18</time>
-                        <a href="/2019/05/18/intellij/" class="has-link-black-ter is-size-6">&#39;intellij&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-08T02:15:11.000Z">2019-05-08</time>
-                        <a href="/2019/05/08/开启-关闭Ubuntu防火墙/" class="has-link-black-ter is-size-6">&#39;开启/关闭Ubuntu防火墙&#39;</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-06T09:22:42.000Z">2019-05-06</time>
-                        <a href="/2019/05/06/linux修改只读文件/" class="has-link-black-ter is-size-6">linux修改只读文件</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-04-28T00:44:08.073Z">2019-04-28</time>
-                        <a href="/2019/04/28/README/" class="has-link-black-ter is-size-6"></a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-04-26T08:54:25.000Z">2019-04-26</time>
-                        <a href="/2019/04/26/Mybatis-Plus学习/" class="has-link-black-ter is-size-6">Mybatis-Plus学习</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-04-24T02:36:01.797Z">2019-04-24</time>
-                        <a href="/2019/04/24/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
         </div>
     </div>
 </div>
 
 
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/18/jsp页面获取session值/">
+                <span class="level-item">&#39;jsp页面获取session值&#39;</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Commentaires</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/07/27/tomcat配置IP访问/';
+        this.page.identifier = '2019/07/27/tomcat配置IP访问/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '不能为空' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 
@@ -925,7 +891,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Sixpence" height="28">
+                    <img src="/images/logo.svg" alt="tomcat配置IP访问;" height="28">
                 
                 </a>
                 <p class="is-size-7">
