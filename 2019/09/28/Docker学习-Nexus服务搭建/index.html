@@ -2,20 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Categorias - Sixpence</title>
+<title>Docker学习--Nexus服务搭建 - Sixpence</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="keywords" content="tag1,tag2,tag3">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sixpence">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+    <meta name="description" content="docker hub 上找到 sonatype/nexus 镜像 1docker pull sonatype/nexus:版本号 编写nexus-compose.yml文件 12345678910version: &amp;apos;2&amp;apos;services:    nexus:      image: sonatype/nexus:2.14.5      restart: always">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker学习--Nexus服务搭建">
+<meta property="og:url" content="http://yoursite.com/2019/09/28/Docker学习-Nexus服务搭建/index.html">
 <meta property="og:site_name" content="Sixpence">
+<meta property="og:description" content="docker hub 上找到 sonatype/nexus 镜像 1docker pull sonatype/nexus:版本号 编写nexus-compose.yml文件 12345678910version: &amp;apos;2&amp;apos;services:    nexus:      image: sonatype/nexus:2.14.5      restart: always">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-09-28T10:09:58.055Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sixpence">
+<meta name="twitter:title" content="Docker学习--Nexus服务搭建">
+<meta name="twitter:description" content="docker hub 上找到 sonatype/nexus 镜像 1docker pull sonatype/nexus:版本号 编写nexus-compose.yml文件 12345678910version: &amp;apos;2&amp;apos;services:    nexus:      image: sonatype/nexus:2.14.5      restart: always">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -90,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Sixpence" height="28">
+                <img src="/images/logo.svg" alt="Docker学习--Nexus服务搭建" height="28">
             
             </a>
         </div>
@@ -102,7 +105,7 @@
                 
                 <a class="navbar-item" href="/archives">归档</a>
                 
-                <a class="navbar-item is-active" href="/categories">分类</a>
+                <a class="navbar-item" href="/categories">分类</a>
                 
                 <a class="navbar-item" href="/tags">标签</a>
                 
@@ -135,27 +138,123 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-28T03:05:12.000Z">2019-09-28</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 145 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Docker学习--Nexus服务搭建
+            
+        </h1>
+        <div class="content">
+            <p><strong>docker hub 上找到 sonatype/nexus 镜像</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sonatype/nexus:版本号</span><br></pre></td></tr></table></figure>
+<p><strong>编写nexus-compose.yml文件</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">version: &apos;2&apos;</span><br><span class="line">services:</span><br><span class="line">    nexus:</span><br><span class="line">      image: sonatype/nexus:2.14.5</span><br><span class="line">      restart: always</span><br><span class="line">      container_name: nexus</span><br><span class="line">      ports:</span><br><span class="line">        - &apos;8081:8081&apos;</span><br><span class="line">      volumes:</span><br><span class="line">        - /usr/local/docker/nexus/data:/nexus-data</span><br></pre></td></tr></table></figure>
+<p><strong>启动</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p><strong>配置认证信息 </strong></p>
+<p>在Maven setting.xml中添加Nexus认证信息（servers 节点下）</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;server&gt;</span><br><span class="line">  &lt;id&gt;nexus-releases&lt;/id&gt;</span><br><span class="line">  &lt;username&gt;admin&lt;/username&gt;</span><br><span class="line">  &lt;password&gt;admin123&lt;/password&gt;</span><br><span class="line">&lt;/server&gt;</span><br><span class="line"></span><br><span class="line">&lt;server&gt;</span><br><span class="line">  &lt;id&gt;nexus-releases&lt;/id&gt;</span><br><span class="line">  &lt;username&gt;admin&lt;/username&gt;</span><br><span class="line">  &lt;password&gt;admin123&lt;/password&gt;</span><br><span class="line">&lt;/server&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>配置自动化部署</strong></p>
+<p>在pom.xml中添加</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;distributionManagement&gt;</span><br><span class="line">    &lt;repository&gt;</span><br><span class="line">      &lt;id&gt;user-release&lt;/id&gt;</span><br><span class="line">      &lt;name&gt;user release resp&lt;/name&gt;</span><br><span class="line">      &lt;url&gt;http://192.168.44.128:8081/nexus/content/repositories/releases/&lt;/url&gt;</span><br><span class="line">    &lt;/repository&gt;</span><br><span class="line">    &lt;snapshotRepository&gt;</span><br><span class="line">      &lt;id&gt;user-snapshots&lt;/id&gt;</span><br><span class="line">      &lt;name&gt;user snapshots resp&lt;/name&gt;</span><br><span class="line">      &lt;url&gt;http://192.168.44.128:8081/nexus/content/repositories/snapshots/&lt;/url&gt;</span><br><span class="line">    &lt;/snapshotRepository&gt;</span><br><span class="line">&lt;/distributionManagement&gt;</span><br></pre></td></tr></table></figure>
+<p> <strong>配置代理仓库</strong></p>
+<p>在pom.xml中添加</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;repositories&gt;</span><br><span class="line">        &lt;repository&gt;</span><br><span class="line">            &lt;id&gt;nexus&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;Nexus Repository&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.172.141:8081/repository/maven-public/&lt;/url&gt;</span><br><span class="line">            &lt;snapshots&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/snapshots&gt;</span><br><span class="line">            &lt;releases&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/releases&gt;</span><br><span class="line">        &lt;/repository&gt;</span><br><span class="line">    &lt;/repositories&gt;</span><br><span class="line">    &lt;pluginRepositories&gt;</span><br><span class="line">        &lt;pluginRepository&gt;</span><br><span class="line">            &lt;id&gt;nexus&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;Nexus Plugin Repository&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.172.141:8081/repository/maven-public/&lt;/url&gt;</span><br><span class="line">            &lt;snapshots&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/snapshots&gt;</span><br><span class="line">            &lt;releases&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/releases&gt;</span><br><span class="line">        &lt;/pluginRepository&gt;</span><br><span class="line">    &lt;/pluginRepositories&gt;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Categorias
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/默认分类/">
-            <span class="level-start">
-                <span class="level-item">默认分类</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li>
-            </ul>
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
     </div>
-</div></div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/11/Scheduled参数详解/">
+                <span class="level-item">@Scheduled参数详解</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comentarios</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/09/28/Docker学习-Nexus服务搭建/';
+        this.page.identifier = '2019/09/28/Docker学习-Nexus服务搭建/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '不能为空' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
                 
 
 
@@ -826,7 +925,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Sixpence" height="28">
+                    <img src="/images/logo.svg" alt="Docker学习--Nexus服务搭建" height="28">
                 
                 </a>
                 <p class="is-size-7">

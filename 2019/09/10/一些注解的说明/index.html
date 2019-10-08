@@ -2,20 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Categorias - Sixpence</title>
+<title>一些注解的说明 - Sixpence</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="keywords" content="tag1,tag2,tag3">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sixpence">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+    <meta name="description" content="@EnableConfigurationProperties 使使用 @ConfigurationProperties 注解的类生效。 如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。说白了 @EnableConfigurationProperties 相当于把使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些注解的说明">
+<meta property="og:url" content="http://yoursite.com/2019/09/10/一些注解的说明/index.html">
 <meta property="og:site_name" content="Sixpence">
+<meta property="og:description" content="@EnableConfigurationProperties 使使用 @ConfigurationProperties 注解的类生效。 如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。说白了 @EnableConfigurationProperties 相当于把使用">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-09-10T01:14:48.463Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sixpence">
+<meta name="twitter:title" content="一些注解的说明">
+<meta name="twitter:description" content="@EnableConfigurationProperties 使使用 @ConfigurationProperties 注解的类生效。 如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。说白了 @EnableConfigurationProperties 相当于把使用">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -90,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Sixpence" height="28">
+                <img src="/images/logo.svg" alt="一些注解的说明" height="28">
             
             </a>
         </div>
@@ -102,7 +105,7 @@
                 
                 <a class="navbar-item" href="/archives">归档</a>
                 
-                <a class="navbar-item is-active" href="/categories">分类</a>
+                <a class="navbar-item" href="/categories">分类</a>
                 
                 <a class="navbar-item" href="/tags">标签</a>
                 
@@ -135,27 +138,122 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-10T00:59:05.000Z">2019-09-10</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 173 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                一些注解的说明
+            
+        </h1>
+        <div class="content">
+            <p><strong>@EnableConfigurationProperties</strong> 使使用 @ConfigurationProperties 注解的类生效。</p>
+<p>如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。说白了 @EnableConfigurationProperties 相当于把使用 @ConfigurationProperties 的类进行了一次注入。</p>
+<p><strong>@ConfigurationProperties</strong></p>
+<p>将配置文件application.properties中配置的每一个属性值映射到当前类的属性中；</p>
+<p>@ConfigurationProperties：告诉springboot将本类中所有属性和配置文件中相关的配置进行绑定；prefix=”person”：指出将配置文件中person下的所有属性进行一一映射；</p>
+<p><strong>@Value</strong></p>
+<p>@Value(“${person.last-name}”)     从配置文件中获取值</p>
+
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Categorias
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/默认分类/">
-            <span class="level-start">
-                <span class="level-item">默认分类</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li>
-            </ul>
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
     </div>
-</div></div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/11/Scheduled参数详解/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">@Scheduled参数详解</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/30/待学习/">
+                <span class="level-item">待学习</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comentarios</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/09/10/一些注解的说明/';
+        this.page.identifier = '2019/09/10/一些注解的说明/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + '不能为空' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
                 
 
 
@@ -826,7 +924,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Sixpence" height="28">
+                    <img src="/images/logo.svg" alt="一些注解的说明" height="28">
                 
                 </a>
                 <p class="is-size-7">
