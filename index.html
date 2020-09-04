@@ -50,7 +50,7 @@
       <h1><a href="/">Sixpence</a></h1>
       <div id="subtitle-box">
         
-          <span id="subtitle">面朝大海，春暖花开</span>
+        <span id="subtitle"></span>
         
       </div>
       <div>
@@ -65,9 +65,26 @@
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
 
 <!-- Subtitle -->
 
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '一个人安静的呆在井底，是我做了一辈子的梦', '生而不息，死亦不止'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
 <div id="main">
   <section class="outer">
   
