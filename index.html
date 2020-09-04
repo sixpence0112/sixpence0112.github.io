@@ -149,27 +149,7 @@
   <time datetime="2020-08-24T02:13:47.000Z" itemprop="datePublished">2020-08-24</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>1.注解的官方定义</strong></p>
-<ol>
-<li>​    注解是一种元数据形式。即注解是属于java的一种数据类型，和类、接口、数组、枚举类似。</li>
-<li>​    注解来修饰，类、方法、变量、参数、包。</li>
-<li>​    注解不会对所修饰的代码产生直接的影响。</li>
-</ol>
-<p><strong>2.如何定义注解</strong></p>
-<ol>
-<li>第一步，定义注解——相当于定义标记；</li>
-<li>第二步，配置注解——把标记打在需要用到的程序代码中；</li>
-<li>第三步，解析注解——在编译期或运行时检测到标记，并进行特殊操作。</li>
-</ol>
-<p><img src="D:\blog\source\images\2018071015404830.png" alt></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -201,22 +181,7 @@
   <time datetime="2020-08-05T01:27:43.000Z" itemprop="datePublished">2020-08-05</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>Ubuntu16.04配置阿里云数据源</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">cd  /etc/apt</span><br><span class="line"></span><br><span class="line">vi sourcee.list</span><br><span class="line"></span><br><span class="line">deb-src http://archive.ubuntu.com/ubuntu xenial main restricted #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted multiverse universe #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse #Added by software-properties</span><br><span class="line">deb http://archive.canonical.com/ubuntu xenial partner</span><br><span class="line">deb-src http://archive.canonical.com/ubuntu xenial partner</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted multiverse universe #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse</span><br><span class="line"></span><br><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
-<p>Docker安装：<br>apt-get install -y apt-transport-https ca-certificates curl software-properties-common<br>curl -fsSL <a href="https://download.docker.com/linux/ubuntu/gpg" target="_blank" rel="noopener">https://download.docker.com/linux/ubuntu/gpg</a> | sudo apt-key add -<br>add-apt-repository “deb [arch=amd64] <a href="https://download.docker.com/linux/ubuntu" target="_blank" rel="noopener">https://download.docker.com/linux/ubuntu</a> $(lsb_release -cs) stable”<br>apt-get update</p>
-<p><strong>docker-compose安装</strong></p>
-<p> <code>curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-uname -s-uname -m -o /usr/local/bin/docker-compose</code> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -250,15 +215,7 @@
   <time datetime="2020-03-21T02:49:33.000Z" itemprop="datePublished">2020-03-21</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p>最近在看Woody·Allen导演的电影和菲利普·迪克原创小说改编的电影</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -281,15 +238,7 @@
   <time datetime="2019-10-12T02:37:51.847Z" itemprop="datePublished">2019-10-12</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># sixpence0112.github.io</span><br><span class="line">sixpence0112的博客</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -321,23 +270,7 @@
   <time datetime="2019-10-12T02:37:51.831Z" itemprop="datePublished">2019-10-12</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -369,29 +302,7 @@
   <time datetime="2019-09-28T03:05:12.000Z" itemprop="datePublished">2019-09-28</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>docker hub 上找到 sonatype/nexus 镜像</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sonatype/nexus:版本号</span><br></pre></td></tr></table></figure>
-<p><strong>编写nexus-compose.yml文件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">version: &apos;2&apos;</span><br><span class="line">services:</span><br><span class="line">    nexus:</span><br><span class="line">      image: sonatype/nexus:2.14.5</span><br><span class="line">      restart: always</span><br><span class="line">      container_name: nexus</span><br><span class="line">      ports:</span><br><span class="line">        - &apos;8081:8081&apos;</span><br><span class="line">      volumes:</span><br><span class="line">        - /usr/local/docker/nexus/data:/nexus-data</span><br></pre></td></tr></table></figure>
-<p><strong>启动</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-<p><strong>配置认证信息 </strong></p>
-<p>在Maven setting.xml中添加Nexus认证信息（servers 节点下）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;server&gt;</span><br><span class="line">  &lt;id&gt;nexus-releases&lt;/id&gt;</span><br><span class="line">  &lt;username&gt;admin&lt;/username&gt;</span><br><span class="line">  &lt;password&gt;admin123&lt;/password&gt;</span><br><span class="line">&lt;/server&gt;</span><br><span class="line"></span><br><span class="line">&lt;server&gt;</span><br><span class="line">  &lt;id&gt;nexus-releases&lt;/id&gt;</span><br><span class="line">  &lt;username&gt;admin&lt;/username&gt;</span><br><span class="line">  &lt;password&gt;admin123&lt;/password&gt;</span><br><span class="line">&lt;/server&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>配置自动化部署</strong></p>
-<p>在pom.xml中添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;distributionManagement&gt;</span><br><span class="line">    &lt;repository&gt;</span><br><span class="line">      &lt;id&gt;user-release&lt;/id&gt;</span><br><span class="line">      &lt;name&gt;user release resp&lt;/name&gt;</span><br><span class="line">      &lt;url&gt;http://192.168.44.128:8081/nexus/content/repositories/releases/&lt;/url&gt;</span><br><span class="line">    &lt;/repository&gt;</span><br><span class="line">    &lt;snapshotRepository&gt;</span><br><span class="line">      &lt;id&gt;user-snapshots&lt;/id&gt;</span><br><span class="line">      &lt;name&gt;user snapshots resp&lt;/name&gt;</span><br><span class="line">      &lt;url&gt;http://192.168.44.128:8081/nexus/content/repositories/snapshots/&lt;/url&gt;</span><br><span class="line">    &lt;/snapshotRepository&gt;</span><br><span class="line">&lt;/distributionManagement&gt;</span><br></pre></td></tr></table></figure>
-<p> <strong>配置代理仓库</strong></p>
-<p>在pom.xml中添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;repositories&gt;</span><br><span class="line">        &lt;repository&gt;</span><br><span class="line">            &lt;id&gt;nexus&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;Nexus Repository&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.172.141:8081/repository/maven-public/&lt;/url&gt;</span><br><span class="line">            &lt;snapshots&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/snapshots&gt;</span><br><span class="line">            &lt;releases&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/releases&gt;</span><br><span class="line">        &lt;/repository&gt;</span><br><span class="line">    &lt;/repositories&gt;</span><br><span class="line">    &lt;pluginRepositories&gt;</span><br><span class="line">        &lt;pluginRepository&gt;</span><br><span class="line">            &lt;id&gt;nexus&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;Nexus Plugin Repository&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.172.141:8081/repository/maven-public/&lt;/url&gt;</span><br><span class="line">            &lt;snapshots&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/snapshots&gt;</span><br><span class="line">            &lt;releases&gt;</span><br><span class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</span><br><span class="line">            &lt;/releases&gt;</span><br><span class="line">        &lt;/pluginRepository&gt;</span><br><span class="line">    &lt;/pluginRepositories&gt;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -423,121 +334,7 @@
   <time datetime="2019-09-11T08:07:48.000Z" itemprop="datePublished">2019-09-11</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><h4 id="1-cron"><a href="#1-cron" class="headerlink" title="1. cron"></a>1. cron</h4><p>该参数接收一个<code>cron表达式</code>，<code>cron表达式</code>是一个字符串，字符串以5或6个空格隔开，分开共6或7个域，每一个域代表一个含义。</p>
-<h5 id="cron表达式语法"><a href="#cron表达式语法" class="headerlink" title="cron表达式语法"></a>cron表达式语法</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[秒] [分] [小时] [日] [月] [周] [年]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注：[年]不是必须的域，可以省略[年]，则一共6个域</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>说明</th>
-<th>必填</th>
-<th>允许填写的值</th>
-<th>允许的通配符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>秒</td>
-<td>是</td>
-<td>0-59</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>2</td>
-<td>分</td>
-<td>是</td>
-<td>0-59</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>3</td>
-<td>时</td>
-<td>是</td>
-<td>0-23</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>4</td>
-<td>日</td>
-<td>是</td>
-<td>1-31</td>
-<td>, - * ? / L W</td>
-</tr>
-<tr>
-<td>5</td>
-<td>月</td>
-<td>是</td>
-<td>1-12 / JAN-DEC</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>6</td>
-<td>周</td>
-<td>是</td>
-<td>1-7 or SUN-SAT</td>
-<td>, - * ? / L #</td>
-</tr>
-<tr>
-<td>7</td>
-<td>年</td>
-<td>否</td>
-<td>1970-2099</td>
-<td>, - * /</td>
-</tr>
-</tbody>
-</table>
-<h6 id="通配符说明"><a href="#通配符说明" class="headerlink" title="通配符说明:"></a>通配符说明:</h6><ul>
-<li><code>*</code> 表示所有值。 例如:在分的字段上设置 *,表示每一分钟都会触发。</li>
-<li><code>?</code> 表示不指定值。使用的场景为不需要关心当前设置这个字段的值。例如:要在每月的10号触发一个操作，但不关心是周几，所以需要周位置的那个字段设置为”?” 具体设置为 0 0 0 10 * ?</li>
-<li><code>-</code> 表示区间。例如 在小时上设置 “10-12”,表示 10,11,12点都会触发。</li>
-<li><code>,</code> 表示指定多个值，例如在周字段上设置 “MON,WED,FRI” 表示周一，周三和周五触发</li>
-<li><code>/</code> 用于递增触发。如在秒上面设置”5/15” 表示从5秒开始，每增15秒触发(5,20,35,50)。 在月字段上设置’1/3’所示每月1号开始，每隔三天触发一次。</li>
-<li><code>L</code> 表示最后的意思。在日字段设置上，表示当月的最后一天(依据当前月份，如果是二月还会依据是否是润年[leap]), 在周字段上表示星期六，相当于”7”或”SAT”。如果在”L”前加上数字，则表示该数据的最后一个。例如在周字段上设置”6L”这样的格式,则表示“本月最后一个星期五”</li>
-<li><code>W</code> 表示离指定日期的最近那个工作日(周一至周五). 例如在日字段上置”15W”，表示离每月15号最近的那个工作日触发。如果15号正好是周六，则找最近的周五(14号)触发, 如果15号是周未，则找最近的下周一(16号)触发.如果15号正好在工作日(周一至周五)，则就在该天触发。如果指定格式为 “1W”,它则表示每月1号往后最近的工作日触发。如果1号正是周六，则将在3号下周一触发。(注，”W”前只能设置具体的数字,不允许区间”-“)。</li>
-<li><code>#</code> 序号(表示每月的第几个周几)，例如在周字段上设置”6#3”表示在每月的第三个周六.注意如果指定”#5”,正好第五周没有周六，则不会触发该配置(用在母亲节和父亲节再合适不过了) ；小提示：’L’和 ‘W’可以一组合使用。如果在日字段上设置”LW”,则表示在本月的最后一个工作日触发；周字段的设置，若使用英文字母是不区分大小写的，即MON与mon相同。</li>
-</ul>
-<h6 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h6><p>每隔5秒执行一次：<em>/5 </em> <em> </em> * ?</p>
-<p>每隔1分钟执行一次：0 <em>/1 </em> <em> </em> ?</p>
-<p>每天23点执行一次：0 0 23 <em> </em> ?</p>
-<p>每天凌晨1点执行一次：0 0 1 <em> </em> ?</p>
-<p>每月1号凌晨1点执行一次：0 0 1 1 * ?</p>
-<p>每月最后一天23点执行一次：0 0 23 L * ?</p>
-<p>每周星期天凌晨1点实行一次：0 0 1 ? * L</p>
-<p>在26分、29分、33分执行一次：0 26,29,33 <em> </em> * ?</p>
-<p>每天的0点、13点、18点、21点都执行一次：0 0 0,13,18,21 <em> </em> ?</p>
-<h5 id="cron表达式使用占位符"><a href="#cron表达式使用占位符" class="headerlink" title="cron表达式使用占位符"></a>cron表达式使用占位符</h5><p>另外，<code>cron</code>属性接收的<code>cron表达式</code>支持占位符。eg：</p>
-<p>配置文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">time:</span><br><span class="line">  cron: */5 * * * * *</span><br><span class="line">  interval: 5</span><br></pre></td></tr></table></figure>
-<p>每5秒执行一次：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Scheduled(cron=<span class="string">"$&#123;time.cron&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">testPlaceholder1</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    System.<span class="keyword">out</span>.println(<span class="string">"Execute at "</span> + System.currentTimeMillis());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Scheduled(cron=<span class="string">"*/$&#123;time.interval&#125; * * * * *"</span>)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">testPlaceholder2</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    System.<span class="keyword">out</span>.println(<span class="string">"Execute at "</span> + System.currentTimeMillis());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="2-zone"><a href="#2-zone" class="headerlink" title="2. zone"></a>2. zone</h4><p>时区，接收一个<code>java.util.TimeZone#ID</code>。<code>cron表达式</code>会基于该时区解析。默认是一个空字符串，即取服务器所在地的时区。比如我们一般使用的时区<code>Asia/Shanghai</code>。该字段我们一般留空。</p>
-<h4 id="3-fixedDelay"><a href="#3-fixedDelay" class="headerlink" title="3. fixedDelay"></a>3. fixedDelay</h4><p>上一次执行完毕时间点之后多长时间再执行。如：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">Scheduled</span>(<span class="keyword">fixedDelay</span> = <span class="number">5000</span>) //上一次执行完毕时间点之后<span class="number">5</span>秒再执行</span><br></pre></td></tr></table></figure>
-<h4 id="4-fixedDelayString"><a href="#4-fixedDelayString" class="headerlink" title="4. fixedDelayString"></a>4. fixedDelayString</h4><p>与 <code>3. fixedDelay</code> 意思相同，只是使用字符串的形式。唯一不同的是支持占位符。如：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">Scheduled</span>(<span class="keyword">fixedDelayString</span> = <span class="string">"5000"</span>) //上一次执行完毕时间点之后<span class="number">5</span>秒再执行</span><br></pre></td></tr></table></figure>
-<p>占位符的使用(配置文件中有配置：time.fixedDelay=5000)：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">Scheduled</span>(<span class="keyword">fixedDelayString</span> = <span class="string">"$&#123;time.fixedDelay&#125;"</span>)</span><br><span class="line">void testFixedDelayString() &#123;</span><br><span class="line">    <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>("<span class="selector-tag">Execute</span> <span class="selector-tag">at</span> " + <span class="selector-tag">System</span><span class="selector-class">.currentTimeMillis</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/6082182-59cae59660fa0007.png?imageMogr2/auto-orient/strip|imageView2/2/w/259/format/webp" alt="img"></p>
-<p>占位符的使用</p>
-<h4 id="5-fixedRate"><a href="#5-fixedRate" class="headerlink" title="5. fixedRate"></a>5. fixedRate</h4><p>上一次开始执行时间点之后多长时间再执行。如：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">Scheduled</span>(<span class="keyword">fixedRate</span> = <span class="number">5000</span>) //上一次开始执行时间点之后<span class="number">5</span>秒再执行</span><br></pre></td></tr></table></figure>
-<h4 id="6-fixedRateString"><a href="#6-fixedRateString" class="headerlink" title="6. fixedRateString"></a>6. fixedRateString</h4><p>与 <code>5. fixedRate</code> 意思相同，只是使用字符串的形式。唯一不同的是支持占位符。</p>
-<h4 id="7-initialDelay"><a href="#7-initialDelay" class="headerlink" title="7. initialDelay"></a>7. initialDelay</h4><p>第一次延迟多长时间后再执行。如：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">Scheduled</span>(<span class="keyword">initialDelay</span>=<span class="keyword">1000</span>, fixedRate=<span class="number">5000</span>) //第一次延迟<span class="number">1</span>秒后执行，之后按fixedRate的规则每<span class="number">5</span>秒执行一次</span><br></pre></td></tr></table></figure>
-<h4 id="8-initialDelayString"><a href="#8-initialDelayString" class="headerlink" title="8. initialDelayString"></a>8. initialDelayString</h4><p>与 <code>7. initialDelay</code> 意思相同，只是使用字符串的形式。唯一不同的是支持占位符。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -569,24 +366,7 @@
   <time datetime="2019-09-10T00:59:05.000Z" itemprop="datePublished">2019-09-10</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>@EnableConfigurationProperties</strong> 使使用 @ConfigurationProperties 注解的类生效。</p>
-<p>如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。说白了 @EnableConfigurationProperties 相当于把使用 @ConfigurationProperties 的类进行了一次注入。</p>
-<p><strong>@ConfigurationProperties</strong></p>
-<p>将配置文件application.properties中配置的每一个属性值映射到当前类的属性中；</p>
-<p>@ConfigurationProperties：告诉springboot将本类中所有属性和配置文件中相关的配置进行绑定；prefix=”person”：指出将配置文件中person下的所有属性进行一一映射；</p>
-<p><strong>@Value</strong></p>
-<p>@Value(“${person.last-name}”)     从配置文件中获取值</p>
-<p><strong>@EnableWebSecurity</strong></p>
-<p>@EnableWebSecurity是Spring  Security用于启动 Web安全的注解。</p>
-<p>典型的用法是该注解用在某个<code>Web</code>安全配置类上(实现了接口<code>WebSecurityConfigurer</code>或者继承自<code>WebSecurityConfigurerAdapter</code>)。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -618,18 +398,7 @@
   <time datetime="2019-08-30T01:57:27.000Z" itemprop="datePublished">2019-08-30</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <ol>
-<li><strong>函数式接口</strong></li>
-<li><strong>lambda公式</strong></li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -661,65 +430,7 @@
   <time datetime="2019-08-22T08:56:29.000Z" itemprop="datePublished">2019-08-22</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>配置Java环境变量</strong></p>
-<ul>
-<li><p>配置系统环境变量</p>
-<p>vi  /etc/enviroment   打开系统配置文件</p>
-<p>添加如下配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_211</span><br><span class="line">export JRE_HOME=/usr/local/java/jdk1.8.0_211/jre</span><br><span class="line">export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>配置用户环境变量</p>
-<p>vi  /etc/profile   打开系统配置文件</p>
-<p>添加如下配置,在图片所示位置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_211</span><br><span class="line">export JRE_HOME=/usr/local/java/jdk1.8.0_211/jre</span><br><span class="line">export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br></pre></td></tr></table></figure>
-<p><img src="E:\blog\source\images\2019-08-23_141018.png" alt></p>
-</li>
-</ul>
-<p>​    </p>
-<p><strong>tomcat安装</strong></p>
-<p>下载jdk对应版本tomcat：<a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-80.cgi</a></p>
-<p>将文件放入相应目录，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf apache-tomcat-8.5.45.tar.gz</span><br></pre></td></tr></table></figure>
-<p>将解压后的文件转移至目标文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv apache-tomcat-8.5.45 /usr/local</span><br></pre></td></tr></table></figure>
-<p><strong>mysql安装</strong></p>
-<p>1.下载并安装MySQL官方的 Yum Repository</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`wget -i -c http:``//dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm`</span><br></pre></td></tr></table></figure>
-<p>　　如果 wegt 未安装的话可以先用 yum 安装 wget ：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`yum install wget`</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>安装mysql57-community-release-el7-10.noarch.rpm包</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`yum -y install mysql57-community-release-el7-10.noarch.rpm`</span><br></pre></td></tr></table></figure>
-<p>　　安装这个包后，会获得两个mysql的yum repo源：/etc/yum.repos.d/mysql-community.repo，/etc/yum.repos.d/mysql-community-source.repo。</p>
-<ol start="3">
-<li>安装MySQL</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`yum -y install mysql-community-server`</span><br></pre></td></tr></table></figure>
-<p>　　至此MySQL就安装完成了，然后是对MySQL的一些设置。</p>
-<p><strong>修改密码</strong></p>
-<p>首先启动MySQL：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`systemctl start  mysqld.service`</span><br></pre></td></tr></table></figure>
-<p>　　查看mysql运行状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`systemctl status mysqld.service`</span><br></pre></td></tr></table></figure>
-<p>　　找出在日志文件中的密码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`grep ``&quot;password&quot;` `/``var``/log/mysqld.log`</span><br></pre></td></tr></table></figure>
-<p>　　进入数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`mysql -uroot -p`</span><br></pre></td></tr></table></figure>
-<p>　　输入初始密码，此时不能做任何事情，因为MySQL默认必须修改密码之后才能操作数据库：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`mysql&gt; ALTER USER ``&apos;root&apos;``@``&apos;localhost&apos;` `IDENTIFIED BY ``&apos;new password&apos;``;`</span><br></pre></td></tr></table></figure>
-<p>​        修改密码设置策略</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global validate_password_policy=0;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -879,16 +590,6 @@
   <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
   <div class="reward-box">
     
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
     
   </div>
 </div>

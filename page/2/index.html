@@ -149,39 +149,7 @@
   <time datetime="2019-07-27T03:00:12.000Z" itemprop="datePublished">2019-07-27</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="1、修改背景："><a href="#1、修改背景：" class="headerlink" title="1、修改背景："></a>1、修改背景：</h3><p>A、通常我们访问我们的web应用格式为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://ip:端口号/项目名称</span><br></pre></td></tr></table></figure>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:8080/projectName</span><br></pre></td></tr></table></figure>
-<p>B、如果想直接输入“本地ip”直接进入应用，该如何设置呢？如下面URL：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1</span><br></pre></td></tr></table></figure>
-<h3 id="2、修改tomcat默认端口号、默认项目（应用）名称："><a href="#2、修改tomcat默认端口号、默认项目（应用）名称：" class="headerlink" title="2、修改tomcat默认端口号、默认项目（应用）名称："></a>2、修改tomcat默认端口号、默认项目（应用）名称：</h3><p>A、先将tomcat的默认端口“8080”改为缺省的端口号“80：<em>需要修改”tomcat”根目录下的”conf”目录下的”server.xml”文件</em>”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot; /&gt;</span><br></pre></td></tr></table></figure>
-<p>把上面标签中”port”属性”8080”修改为”80”即可（访问url可以不输入端口号）。</p>
-<p>备注：tomcat默认端口号为8080，http服务的默认端口号为80。在浏览器地址栏输入ip或者域名之后，如果不输入端口号，默认就是80端口。 </p>
-<h3 id="2、设置默认应用-这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页"><a href="#2、设置默认应用-这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页" class="headerlink" title="2、设置默认应用(这里用到一个小技巧，注释掉的默认应用配置，默认输入ip就去访问Tomcat主页)"></a>2、<strong>设置默认应用(这里用到一个小技巧，注释掉<context>的默认应用配置，默认输入ip就去访问Tomcat主页)</context></strong></h3><p>　　A：注释如下：</p>
-<host name="localhost" appbase="webapps" unpackwars="true" autodeploy="true" xmlvalidation="false" xmlnamespaceaware="false"><br><br><!-- SingleSignOn valve, share authentication between web applications
-Documentation at: /docs/config/valve.html --><br><!--
-<Valve className="org.apache.catalina.authenticator.SingleSignOn" />
---><br><br><!-- Access log processes all example.
-Documentation at: /docs/config/valve.html --><br><!--
-<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" 
-prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
---><br><br></host>
-
-
-
-<p>备注：如果不配置<context>标签,由于没有docBase指明项目位置，则项目必须放在host配置中对应的appBase地址下（如webapps）,Tomcat启动时会加载webapps下所有项目，且没有path指引时，默认指引是项目名称。就会访问Tomcat  ROOT下的web.xml <welcome-file>index.jsp</welcome-file>  主页(index.jsp)(因为Tomacat主页是ROOT文件夹下的)。</context></p>
-<p>B：修改ROOT下的index.jsp文件</p>
-<p>&lt;%<br>response.sendRedirect(“/myProject/index.html”);//myProject这里就是我们不熟的项目名称了。<br>%&gt;</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -213,95 +181,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-06-18T07:44:53.000Z" itemprop="datePublished">2019-06-18</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="N滚下入门学习"><a href="#N滚下入门学习" class="headerlink" title="N滚下入门学习"></a>N滚下入门学习</h4><ul>
-<li><p><strong>下载安装</strong></p>
-<p>Nginx官网：<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a> </p>
-<p>Github项目地址：<a href="https://github.com/nginx/nginx" target="_blank" rel="noopener">https://github.com/nginx/nginx</a> </p>
-<p><img src="E:\blog\source\images\1560845819222.png" alt="1560845819222"></p>
-<p>Mainline version: Mainline 是 Nginx 目前主力在做的版本，可以说是开发版</p>
-<p><strong>Stable version: 最新稳定版，生产环境上建议使用的版本</strong></p>
-<p>Legacy versions:遗留的老版本的稳定版</p>
-<p>下载完成之后解压，目录如下，</p>
-<p><img src="E:\blog\source\images\1560846289856.png" alt="1560846289856"></p>
-<p>Nginx解压完毕之后，直接双击<code>nginx.exe</code> 即可启动，当Nginx启动之后，通过<code>nginx -s</code> 命令可以实现停止nginx和重新加载配置文件。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop # 立即停止</span><br><span class="line">nginx -s quit # 停止，在Nginx停止前会等待当前正在进行的任务</span><br><span class="line">nginx -s reload # 重新加载配置文件</span><br><span class="line">nginx –v # 查看nginx版本</span><br><span class="line">nginx -t # 测试当前配置文件是否正确</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="Nginx作为普通HttpServer"><a href="#Nginx作为普通HttpServer" class="headerlink" title="Nginx作为普通HttpServer"></a>Nginx作为普通HttpServer</h3><p>简单来说，任何可以通过Http请求的方式访问IO资源（文件是对磁盘IO的一种抽象）服务都可以称为HttpServer。你可以自己写一个程序监听一个端口，当使用浏览器输入ip:port/path 访问，程序获取浏览器获取到Http请求报文，然后对URI部分（也就是path部分）进行解析，在本地文件系统或者其他IO资源中找到对应的资源，通过封装一个Http响应报文，将资源内容放入响应体中写回给浏览器，浏览器就会对其进行解析并展示（或者下载），这就完成了最简单的Http服务器。但我们平时应用的Http服务器需要处理的细节是很多的，如IO复用，安全性等，在此不再赘述。</p>
-<p>首先复制<code>conf/nginx.conf</code> 为<code>conf/nginx_bak.conf</code> 备份原有的配置文件文件，在nginx的根目录下创建<code>www</code> 目录，并使用<code>echo 01 &gt; index.html</code> 命令，在www目录下创建<code>index.html</code>，作为HttpServer的静态资源。 </p>
-<p>删除<code>nginx.conf</code> 的内容并写入如下配置： </p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">error_log  D:/nginx-1.14.0/error.log;</span><br><span class="line">http &#123;</span><br><span class="line">    access_log  D:/nginx-1.14.0/access.log;</span><br><span class="line">    server &#123;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root D:/nginx-1.14.0/www;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>​    打开浏览器输入<code>http://localhost/</code> 结果如下图： </p>
-<p>​    <img src="E:\blog\source\images\1560851095423.png" alt="1560851095423"></p>
-<p>​    至此， 配置Nginx最基本的功能已经成功运行 </p>
-<ul>
-<li><h3 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h3><p>Nginx配置文件中配置项有两种结构</p>
-<ul>
-<li>简单指令（simple directive），形如<code>key value;</code></li>
-<li>块指令（block directive）， 形如<code>key {simple_key simple_value;}</code> 块指令中包含有简单指令。</li>
-</ul>
-<p>形如json，又不是json</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>worker_processes</code> <strong>为工作进程的数量</strong>，这里如果不填的话默认为CPU核心数，事实上数量为CPU核心数也是最优配置，因为此时，理论上操作系统发生进程切换的的代价最小。 </p>
-<p><code>events.worker_connections</code> <strong>每个工作进程的最大连接数</strong>，events有很多复杂的配置，详情点击<a href="http://nginx.org/en/docs/ngx_core_module.html#event" target="_blank" rel="noopener">这里</a> </p>
-<p><code>error_log</code> <strong>为发生错误时的日志输出路径</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    access_log  D:/Tools/nginx-1.17.0/logs/access.log;</span><br><span class="line">    server &#123;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root D:/Tools/nginx-1.17.0/www;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>这一部分是映射的主体，包含在一个块级指令<code>http{}</code>中，<code>access_log</code>指定该http的日志路径 （也可配置在<code>server{}</code>内），所有server访问日志都会输出到此。<code>server{}</code>内有<code>location / {}</code>项，nginx会根据location后面的路径和<code>ip:port/path</code>中的path做匹配，如果匹配到， 则从里面配置的<code>D:/Tools/nginx-1.17.0/www</code>本地目录下寻找请求的资源。 </p>
-<p><strong>注意：一个<code>server{}</code>下可以有多个location配置，且location配置可以跟正则表达式，如下</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;    </span><br><span class="line">    location / &#123;       </span><br><span class="line">        root D:/Tools/nginx-1.17.0/www;   </span><br><span class="line">    &#125;    </span><br><span class="line">    location /static/ &#123;        </span><br><span class="line">        root D:/Tools/nginx-1.17.0/static;   </span><br><span class="line">    &#125;   </span><br><span class="line">    location ~ \.(gif|jpg|png)$&#123;        </span><br><span class="line">        root D:/Tools/nginx-1.17.0/images;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>nginx的匹配优先级为：正则、长路径、短路径。正则必须以<code>~</code>开头，后面跟要匹配的文件名正则表达式，这里以<code>localhost/01.png</code>为例， nginx会找到符合文件名的第三项配置，然后会从<code>D:/Tools/nginx-1.17.0/images</code>中找<code>01.png</code>文件，这里没有任何问题。 </p>
-<p>如果路径 为/static/file.suffix，匹配到location /之后，还会往更深的location /static/配置的root目录下匹配资源，此时会在本地找到<code>D:/Tools/nginx-1.17.0/static/file.suffix</code>文件。此时如果删除<code>location /static/</code>的配置，就会从<code>location /</code>的<code>root</code>目录下寻找配置文件，即此时的匹配路径为<code>D:/Tools/nginx-1.17.0/www/static/file.suffix</code>。这点符合nginx优先匹配深层次的<code>location</code>配置这一特性。  </p>
-<p>有意思的是当路径为<code>/static/01.png</code>时，此时符合<code>location ~ \.(gif|jpg|png)$</code>和<code>location /static/</code>两项配置，但由于正则优先，会寻找本地文件系统中<code>D:/Tools/nginx-1.17.0/images/static/01.png</code>文件 。</p>
-</li>
-<li><h3 id="Nginx作为代理服务器"><a href="#Nginx作为代理服务器" class="headerlink" title="Nginx作为代理服务器"></a>Nginx作为代理服务器</h3><p>Nginx经常作为代理服务器，作为代理的访问逻辑如下图： </p>
-<p><img src="E:\blog\source\images\1560935683996.png" alt="1560935683996"></p>
-<p>这里将上面配置好的静态文件服务器作为目标WebServer，首先将配置文件的<code>http{}</code>块中追加以下内容 ：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 8080;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://localhost:80;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后使用<code>nginx -s reload</code>重新加载配置文件，在浏览器中输入<code>localhost:8080/index.html</code>可以看到浏览器输出如下：  </p>
-<p><img src="E:\blog\source\images\1560935949216.png" alt="1560935949216"></p>
-<p>这里对上面的配置进行简单解释：</p>
-<p>server{listen 8080;}表明启动一个http-server监听在8080端口（注：此项不填默认为80端口，但前面的静态服务器已经占用了80端口，此处就为其他端口）。 <code>location / {proxy_pass http://localhost:80;}</code> <code>location</code>的匹配规则前文已经讲过，这里当匹配上<code>location /</code>之后，就会从请求<code>proxy_pass</code>的URL，然后在将结果返回给浏览器。此时的<code>localhost:8080/index.html</code>请求相当于在请求<code>localhost:80/index.html</code></p>
-</li>
-<li><h3 id="Nginx负载均衡"><a href="#Nginx负载均衡" class="headerlink" title="Nginx负载均衡"></a>Nginx负载均衡</h3><ol>
-<li><h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>Nginx配置负载均衡工作在TCP/IP协议的第七层，即应用层，属于七层负载均衡。 </p>
-<p>Nginx使用反向代理达到负载均衡 </p>
-</li>
-<li><h4 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h4><p>nginx的负载均衡策略可以划分为两大类：<code>内置策略</code>和<code>扩展策略</code>。</p>
-<p>内置策略包含<code>加权轮询</code>和<code>ip hash</code>，在默认情况下这两种策略会编译进nginx内核，只需在nginx配置中指明参数即可。</p>
-<p> 扩展策略有很多，如fair、通用hash、consistent hash等，默认不编译进nginx内核 。</p>
-<ul>
-<li><h5 id="轮询策略"><a href="#轮询策略" class="headerlink" title="轮询策略"></a>轮询策略</h5><p>轮询（默认）：每个请求按时间顺序逐一分配到不同的后端服务器，如果后端某台服务器宕机，故障系统被自动剔除，使用户访问不受影响。<code>Weight</code> 指定轮询权值，<strong><code>Weight</code>值越大，分配到的访问机率越高</strong>，主要用于后端每个服务器性能不均的情况下。 </p>
-</li>
-<li><h5 id="ip-hash策略"><a href="#ip-hash策略" class="headerlink" title="ip_hash策略"></a>ip_hash策略</h5><p>ip_hash：每个请求按访问IP的hash结果分配，这样来<strong>自同一个IP的访客固定访问一个后端服务器，有效解决了动态网页存在的session共享问题</strong>。但目前大部份应用的客户端都是共享上网方式，所以此策略在实际运用过程中，往往达不到效果。 </p>
-</li>
-<li><h5 id="扩展策略"><a href="#扩展策略" class="headerlink" title="扩展策略"></a>扩展策略</h5><p>fair：这是比上面两个更加智能的负载均衡算法。此种算法可以依据页面大小和加载时间长短智能地进行负载均衡，也就是根据后端服务器的响应时间来分配请求，响应时间短的优先分配。Nginx本身是不支持fair的，如果需要使用这种调度算法，必须下载Nginx的upstream_fair模块 </p>
-<p>​    </p>
-<p>fair：这是比上面两个更加智能的负载均衡算法。此种算法可以依据页面大小和加载时间长短智能地进行负载均衡，也就是根据后端服务器的响应时间来分配请求，响应时间短的优先分配。Nginx本身是不支持fair的，如果需要使用这种调度算法，必须下载Nginx的upstream_fair模块 </p>
-</li>
-</ul>
-</li>
-<li><h4 id="负载均衡的优点"><a href="#负载均衡的优点" class="headerlink" title="负载均衡的优点"></a>负载均衡的优点</h4><p><strong>提高系统吞吐量</strong>  通过负载均衡，部署多个tomcat服务，提高系统的吞吐量 </p>
-<p><strong>降低单点故障</strong>  有效降低单点故障率，故障率随着后端服务的部署增多而下降，同时通过对HTTP报头的检查，自定义400\500等错误显示页面，提供更友好服务 </p>
-<p><strong>降低对外网端口的依赖</strong>  负载均衡下只需要一个外网端口，但可以负载到内网多个tomcat上 </p>
-<p><strong>降低网络带宽</strong>  通过nginx的动静资源分离root、缓存加速proxy_cache_path、压缩GZIP、客户端缓 存expires等功能，减少数据传输量，降低带宽要求 </p>
-<p><strong>不停机升级系统</strong>  很多情况下，我们升级服务端系统文件后，需要重启服务以应用最新程序，通过 <strong>Nginx负载实现不停服务完成重启</strong> </p>
-</li>
-<li><h4 id="负载均衡策略-1"><a href="#负载均衡策略-1" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h4></li>
-</ol>
-</li>
-</ul>
-<ul>
-<li><h3 id="Nginx负载均衡-1"><a href="#Nginx负载均衡-1" class="headerlink" title="Nginx负载均衡"></a>Nginx负载均衡</h3></li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -335,21 +215,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-06-18T00:52:08.000Z" itemprop="datePublished">2019-06-18</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p>​                                <strong>jsp页面获取session值</strong><br>java代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;/chkUser&quot;,method = RequestMethod.POST,produces = &quot;application/json;charset=UTF-8&quot;)</span><br><span class="line">   public String chkUserInfo(HttpServletRequest request,String userName, String userPwd)&#123;</span><br><span class="line">       if(StringUtils.isBlank(userName)||StringUtils.isBlank(userPwd))</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       UserEntity entity = chkLoginService.chkUserService(userName,userPwd);</span><br><span class="line">       if(entity==null)</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       request.getSession().setAttribute(&quot;userEntity&quot;,entity);</span><br><span class="line">       return &quot;true&quot;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>方法一</strong><br>jsp页面<br>使用 request.getSession().getAttribute(“**“) 方法 </p>
-<p><img src="E:\blog\source\images\70" alt="img"> </p>
-<p><strong>方法二</strong><br>在jsp页面 script中使用EL表达式获取<br><strong>var userEntity=’${sessionScope.userEntity.loginName}’;</strong><br>说明<br>1、sessionScope指的是session的范围，类似还有requestScope，pageScope,contextScope </p>
-<p>2、sessionScope整体的意思是获得存放在session.setAttrbute(key,value)的值即session.getAttribute(key) </p>
-<p>原文：<a href="https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244" target="_blank" rel="noopener">https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244</a> </p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -381,18 +247,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-06-03T10:07:26.000Z" itemprop="datePublished">2019-06-03</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p><code>onpropertychange</code>： IE下，当一个HTML元素的属性改变的时候，都能通过 onpropertychange来即时捕获。onchange在属性值改变时还必须使得当前元素失去焦点(onblur)才可以激活该事件。 在用js脚本改动该元素值时候亦能触发onpropertychange事件。<br><code>oninput</code>：是onpropertychange的非IE浏览器版本，支持firefox和opera等浏览器，但有一点不同，它绑定于对象时，并非该对象所有属性改变都能触发事件，它只在对象value值发生改变时奏效。</p>
-<p><code>onchange</code>： (a)当前对象属性改变，并且是由键盘或鼠标事件激发的（脚本触发无效）；(b)当前对象失去焦点(onblur) ；</p>
-<h3 id="jQuery用法"><a href="#jQuery用法" class="headerlink" title="jQuery用法"></a>jQuery用法</h3><p><code>$(&quot;#input1&quot;).bind(&quot;input propertychange&quot;,function(event){ console.log($(&quot;#input1&quot;).val()) });</code></p>
-<h3 id="原生Js用法"><a href="#原生Js用法" class="headerlink" title="原生Js用法"></a>原生Js用法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    // Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9</span><br><span class="line">        function OnInput (event) &#123;</span><br><span class="line">            alert (&quot;The new content: &quot; + event.target.value);</span><br><span class="line">        &#125;</span><br><span class="line">    // Internet Explorer</span><br><span class="line">        function OnPropChanged (event) &#123;</span><br><span class="line">            if (event.propertyName.toLowerCase () == &quot;value&quot;) &#123;</span><br><span class="line">                alert (&quot;The new content: &quot; + event.srcElement.value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &lt;/script&gt;</span><br><span class="line"> //Input标签</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;text&quot; oninput=&quot;OnInput (event)&quot; onpropertychange=&quot;OnPropChanged (event)&quot; value=&quot;Text field&quot; /&gt;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -424,30 +279,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-05-20T02:49:32.000Z" itemprop="datePublished">2019-05-20</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <ol>
-<li>sudo chmod -R 777  /工作目录    获取工作目录下的文件操作权限（解决permission denied问题）</li>
-<li>ps -ef |grep tomcat   产看进程，<code>grep</code>后边可跟应用名或者端口号</li>
-<li>tail -f logs/catalina.out  查看<code>tomcat</code>日志，须在<code>tomcat</code>目录下执行</li>
-<li>cp -r userfiles /home 复制文件<code>userfiles</code>到<code>/home</code>目录下 </li>
-<li>netstat  -anp  |grep   端口号  查看端口占用</li>
-<li>netstat   -nultp    查看当前所有已经使用的端口情况</li>
-<li>firewall-cmd –state  查看防火墙运行状态</li>
-<li>start firewalld.service  启动防火墙</li>
-<li>firewall-cmd –permanent –zone=public –add-port=8080-8081/tcp  开放某个端口</li>
-<li>firewall-cmd –permanent –zone=public –add-service=https   开启服务</li>
-<li>firewall-cmd –permanent –zone=public –list-services //服务空格隔开  查看开启的服务</li>
-<li>firewall-cmd –permanent –zone=public –list-ports //端口空格隔开   查看开启的端口</li>
-<li>iptables -L -n | grep 21   检查设定是否生效</li>
-<li>ps -ef|grep tomcat  查看程序启动情况</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -479,16 +311,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-05-18T07:59:41.000Z" itemprop="datePublished">2019-05-18</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p>1.ctrl+alt+v：自动补全返回值</p>
-<p>2.ctrl+alt+T：try…catch  if…else补全</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -520,36 +343,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-05-08T02:15:11.000Z" itemprop="datePublished">2019-05-08</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ufw</span><br></pre></td></tr></table></figure>
-<p>当然，这是有图形界面的(比较简陋)，在新立得里搜索gufw试试……</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>1 启用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw default deny</span><br></pre></td></tr></table></figure>
-<p>作用：开启了防火墙并随系统启动同时关闭所有外部对本机的访问（本机访问外部正常）。</p>
-<p>2 关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw disable</span><br></pre></td></tr></table></figure>
-<p>2 查看防火墙状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
-<p>3 开启/禁用相应端口或服务举例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow 80 允许外部访问80端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw delete allow 80 禁止外部访问80 端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw deny smtp 禁止外部访问smtp服务</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw delete allow smtp 删除上面建立的某条规则</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 22 要拒绝所有的TCP流量从10.0.0.0/8 到192.168.0.1地址的22端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 可以允许所有RFC1918网络（局域网/无线局域网的）访问这个主机（/8,/16,/12是一种网络分级）：</span><br><span class="line">sudo ufw allow from 10.0.0.0/8</span><br><span class="line">sudo ufw allow from 172.16.0.0/12</span><br><span class="line">sudo ufw allow from 192.168.0.0/16</span><br></pre></td></tr></table></figure>
-<h2 id="推荐设置"><a href="#推荐设置" class="headerlink" title="推荐设置"></a>推荐设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ufw</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw default deny</span><br></pre></td></tr></table></figure>
-<p>这样设置已经很安全，如果有特殊需要，可以使用sudo ufw allow开启相应服务。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -581,16 +375,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-05-06T09:22:42.000Z" itemprop="datePublished">2019-05-06</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="Linux-修改只读文件"><a href="#Linux-修改只读文件" class="headerlink" title="Linux 修改只读文件"></a>Linux 修改只读文件</h3><p>进入文件所在位置 — 例如：cd /etc （在etc文件夹下有文件hosts）<br>查看文件 — 命令：vim host 然后enter<br>编辑该文件 — 点击insert，就可以编辑了，上下箭头移动到要编辑的位置<br>保存文件 — 按下Esc，之后，键入命令：<code>:w !sudo tee %</code>，输入密码<br>然后，警告文件已被修改了，并显示出一个选项菜单。<br>这里按 <code>L</code>键重新将该文件载入缓冲区。<br>Press ENTER or type command to continue<br>W12: Warning: File “/etc/profile” has changed and the buffer was changed in Vim as well<br>See “:help W12” for more info.</p>
-<p>[O]K, (L)oad File:</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -622,110 +407,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <time datetime="2019-04-26T08:54:25.000Z" itemprop="datePublished">2019-04-26</time>
 </a>    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <p>这是一片关于Mybatis-Plus的学习笔记，记录学习的过程与感悟。仅适用于自身。</p>
-<ol>
-<li>引入依赖</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.1.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	WARNING</span><br><span class="line"></span><br><span class="line">引入 `MyBatis-Plus` 之后请不要再次引入 `MyBatis` 以及 `MyBatis-Spring`，以避免因版本差异导致的问题</span><br></pre></td></tr></table></figure>
-<p>2.在<code>application.yml</code>文件中添加配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#mybatis plus 设置</span><br><span class="line">mybatis-plus:</span><br><span class="line">  type-aliases-package: cc.mrbird.febs.system.domain,cc.mrbird.febs.job.domain</span><br><span class="line">  mapper-locations: classpath:mapper/*/*.xml</span><br><span class="line">  configuration:</span><br><span class="line">    jdbc-type-for-null: null</span><br><span class="line">  global-config:</span><br><span class="line">    # 关闭 mybatis-plus的 banner</span><br><span class="line">    banner: false</span><br></pre></td></tr></table></figure>
-<h3 id="typeAliasesPackage"><a href="#typeAliasesPackage" class="headerlink" title="typeAliasesPackage"></a>typeAliasesPackage</h3><p>​    MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名，注册后在 Mapper 对应的 XML 文件中可以直接使用类名，而不用使用全限定的类名（即 XML 中调用的时候不用包含包名）。 </p>
-<p>​    例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;queryList&quot; resultType=&quot;job&quot;&gt;&lt;/select&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="typeAliasesSuperType"><a href="#typeAliasesSuperType" class="headerlink" title="typeAliasesSuperType"></a>typeAliasesSuperType</h3><p>​    该配置请和 <code>typeAliasesPackage</code> 一起使用，如果配置了该属性，则仅仅会扫描路径下以该类作为父类的域对象 。 </p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
-<li><p>代码生成</p>
-<p>参照官方文档进行配置，基本不会出幺蛾子。模板选项有<code>freemarker</code>，<code>String templatePath = &quot;/templates/mapper.xml.ftl&quot;</code>    和<code>velocity</code>， <code>String templatePath = &quot;/templates/mapper.xml.vm&quot;</code></p>
-<p>也可自定义模板。代码示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">// 数据库 URL</span><br><span class="line">private static final String URL = &quot;jdbc:mysql://127.0.0.1:3306/sixpence?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&quot;;</span><br><span class="line">// 数据库驱动</span><br><span class="line">private static final String DRIVER_NAME = &quot;com.mysql.jdbc.Driver&quot;;</span><br><span class="line">// 数据库用户名</span><br><span class="line">private static final String USERNAME = &quot;root&quot;;</span><br><span class="line">// 数据库密码</span><br><span class="line">private static final String PASSWORD = &quot;root&quot;;</span><br><span class="line">// @author 值</span><br><span class="line">private static final String AUTHOR = &quot;sixpence&quot;;</span><br><span class="line">// 包的基础路径</span><br><span class="line">private static final String BASE_PACKAGE_URL = &quot;com.sixpence.mp&quot;;</span><br><span class="line">// xml文件路径</span><br><span class="line">private static final String XML_PACKAGE_URL = &quot;/src/main/resources/mapper/&quot;;</span><br><span class="line">// xml 文件模板</span><br><span class="line">private static final String XML_MAPPER_TEMPLATE_PATH = &quot;generator/templates/mapper.xml&quot;;</span><br><span class="line">// mapper 文件模板</span><br><span class="line">private static final String MAPPER_TEMPLATE_PATH = &quot;generator/templates/mapper.java&quot;;</span><br><span class="line">// entity 文件模板</span><br><span class="line">private static final String ENTITY_TEMPLATE_PATH = &quot;generator/templates/entity.java&quot;;</span><br><span class="line">// service 文件模板</span><br><span class="line">private static final String SERVICE_TEMPLATE_PATH = &quot;generator/templates/service.java&quot;;</span><br><span class="line">// serviceImpl 文件模板</span><br><span class="line">private static final String SERVICE_IMPL_TEMPLATE_PATH = &quot;generator/templates/serviceImpl.java&quot;;</span><br><span class="line">// controller 文件模板</span><br><span class="line">private static final String CONTROLLER_TEMPLATE_PATH = &quot;generator/templates/controller.java&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    // 代码生成器</span><br><span class="line">    AutoGenerator generator = new AutoGenerator();</span><br><span class="line"></span><br><span class="line">    // 全局配置</span><br><span class="line">    GlobalConfig globalConfig = new GlobalConfig();</span><br><span class="line">    String projectPath = System.getProperty(&quot;user.dir&quot;);</span><br><span class="line">    globalConfig.setOutputDir(projectPath + &quot;/src/main/java&quot;);</span><br><span class="line">    globalConfig.setAuthor(AUTHOR);</span><br><span class="line">    globalConfig.setOpen(false);</span><br><span class="line">    globalConfig.setFileOverride(false);</span><br><span class="line">    generator.setGlobalConfig(globalConfig);</span><br><span class="line"></span><br><span class="line">    // 数据源配置</span><br><span class="line">    DataSourceConfig dataSourceConfig = new DataSourceConfig();</span><br><span class="line">    dataSourceConfig.setUrl(URL);</span><br><span class="line">    // dataSourceConfig.setSchemaName(&quot;public&quot;);</span><br><span class="line">    dataSourceConfig.setDriverName(DRIVER_NAME);</span><br><span class="line">    dataSourceConfig.setUsername(USERNAME);</span><br><span class="line">    dataSourceConfig.setPassword(PASSWORD);</span><br><span class="line">    generator.setDataSource(dataSourceConfig);</span><br><span class="line"></span><br><span class="line">    // 包配置</span><br><span class="line">    PackageConfig packageConfig = new PackageConfig();</span><br><span class="line">    packageConfig.setModuleName(&quot;gen&quot;);</span><br><span class="line">    packageConfig.setParent(BASE_PACKAGE_URL);</span><br><span class="line">    generator.setPackageInfo(packageConfig);</span><br><span class="line"></span><br><span class="line">    // 配置自定义代码模板</span><br><span class="line">    TemplateConfig templateConfig = new TemplateConfig();</span><br><span class="line">    templateConfig.setXml(XML_MAPPER_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setMapper(MAPPER_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setEntity(ENTITY_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setService(SERVICE_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setServiceImpl(SERVICE_IMPL_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setController(CONTROLLER_TEMPLATE_PATH);</span><br><span class="line">    generator.setTemplate(templateConfig);</span><br><span class="line"></span><br><span class="line">    // 策略配置</span><br><span class="line">    StrategyConfig strategy = new StrategyConfig();</span><br><span class="line">    strategy.setNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">    strategy.setColumnNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">    //strategy.setSuperEntityClass(&quot;com.baomidou.ant.common.BaseEntity&quot;);</span><br><span class="line">    strategy.setEntityLombokModel(true);</span><br><span class="line">    strategy.setRestControllerStyle(true);</span><br><span class="line">    //strategy.setSuperControllerClass(&quot;com.baomidou.ant.common.BaseController&quot;);</span><br><span class="line">    strategy.setInclude(scanner(&quot;表名，多个英文逗号分割&quot;).split(&quot;,&quot;));</span><br><span class="line">    strategy.setSuperEntityColumns(&quot;id&quot;);</span><br><span class="line">    strategy.setControllerMappingHyphenStyle(true);</span><br><span class="line">    strategy.setTablePrefix(packageConfig.getModuleName() + &quot;_&quot;);</span><br><span class="line">    generator.setStrategy(strategy);</span><br><span class="line">    generator.setTemplateEngine(new FreemarkerTemplateEngine());</span><br><span class="line">    generator.execute();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static String scanner(String tip) &#123;</span><br><span class="line">    Scanner scanner = new Scanner(System.in);</span><br><span class="line">    System.out.println((&quot;请输入&quot; + tip + &quot;：&quot;));</span><br><span class="line">    if (scanner.hasNext()) &#123;</span><br><span class="line">        String ipt = scanner.next();</span><br><span class="line">        if (StringUtils.isNotBlank(ipt)) return ipt;</span><br><span class="line">    &#125;</span><br><span class="line">    throw new MybatisPlusException(&quot;请输入正确的&quot; + tip + &quot;！&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="CRUD接口"><a href="#CRUD接口" class="headerlink" title="CRUD接口"></a>CRUD接口</h3><ul>
-<li><p>Mapper的CRUD接口</p>
-<p>说明:</p>
-<ul>
-<li>通用 CRUD 封装<a href="https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-core/src/main/java/com/baomidou/mybatisplus/core/mapper/BaseMapper.java" target="_blank" rel="noopener">BaseMapper</a>接口，为 <code>Mybatis-Plus</code> 启动时自动解析实体表关系映射转换为 <code>Mybatis</code> 内部对象注入容器</li>
-<li>泛型 <code>T</code> 为任意实体对象</li>
-<li>参数 <code>Serializable</code> 为任意类型主键 <code>Mybatis-Plus</code> 不推荐使用复合主键约定每一张表都有自己的唯一 <code>id</code> 主键</li>
-<li>对象 <code>Wrapper</code> 为 <em>条件构造器</em></li>
-</ul>
-<p>以下为部分接口方法：</p>
-<ul>
-<li><p>insert</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 插入一条记录</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param entity 实体对象</span><br><span class="line"> * @return 插入成功记录数</span><br><span class="line"> */</span><br><span class="line">int insert(T entity);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>- delete
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 根据 entity 条件，删除记录</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param wrapper 实体对象封装操作类（可以为 null）</span><br><span class="line"> * @return 删除成功记录数</span><br><span class="line"> */</span><br><span class="line">int delete(@Param(Constants.WRAPPER) Wrapper&lt;T&gt; wrapper);</span><br></pre></td></tr></table></figure>
-
-- updateById
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 根据 ID 修改</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param entity 实体对象</span><br><span class="line"> * @return 修改成功记录数</span><br><span class="line"> */</span><br><span class="line">int updateById(@Param(Constants.ENTITY) T entity);</span><br></pre></td></tr></table></figure>
-
-- selectMaps
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 根据 Wrapper 条件，查询全部记录</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param queryWrapper 实体对象封装操作类（可以为 null）</span><br><span class="line"> * @return 字段映射对象 Map 集合</span><br><span class="line"> */</span><br><span class="line">List&lt;Map&lt;String, Object&gt;&gt; selectMaps(@Param(Constants.WRAPPER) Wrapper&lt;T&gt; queryWrapper);</span><br></pre></td></tr></table></figure>
-</code></pre><ul>
-<li><p>Service的CRUD接口</p>
-<p>说明:</p>
-<ul>
-<li>通用 Service CRUD 封装<a href="https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-extension/src/main/java/com/baomidou/mybatisplus/extension/service/IService.java" target="_blank" rel="noopener">IService</a>接口，进一步封装 CRUD 采用 <code>get 查询单行</code> <code>remove 删除`</code>list 查询集合<code></code>page 分页<code>前缀命名方式区分</code>Mapper` 层避免混淆，</li>
-<li>泛型 <code>T</code> 为任意实体对象</li>
-<li>建议如果存在自定义通用 Service 方法的可能，请创建自己的 <code>IBaseService</code> 继承 <code>Mybatis-Plus</code> 提供的基类</li>
-<li>对象 <code>Wrapper</code> 为 <code>条件构造器</code></li>
-</ul>
-<p>关于接口内容不再赘述，偶需要看文档。</p>
-</li>
-<li><p>条件构造器</p>
-<p><a href="https://mp.baomidou.com/guide/wrapper.html#abstractwrapper" target="_blank" rel="noopener">详见文档</a></p>
-</li>
-<li><p>分页插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- spring xml 方式 --&gt;</span><br><span class="line">&lt;plugins&gt;</span><br><span class="line">    &lt;plugin interceptor=&quot;com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;sqlParser&quot; ref=&quot;自定义解析类、可以没有&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;dialectClazz&quot; value=&quot;自定义方言类、可以没有&quot; /&gt;</span><br><span class="line">    &lt;/plugin&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//Spring boot方式</span><br><span class="line">@EnableTransactionManagement</span><br><span class="line">@Configuration</span><br><span class="line">@MapperScan(&quot;com.baomidou.cloud.service.*.mapper*&quot;)</span><br><span class="line">public class MybatisPlusConfig &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 分页插件</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public PaginationInterceptor paginationInterceptor() &#123;</span><br><span class="line">        return new PaginationInterceptor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>自定义分页</strong></p>
-<ul>
-<li><p>UserMapper.java方法内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public interface UserMapper&#123;//可以继承或者不继承BaseMapper</span><br><span class="line">    /**</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 查询 : 根据state状态查询用户列表，分页显示</span><br><span class="line">     * 注意!!: 如果入参是有多个,需要加注解指定参数名才能在xml中取值</span><br><span class="line">     * &lt;/p&gt;</span><br><span class="line">     *</span><br><span class="line">     * @param page 分页对象,xml中可以从里面进行取值,传递参数 Page 即自动分页,必须放在第一位(你可以继承Page实现自己的分页对象)</span><br><span class="line">     * @param state 状态</span><br><span class="line">     * @return 分页对象</span><br><span class="line">     */</span><br><span class="line">    IPage&lt;User&gt; selectPageVo(Page page, @Param(&quot;state&quot;) Integer state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>UserMapper.xml编写一个list查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;selectPageVo&quot; resultType=&quot;com.baomidou.cloud.entity.UserVo&quot;&gt;</span><br><span class="line">    SELECT id,name FROM user WHERE state=#&#123;state&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>UserServiceImpl调用分页方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public IPage&lt;User&gt; selectUserPage(Page&lt;User&gt; page, Integer state) &#123;</span><br><span class="line">    // 不进行 count sql 优化，解决 MP 无法自动优化 SQL 问题，这时候你需要自己查询 count 部分</span><br><span class="line">    // page.setOptimizeCountSql(false);</span><br><span class="line">    // 当 total 为非 0 时(默认为 0),分页插件不会进行 count 查询</span><br><span class="line">    // 要点!! 分页返回的对象与传入的对象是同一个</span><br><span class="line">    return userMapper.selectPageVo(page, state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>代码示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class PaginationTest &#123;</span><br><span class="line"></span><br><span class="line">    @Resource</span><br><span class="line">    private UserMapper mapper;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void tests() &#123;</span><br><span class="line">        System.out.println(&quot;----- baseMapper 自带分页 ------&quot;);</span><br><span class="line">        Page&lt;User&gt; page = new Page&lt;&gt;(1, 5);</span><br><span class="line">        IPage&lt;User&gt; userIPage = mapper.selectPage(page, new QueryWrapper&lt;User&gt;()</span><br><span class="line">                .eq(&quot;age&quot;, 20).eq(&quot;name&quot;, &quot;Jack&quot;));</span><br><span class="line">        assertThat(page).isSameAs(userIPage);</span><br><span class="line">        System.out.println(&quot;总条数 ------&gt; &quot; + userIPage.getTotal());</span><br><span class="line">        System.out.println(&quot;当前页数 ------&gt; &quot; + userIPage.getCurrent());</span><br><span class="line">        System.out.println(&quot;当前每页显示数 ------&gt; &quot; + userIPage.getSize());</span><br><span class="line">        print(userIPage.getRecords());</span><br><span class="line">        System.out.println(&quot;----- baseMapper 自带分页 ------&quot;);</span><br><span class="line">        System.out.println(&quot;json 正反序列化 begin&quot;);</span><br><span class="line">        String json = JSON.toJSONString(page);</span><br><span class="line">        Page&lt;User&gt; page1 = JSON.parseObject(json, 		  TypeBuilder.newInstance(Page.class).addTypeParam(User.class).build());</span><br><span class="line">        print(page1.getRecords());</span><br><span class="line">        System.out.println(&quot;json 正反序列化 end&quot;);</span><br><span class="line">        System.out.println(&quot;----- 自定义 XML 分页 ------&quot;);</span><br><span class="line">        MyPage&lt;User&gt; myPage = new MyPage&lt;User&gt;(1, 5).setSelectInt(20).setSelectStr(&quot;Jack&quot;);</span><br><span class="line">        ParamSome paramSome = new ParamSome(20, &quot;Jack&quot;);</span><br><span class="line">        MyPage&lt;User&gt; userMyPage = mapper.mySelectPage(myPage, paramSome);</span><br><span class="line">        assertThat(myPage).isSameAs(userMyPage);</span><br><span class="line">        System.out.println(&quot;总条数 ------&gt; &quot; + userMyPage.getTotal());</span><br><span class="line">        System.out.println(&quot;当前页数 ------&gt; &quot; + userMyPage.getCurrent());</span><br><span class="line">        System.out.println(&quot;当前每页显示数 ------&gt; &quot; + userMyPage.getSize());</span><br><span class="line">        print(userMyPage.getRecords());</span><br><span class="line">        System.out.println(&quot;----- 自定义 XML 分页 ------&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<pre><code>### sql分析打印
-
-​    该功能依赖 `p6spy` 组件，完美的输出打印 SQL 及执行时长 `3.1.0` 以上版本 
-
-- p6spy 依赖引入
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;p6spy&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;p6spy&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;最新版本&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-- application.yml配置
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    dynamic:</span><br><span class="line">      # 是否开启 SQL日志输出，生产环境建议关闭，有性能损耗</span><br><span class="line">      p6spy: true</span><br></pre></td></tr></table></figure>
-
-- spy.properties配置
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># p6spy配置，文档 https://p6spy.readthedocs.io/en/latest/configandusage.html</span><br><span class="line"># 使用日志系统记录 sql</span><br><span class="line">appender=com.p6spy.engine.spy.appender.Slf4JLogger</span><br><span class="line"># 自定义日志打印</span><br><span class="line">logMessageFormat=cc.mrbird.febs.common.config.P6spySqlFormatConfig</span><br><span class="line"># 是否开启慢 SQL记录</span><br><span class="line">outagedetection=true</span><br><span class="line"># 慢 SQL记录标准 2 秒</span><br><span class="line">outagedetectioninterval=2</span><br><span class="line"># 开启过滤</span><br><span class="line">filter=true</span><br><span class="line"># 包含 QRTZ的不打印</span><br><span class="line">exclude=QRTZ</span><br></pre></td></tr></table></figure>
-</code></pre> 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -761,15 +443,7 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -931,16 +605,6 @@ prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="fals
   <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
   <div class="reward-box">
     
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
     
   </div>
 </div>
