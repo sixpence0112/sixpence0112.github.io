@@ -58,7 +58,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">136</span>
         </span>
     </span>
 
@@ -80,7 +80,14 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <ul>
+<li>bootstrap checks failed</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: [1] bootstrap checks failed</span><br><span class="line">[1]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured</span><br><span class="line">ERROR: Elasticsearch did not exit normally - check the logs at /usr/share/elasticsearch/logs/elasticsearch.log</span><br></pre></td></tr></table></figure>
+<p><strong>解决方案</strong>：</p>
+<p>在<code>elasticsearch</code>的<code>config</code>目录下，修改<code>elasticsearch.yml</code>配置文件，将下面的配置加入到该配置文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip替换host1等，多节点请添加多个ip地址，单节点可写按默认来</span><br><span class="line">#配置以下三者，最少其一</span><br><span class="line">#[discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes]</span><br><span class="line">cluster.initial_master_nodes: [&quot;node-1&quot;] #这里的node-1为node-name配置的值</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>
@@ -142,6 +149,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2020/12/09/vagrant设置默认目录/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            vagrant设置默认目录
+          
+        </div>
+      </a>
     
     
       <a href="/2020/10/21/docker常用命令/" class="article-nav-link">
@@ -209,7 +225,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2020
+        2021
         <i class="ri-heart-fill heart_icon"></i> Sixpence
       </li>
     </ul>
