@@ -128,7 +128,14 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+   
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -179,7 +186,16 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <h5 id="1-关闭swap"><a href="#1-关闭swap" class="headerlink" title="1.关闭swap"></a>1.关闭swap</h5><p>Swap是操作系统在内存吃紧的情况申请的虚拟内存，按照Kubernetes官网的说法，Swap会对Kubernetes的性能造成影响，不推荐使用Swap。 
+      <a class="article-more-link" href="/2021/05/09/安装指定版本的kubeadm/">阅读更多...</a>
+       
+      <!-- reward -->
+      
+    </p></div>
+    
 
     <!-- copyright -->
     
@@ -232,7 +248,16 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p>在使用k8s构建高可用Nacos时，编写完<code>nacos-server.yml</code>后，运行<code>kubectl apply -f nacos-server.yml</code>,创建的pod节点一直处于pending状态，无法完成创建。之后几天经过反复尝试、多方查找资料，终于将问题解决。以下为过程记录。</p>
+<p>​    </p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -285,7 +310,24 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <h1 id="更改VirtualBox虚拟机映像文件的位置"><a href="#更改VirtualBox虚拟机映像文件的位置" class="headerlink" title="更改VirtualBox虚拟机映像文件的位置"></a>更改VirtualBox虚拟机映像文件的位置</h1><ul>
+<li>打开 VirtualBox 程序，点击<code>管理/全局设定</code>菜单项(Ctrl+G), 将<code>常规</code>栏里的<code>默认虚拟电脑位置(M)</code>改为其他磁盘下的路径</li>
+<li>将原路径 <code>C:\Users\user_name\.VirtualBox\VirtualBox VMs</code> 下的文件移动到新路径下。</li>
+<li>重新启动VirtualBox程序，在虚拟机列表里，以前建立的虚拟机虽然都还在，但已经不可用了，将他们全部删除。</li>
+<li>双击打开新路径各个文件夹里的vbox文件，将建立的虚拟机重新导入。</li>
+</ul>
+<h1 id="更改vagrant配置文件的位置"><a href="#更改vagrant配置文件的位置" class="headerlink" title="更改vagrant配置文件的位置"></a>更改vagrant配置文件的位置</h1><ul>
+<li>将 <code>C:\Users\user_name\.vagrant.d</code> 移动到新的位置</li>
+<li>新建环境变量<code>VAGRANT_HOME</code>，并指向新路径</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -336,7 +378,21 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <ul>
+<li>bootstrap checks failed</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: [1] bootstrap checks failed</span><br><span class="line">[1]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured</span><br><span class="line">ERROR: Elasticsearch did not exit normally - check the logs at /usr/share/elasticsearch/logs/elasticsearch.log</span><br></pre></td></tr></table></figure>
+<p><strong>解决方案</strong>：</p>
+<p>在<code>elasticsearch</code>的<code>config</code>目录下，修改<code>elasticsearch.yml</code>配置文件，将下面的配置加入到该配置文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip替换host1等，多节点请添加多个ip地址，单节点可写按默认来</span><br><span class="line">#配置以下三者，最少其一</span><br><span class="line">#[discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes]</span><br><span class="line">cluster.initial_master_nodes: [&quot;node-1&quot;] #这里的node-1为node-name配置的值</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -387,7 +443,16 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <h2 id="Docker镜像"><a href="#Docker镜像" class="headerlink" title="Docker镜像"></a>Docker镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#查看当前镜像</span><br><span class="line">docker image ls</span><br><span class="line">#拉取镜像</span><br><span class="line">docker pull ubuntu</span><br><span class="line">#通过tag拉取指定版本</span><br><span class="line">docker pull ubuntu:16.04</span><br><span class="line">#查看image的构建历史(图层)</span><br><span class="line">docker history ubuntu 或 docker history 94e814e2efa8(id，可简写为94e)</span><br><span class="line">#删除镜像</span><br><span class="line">docker rmi ubuntu</span><br><span class="line">##强制删除</span><br><span class="line">docker rmi -f ubuntu</span><br><span class="line">##多个镜像删除</span><br><span class="line">docker rmi -f ubuntu redis tomcat</span><br><span class="line">##删除本地全部镜像</span><br><span class="line">docker rmi -f $(docker images -q)</span><br></pre></td></tr></table></figure>
+<h2 id="Docker容器"><a href="#Docker容器" class="headerlink" title="Docker容器"></a>Docker容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">##查看当前运行容器</span><br><span class="line">docker container ls</span><br><span class="line">##运行容器</span><br><span class="line">docker run ubuntu</span><br><span class="line">##查看所有状态的容器</span><br><span class="line">docker container ls -a</span><br><span class="line">##运行容器并常驻</span><br><span class="line">docker run -it ubuntu</span><br><span class="line">##删除容器</span><br><span class="line">docker rm dd1(容器id)</span><br><span class="line">##删除所有容器</span><br><span class="line">docker rm $(docker container ls -aq)</span><br><span class="line">##删除指定状态的容器</span><br><span class="line">docker rm $(docker container ls -f &quot;status=exited&quot; -q)</span><br><span class="line">##启动exited状态的容器</span><br><span class="line">docker container start ubuntu 或 docker container start id</span><br><span class="line">##进入运行中容器</span><br><span class="line">docker container attach ubuntu 或 docker container attach id</span><br><span class="line">##暂停容器</span><br><span class="line">docker container pause ubuntu</span><br><span class="line">##恢复容器</span><br><span class="line">docker container unpause ubuntu</span><br><span class="line">##停止容器</span><br><span class="line">docker container stop ubuntu</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -444,7 +509,16 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p>目前，各个微服务系统的日志都保存在各自指定的目录中，如果这些微服务部署在不同的服务器上，那么日志文件也是分散在各自的服务器上。分散的日志不利于我们快速通过日志定位问题，我们可以借助ELK来收集各个微服务系统的日志并集中展示。</p>
+<p>ELK即Elasticsearch、Logstash和Kibana首字母缩写。Elasticsearch用于存储日志信息，Logstash用于收集日志，Kibana用于图形化展示。</p>
+<h2 id="搭建ELK环境"><a href="#搭建ELK环境" class="headerlink" title="搭建ELK环境"></a>搭建ELK环境</h2> 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -501,7 +575,76 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p>一个复杂的业务流程通常会被拆分多个微服务系统来完成，微服务间通过Feign来通信。当业务流程足够复杂时，一个完整的HTTP请求调用链一般会经过多个微服务系统，要通过日志来跟踪一整个调用链变得不再那么简单。我们可以通过Spring Cloud Sleuth来解决这个问题。</p>
+<p>在前面的章节中，我们已经实现了通过Spring Cloud Feign来远程访问受保护的资源，这一节我们将演示如何通过Spring Cloud Sleuth来追踪这个过程，并借助Zipkin以图形化界面的方式展示。</p>
+<h2 id="整合Spring-Cloud-Sleuth"><a href="#整合Spring-Cloud-Sleuth" class="headerlink" title="整合Spring Cloud Sleuth"></a>整合Spring Cloud Sleuth</h2><p>在febs-server模块的pom里引入sleuth依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-sleuth&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>然后在febs-server-test模块的<code>TestController</code>的<code>hello</code>方法里打印一条日志信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@RestController</span><br><span class="line">public class TestController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private IHelloService helloService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;hello&quot;)</span><br><span class="line">    public String hello(String name) &#123;</span><br><span class="line">        log.info(&quot;Feign调用febs-server-system的/hello服务&quot;);</span><br><span class="line">        return this.helloService.hello(name);</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在febs-server-system模块的<code>TestController</code>的<code>hello</code>方法里也打印一条日志信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@RestController</span><br><span class="line">public class TestController &#123;</span><br><span class="line"></span><br><span class="line">    ......</span><br><span class="line">    @GetMapping(&quot;hello&quot;)</span><br><span class="line">    public String hello(String name) &#123;</span><br><span class="line">        log.info(&quot;/hello服务被调用&quot;);</span><br><span class="line">        return &quot;hello&quot; + name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启febs-server-system和febs-server-test模块，使用PostMan获取令牌后，访问 <a href="localhost:8301/test/hello?name=夏天" target="_blank" rel="noopener">localhost:8301/test/hello?name=夏天</a>：</p>
+<p><img src="D:\blog\source\images\mDE4uq.png" alt="130.png"></p>
+<p>这时候，观察febs-server-test打印的日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-08-23 14:22:51.774  INFO [FEBS-Server-Test,72bb0469bee07104,72bb0469bee07104,false] 22728 --- [nio-8202-exec-1] c.m.f.s.test.controller.TestController   : Feign调用febs-server-system的/hello服务</span><br></pre></td></tr></table></figure>
+<p>febs-server-system模块也输出了一条日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-08-23 14:22:52.469  INFO [FEBS-Server-System,72bb0469bee07104,43597a6edded6f2e,false] 812 --- [nio-8201-exec-2] c.m.f.s.s.controller.TestController      : /hello服务被调用</span><br></pre></td></tr></table></figure>
+<p>可以看到，日志里出现了<code>[FEBS-Server-Test,72bb0469bee07104,72bb0469bee07104,false]</code>信息，这些信息由Spring Cloud Sleuth生成，用于跟踪微服务请求链路。这些信息包含了4个部分的值，它们的含义如下：</p>
+<ol>
+<li><code>FEBS-Server-System</code>微服务的名称，与<code>spring.application.name</code>对应；</li>
+<li><code>72bb0469bee07104</code>称为Trace ID，在一条完整的请求链路中，这个值是固定的。观察上面的日志即可证实这一点；</li>
+<li><code>43597a6edded6f2e</code>称为Span ID，它表示一个基本的工作单元；</li>
+<li><code>false</code>表示是否要将该信息输出到Zipkin等服务中来收集和展示，这里我们还没有集成Zipkin，所以为false。</li>
+</ol>
+<p>现在我们要跟踪整条请求链路，就可以通过traceId来完成。但是，从海量日志里捞取traceId并追踪也不是一件轻松的事情，下面我们可以借助zipkin实现使用图形化界面的方式追踪请求链路。</p>
+<h2 id="整合Zipkin"><a href="#整合Zipkin" class="headerlink" title="整合Zipkin"></a>整合Zipkin</h2><p>在整合Zipkin之前，我们需要先搭建RabbitMQ。RabbitMQ用于收集Sleuth提供的追踪信息，然后Zipkin Server从RabbitMQ里获取，这样可以提升性能。</p>
+<p>在安装RabbitMQ之前，需要先安装Erlang/OTP，下载地址为：<a href="http://www.erlang.org/downloads/，下载exe文件安装即可。" target="_blank" rel="noopener">http://www.erlang.org/downloads/，下载exe文件安装即可。</a></p>
+<p>安装完毕后，下载RabbitMQ，下载地址为 <a href="http://www.rabbitmq.com/install-windows.html，下载exe文件安装即可。" target="_blank" rel="noopener">http://www.rabbitmq.com/install-windows.html，下载exe文件安装即可。</a></p>
+<p>安装完RabbitMQ之后，我们到RabbitMQ安装目录的sbin下执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br></pre></td></tr></table></figure>
+<p>然后在浏览器中输入<a href="http://localhost:15672/" target="_blank" rel="noopener">http://localhost:15672</a>，用户名和密码都是guest，登录后可看到：</p>
+<p><img src="D:\blog\source\images\mDuW2F.png" alt="131.png"></p>
+<p>点击Admin Tab页面，新增一个用户：</p>
+<p><img src="D:\blog\source\images\mDKFG8.png" alt="132.png"></p>
+<p>用户名为febs，密码为123456，角色为管理员。新添加的用户还是No access状态，需要进一步对该用户进行授权后，方可以远程通过该用户名访问。点击该新增用户名。进入授权页面，点击Set permission按钮，进行用户授权操作。</p>
+<p>安装好RabbitMQ后，我们开始整合Zipkin。在较低版本的Spring Cloud中，我们可以自己搭建Zipkin Server，现在我们只能使用官方搭建好的Zipkin Server，地址为：<a href="https://github.com/openzipkin/zipkin" target="_blank" rel="noopener">https://github.com/openzipkin/zipkin</a></p>
+<p>在cmd窗口下运行下面这条命令（windows下没有curl环境的话，可以在git bash中运行这条命令），下载zipkin.jar：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://zipkin.io/quickstart.sh | bash -s</span><br></pre></td></tr></table></figure>
+<p><img src="D:\blog\source\images\mDQxr4.png" alt="133.png"></p>
+<p>由于网络问题，下载速度极慢，可以复制图中的链接到迅雷下载中下载，下载后重命名为zipkin.jar即可。</p>
+<p>zipkin支持将追踪信息保存到MySQL数据库，所以在运行zipkin.jar之前，我们先准备好相关库表，SQL脚本地址为：<a href="https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/mysql-v1/src/main/resources/mysql.sql。" target="_blank" rel="noopener">https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/mysql-v1/src/main/resources/mysql.sql。</a></p>
+<p>运行这些SQL后，数据库创建了三张新的表：</p>
+<p><img src="D:\blog\source\images\mD1EYq.png" alt="134.png"></p>
+<p>库表准备好后，运行下面这条命令启动zipkin.jar：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar zipkin.jar --server.port=8402 --zipkin.storage.type=mysql --zipkin.storage.mysql.db=febs_cloud_base --zipkin.storage.mysql.username=root --zipkin.storage.mysql.password=123456 --zipkin.storage.mysql.host=localhost --zipkin.storage.mysql.port=3306 --zipkin.collector.rabbitmq.addresses=localhost:5672 --zipkin.collector.rabbitmq.username=febs --zipkin.collector.rabbitmq.password=123456</span><br></pre></td></tr></table></figure>
+<p>上面命令指定了数据库链接和RabbitMQ链接信息。更多可选配置可以解压zipkin.jar，查看<code>zipkin\BOOT-INF\classes</code>路径下的<code>zipkin-server-shared.yml</code>配置类源码。</p>
+<p>启动好zipkin.jar后，在febs-server模块的pom里引入如下依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-zipkin&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.amqp&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-rabbit&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>然后在febs-server-system和febs-server-test模块的配置文件application.yml里添加如下配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  zipkin:</span><br><span class="line">    sender:</span><br><span class="line">      type: rabbit</span><br><span class="line">  sleuth:</span><br><span class="line">    sampler:</span><br><span class="line">      probability: 1</span><br><span class="line">  rabbitmq:</span><br><span class="line">    host: localhost</span><br><span class="line">    port: 5672</span><br><span class="line">    username: febs</span><br><span class="line">    password: 123456</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>spring.zipkin.sender.type</code>指定了使用RabbitMQ收集追踪信息；</li>
+<li><code>spring.sleuth.sampler.probability</code>默认值为0.1，即采样率才1/10，发送10笔请求只有一笔会被采集。为了测试方便，我们可以将它设置为1，即100%采样；</li>
+<li><code>spring.rabbitmq</code>用于配置RabbitMQ连接信息，你可能会问，为什么刚刚RabbitMQ端口是15672，这里却配置为5672，是不是写错了呢？其实不是，15672是RabbitMQ的管理页面端口，5672是AMPQ端口。</li>
+</ul>
+<p>添加好配置后，重启febs-server-system和febs-server-test模块，发送一笔<a href="localhost:8301/test/hello?name=夏天" target="_blank" rel="noopener">localhost:8301/test/hello?name=夏天</a>请求后，使用浏览器访问<a href="http://localhost:8402/zipkin/链接（个人习惯使用Lens" target="_blank" rel="noopener">http://localhost:8402/zipkin/链接（个人习惯使用Lens</a> UI）：</p>
+<p><img src="D:\blog\source\images\mDwFJg.png" alt="135.png"></p>
+<p><img src="D:\blog\source\images\mDywkt.png" alt="136.png"></p>
+<p><img src="D:\blog\source\images\mD68Nq.png" alt="137.png"></p>
+<p>查看依赖关系：</p>
+<p><img src="D:\blog\source\images\mD6c8K.png" alt="138.png"></p>
+<p>查看数据表，看是否存储了信息：</p>
+<p><img src="D:\blog\source\images\mD2QDe.png" alt="139.png"></p>
+<p>至此，Sleuth和Zipkin整合成功。整合后，我们的系统架构如下图所示：</p>
+<p><img src="D:\blog\source\images\mxQxgS.png" alt="A05.png"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -554,7 +697,27 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p><strong>1.注解的官方定义</strong></p>
+<ol>
+<li>​    注解是一种元数据形式。即注解是属于java的一种数据类型，和类、接口、数组、枚举类似。</li>
+<li>​    注解来修饰，类、方法、变量、参数、包。</li>
+<li>​    注解不会对所修饰的代码产生直接的影响。</li>
+</ol>
+<p><strong>2.如何定义注解</strong></p>
+<ol>
+<li>第一步，定义注解——相当于定义标记；</li>
+<li>第二步，配置注解——把标记打在需要用到的程序代码中；</li>
+<li>第三步，解析注解——在编译期或运行时检测到标记，并进行特殊操作。</li>
+</ol>
+<p><img src="D:\blog\source\images\2018071015404830.png" alt></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -609,7 +772,51 @@
 </div>
  
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p><strong>Ubuntu16.04配置阿里云数据源</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">cd  /etc/apt</span><br><span class="line"></span><br><span class="line">vi sourcee.list</span><br><span class="line"></span><br><span class="line">deb-src http://archive.ubuntu.com/ubuntu xenial main restricted #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted multiverse universe #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse #Added by software-properties</span><br><span class="line">deb http://archive.canonical.com/ubuntu xenial partner</span><br><span class="line">deb-src http://archive.canonical.com/ubuntu xenial partner</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted multiverse universe #Added by software-properties</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse</span><br><span class="line"></span><br><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Docker安装：</strong></p>
+<ol>
+<li><p>卸载旧版本Docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装Docker所需要的包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>设置稳定的仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo \</span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装最新版的Docker引擎</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动Docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable docker &amp;&amp; systemctl start docker</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>docker-compose安装</strong></p>
+<ol>
+<li><p>获取Docker Compose最新稳定版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L &quot;https://get.daocloud.io/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>如果超时，解决方式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L &quot;https://get.daocloud.io/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对二进制文件授予可执行权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建link</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
