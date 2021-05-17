@@ -80,7 +80,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>@EnableConfigurationProperties</strong> 使使用 @ConfigurationProperties 注解的类生效。</p>
+  <p><strong>@EnableConfigurationProperties</strong> 使使用 @ConfigurationProperties 注解的类生效。<a id="more"></a></p>
 <p>如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。说白了 @EnableConfigurationProperties 相当于把使用 @ConfigurationProperties 的类进行了一次注入。</p>
 <p><strong>@ConfigurationProperties</strong></p>
 <p>将配置文件application.properties中配置的每一个属性值映射到当前类的属性中；</p>

@@ -84,7 +84,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>​                                <strong>jsp页面获取session值</strong><br>java代码</p>
+  <p>​                                <strong>jsp页面获取session值</strong><a id="more"></a><br>java代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;/chkUser&quot;,method = RequestMethod.POST,produces = &quot;application/json;charset=UTF-8&quot;)</span><br><span class="line">   public String chkUserInfo(HttpServletRequest request,String userName, String userPwd)&#123;</span><br><span class="line">       if(StringUtils.isBlank(userName)||StringUtils.isBlank(userPwd))</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       UserEntity entity = chkLoginService.chkUserService(userName,userPwd);</span><br><span class="line">       if(entity==null)</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       request.getSession().setAttribute(&quot;userEntity&quot;,entity);</span><br><span class="line">       return &quot;true&quot;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p><strong>方法一</strong><br>jsp页面<br>使用 request.getSession().getAttribute(“**“) 方法 </p>
 <p><img src="E:\blog\source\images\70" alt="img"> </p>

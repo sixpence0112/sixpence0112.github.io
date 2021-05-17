@@ -82,7 +82,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="Linux-修改只读文件"><a href="#Linux-修改只读文件" class="headerlink" title="Linux 修改只读文件"></a>Linux 修改只读文件</h3><p>进入文件所在位置 — 例如：cd /etc （在etc文件夹下有文件hosts）<br>查看文件 — 命令：vim host 然后enter<br>编辑该文件 — 点击insert，就可以编辑了，上下箭头移动到要编辑的位置<br>保存文件 — 按下Esc，之后，键入命令：<code>:w !sudo tee %</code>，输入密码<br>然后，警告文件已被修改了，并显示出一个选项菜单。<br>这里按 <code>L</code>键重新将该文件载入缓冲区。<br>Press ENTER or type command to continue<br>W12: Warning: File “/etc/profile” has changed and the buffer was changed in Vim as well<br>See “:help W12” for more info.</p>
+  <h3 id="Linux-修改只读文件"><a href="#Linux-修改只读文件" class="headerlink" title="Linux 修改只读文件"></a>Linux 修改只读文件<a id="more"></a></h3><p>进入文件所在位置 — 例如：cd /etc （在etc文件夹下有文件hosts）<br>查看文件 — 命令：vim host 然后enter<br>编辑该文件 — 点击insert，就可以编辑了，上下箭头移动到要编辑的位置<br>保存文件 — 按下Esc，之后，键入命令：<code>:w !sudo tee %</code>，输入密码<br>然后，警告文件已被修改了，并显示出一个选项菜单。<br>这里按 <code>L</code>键重新将该文件载入缓冲区。<br>Press ENTER or type command to continue<br>W12: Warning: File “/etc/profile” has changed and the buffer was changed in Vim as well<br>See “:help W12” for more info.</p>
 <p>[O]K, (L)oad File:</p>
  
       <!-- reward -->

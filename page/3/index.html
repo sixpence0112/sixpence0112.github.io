@@ -92,77 +92,6 @@
     
     
     
-    <article id="post-jsp页面获取session值" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2019/06/18/jsp页面获取session值/">jsp页面获取session值</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2019/06/18/jsp页面获取session值/" class="article-date">
-  <time datetime="2019-06-18T00:52:08.000Z" itemprop="datePublished">2019-06-18</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
-  </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">153</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>​                                <strong>jsp页面获取session值</strong><br>java代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;/chkUser&quot;,method = RequestMethod.POST,produces = &quot;application/json;charset=UTF-8&quot;)</span><br><span class="line">   public String chkUserInfo(HttpServletRequest request,String userName, String userPwd)&#123;</span><br><span class="line">       if(StringUtils.isBlank(userName)||StringUtils.isBlank(userPwd))</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       UserEntity entity = chkLoginService.chkUserService(userName,userPwd);</span><br><span class="line">       if(entity==null)</span><br><span class="line">           return &quot;false&quot;;</span><br><span class="line">       request.getSession().setAttribute(&quot;userEntity&quot;,entity);</span><br><span class="line">       return &quot;true&quot;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>方法一</strong><br>jsp页面<br>使用 request.getSession().getAttribute(“**“) 方法 </p>
-<p><img src="E:\blog\source\images\70" alt="img"> </p>
-<p><strong>方法二</strong><br>在jsp页面 script中使用EL表达式获取<br><strong>var userEntity=’${sessionScope.userEntity.loginName}’;</strong><br>说明<br>1、sessionScope指的是session的范围，类似还有requestScope，pageScope,contextScope </p>
-<p>2、sessionScope整体的意思是获得存放在session.setAttrbute(key,value)的值即session.getAttribute(key) </p>
-<p>原文：<a href="https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244" target="_blank" rel="noopener">https://blog.csdn.net/xiongdaandxiaomi/article/details/80593244</a> </p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
     <article id="post-js监听input框" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   <div class="article-inner">
     
@@ -202,14 +131,12 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p><code>onpropertychange</code>： IE下，当一个HTML元素的属性改变的时候，都能通过 onpropertychange来即时捕获。onchange在属性值改变时还必须使得当前元素失去焦点(onblur)才可以激活该事件。 在用js脚本改动该元素值时候亦能触发onpropertychange事件。<br><code>oninput</code>：是onpropertychange的非IE浏览器版本，支持firefox和opera等浏览器，但有一点不同，它绑定于对象时，并非该对象所有属性改变都能触发事件，它只在对象value值发生改变时奏效。</p>
-<p><code>onchange</code>： (a)当前对象属性改变，并且是由键盘或鼠标事件激发的（脚本触发无效）；(b)当前对象失去焦点(onblur) ；</p>
-<h3 id="jQuery用法"><a href="#jQuery用法" class="headerlink" title="jQuery用法"></a>jQuery用法</h3><p><code>$(&quot;#input1&quot;).bind(&quot;input propertychange&quot;,function(event){ console.log($(&quot;#input1&quot;).val()) });</code></p>
-<h3 id="原生Js用法"><a href="#原生Js用法" class="headerlink" title="原生Js用法"></a>原生Js用法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    // Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9</span><br><span class="line">        function OnInput (event) &#123;</span><br><span class="line">            alert (&quot;The new content: &quot; + event.target.value);</span><br><span class="line">        &#125;</span><br><span class="line">    // Internet Explorer</span><br><span class="line">        function OnPropChanged (event) &#123;</span><br><span class="line">            if (event.propertyName.toLowerCase () == &quot;value&quot;) &#123;</span><br><span class="line">                alert (&quot;The new content: &quot; + event.srcElement.value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &lt;/script&gt;</span><br><span class="line"> //Input标签</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;text&quot; oninput=&quot;OnInput (event)&quot; onpropertychange=&quot;OnPropChanged (event)&quot; value=&quot;Text field&quot; /&gt;</span><br></pre></td></tr></table></figure>
- 
+  <p><code>onpropertychange</code>： IE下，当一个HTML元素的属性改变的时候，都能通过 onpropertychange来即时捕获。onchange在属性值改变时还必须使得当前元素失去焦点(onblur)才可以激活该事件。 在用js脚本改动该元素值时候亦能触发onpropertychange事件。 
+      <a class="article-more-link" href="/2019/06/03/js监听input框/">阅读更多...</a>
+       
       <!-- reward -->
       
-    </div>
+    </p></div>
     
 
     <!-- copyright -->
@@ -246,7 +173,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">244</span>
+            <span class="post-count">259</span>
         </span>
     </span>
 
@@ -264,28 +191,12 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <ol>
-<li>sudo chmod -R 777  /工作目录    获取工作目录下的文件操作权限（解决permission denied问题）</li>
-<li>ps -ef |grep tomcat   产看进程，<code>grep</code>后边可跟应用名或者端口号</li>
-<li>tail -f logs/catalina.out  查看<code>tomcat</code>日志，须在<code>tomcat</code>目录下执行</li>
-<li>cp -r userfiles /home 复制文件<code>userfiles</code>到<code>/home</code>目录下 </li>
-<li>netstat  -anp  |grep   端口号  查看端口占用</li>
-<li>netstat   -nultp    查看当前所有已经使用的端口情况</li>
-<li>netstat -ntlp  查看所有的端口占用</li>
-<li>firewall-cmd –state  查看防火墙运行状态</li>
-<li>start firewalld.service  启动防火墙</li>
-<li>firewall-cmd –permanent –zone=public –add-port=8080-8081/tcp  开放某个端口</li>
-<li>firewall-cmd –permanent –zone=public –add-service=https   开启服务</li>
-<li>firewall-cmd –permanent –zone=public –list-services //服务空格隔开  查看开启的服务</li>
-<li>firewall-cmd –permanent –zone=public –list-ports //端口空格隔开   查看开启的端口</li>
-<li>iptables -L -n | grep 21   检查设定是否生效</li>
-<li>ps -ef|grep tomcat  查看程序启动情况</li>
-<li>yum list installed 查看已安装程序</li>
-</ol>
- 
+  <p>自己学习用到的Linux命令。记录以记忆。 
+      <a class="article-more-link" href="/2019/05/20/linux命令/">阅读更多...</a>
+       
       <!-- reward -->
       
-    </div>
+    </p></div>
     
 
     <!-- copyright -->
@@ -322,7 +233,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">21</span>
+            <span class="post-count">27</span>
         </span>
     </span>
 
@@ -340,18 +251,20 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>1.ctrl+alt+v：自动补全返回值</p>
-<p>2.ctrl+alt+T：try…catch  if…else补全</p>
- 
+  <p>Intellij快捷键练习 
+      <a class="article-more-link" href="/2019/05/18/intellij/">阅读更多...</a>
+       
       <!-- reward -->
       
-    </div>
+    </p></div>
     
 
     <!-- copyright -->
     
     <footer class="article-footer">
        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/idea/">idea</a></li></ul>
+
     </footer>
   </div>
 
@@ -400,29 +313,9 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ufw</span><br></pre></td></tr></table></figure>
-<p>当然，这是有图形界面的(比较简陋)，在新立得里搜索gufw试试……</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>1 启用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw default deny</span><br></pre></td></tr></table></figure>
-<p>作用：开启了防火墙并随系统启动同时关闭所有外部对本机的访问（本机访问外部正常）。</p>
-<p>2 关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw disable</span><br></pre></td></tr></table></figure>
-<p>2 查看防火墙状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
-<p>3 开启/禁用相应端口或服务举例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow 80 允许外部访问80端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw delete allow 80 禁止外部访问80 端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw deny smtp 禁止外部访问smtp服务</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw delete allow smtp 删除上面建立的某条规则</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 22 要拒绝所有的TCP流量从10.0.0.0/8 到192.168.0.1地址的22端口</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 可以允许所有RFC1918网络（局域网/无线局域网的）访问这个主机（/8,/16,/12是一种网络分级）：</span><br><span class="line">sudo ufw allow from 10.0.0.0/8</span><br><span class="line">sudo ufw allow from 172.16.0.0/12</span><br><span class="line">sudo ufw allow from 192.168.0.0/16</span><br></pre></td></tr></table></figure>
-<h2 id="推荐设置"><a href="#推荐设置" class="headerlink" title="推荐设置"></a>推荐设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ufw</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw default deny</span><br></pre></td></tr></table></figure>
-<p>这样设置已经很安全，如果有特殊需要，可以使用sudo ufw allow开启相应服务。</p>
- 
+  <h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ufw</span><br></pre></td></tr></table></figure> 
+      <a class="article-more-link" href="/2019/05/08/开启-关闭Ubuntu防火墙/">阅读更多...</a>
+       
       <!-- reward -->
       
     </div>
@@ -480,12 +373,12 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="Linux-修改只读文件"><a href="#Linux-修改只读文件" class="headerlink" title="Linux 修改只读文件"></a>Linux 修改只读文件</h3><p>进入文件所在位置 — 例如：cd /etc （在etc文件夹下有文件hosts）<br>查看文件 — 命令：vim host 然后enter<br>编辑该文件 — 点击insert，就可以编辑了，上下箭头移动到要编辑的位置<br>保存文件 — 按下Esc，之后，键入命令：<code>:w !sudo tee %</code>，输入密码<br>然后，警告文件已被修改了，并显示出一个选项菜单。<br>这里按 <code>L</code>键重新将该文件载入缓冲区。<br>Press ENTER or type command to continue<br>W12: Warning: File “/etc/profile” has changed and the buffer was changed in Vim as well<br>See “:help W12” for more info.</p>
-<p>[O]K, (L)oad File:</p>
- 
+  <h3 id="Linux-修改只读文件"><a href="#Linux-修改只读文件" class="headerlink" title="Linux 修改只读文件"></a>Linux 修改只读文件 
+      <a class="article-more-link" href="/2019/05/06/linux修改只读文件/">阅读更多...</a>
+       
       <!-- reward -->
       
-    </div>
+    </h3></div>
     
 
     <!-- copyright -->
@@ -540,106 +433,12 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>这是一片关于Mybatis-Plus的学习笔记，记录学习的过程与感悟。仅适用于自身。</p>
-<ol>
-<li>引入依赖</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.1.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	WARNING</span><br><span class="line"></span><br><span class="line">引入 `MyBatis-Plus` 之后请不要再次引入 `MyBatis` 以及 `MyBatis-Spring`，以避免因版本差异导致的问题</span><br></pre></td></tr></table></figure>
-<p>2.在<code>application.yml</code>文件中添加配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#mybatis plus 设置</span><br><span class="line">mybatis-plus:</span><br><span class="line">  type-aliases-package: cc.mrbird.febs.system.domain,cc.mrbird.febs.job.domain</span><br><span class="line">  mapper-locations: classpath:mapper/*/*.xml</span><br><span class="line">  configuration:</span><br><span class="line">    jdbc-type-for-null: null</span><br><span class="line">  global-config:</span><br><span class="line">    # 关闭 mybatis-plus的 banner</span><br><span class="line">    banner: false</span><br></pre></td></tr></table></figure>
-<h3 id="typeAliasesPackage"><a href="#typeAliasesPackage" class="headerlink" title="typeAliasesPackage"></a>typeAliasesPackage</h3><p>​    MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名，注册后在 Mapper 对应的 XML 文件中可以直接使用类名，而不用使用全限定的类名（即 XML 中调用的时候不用包含包名）。 </p>
-<p>​    例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;queryList&quot; resultType=&quot;job&quot;&gt;&lt;/select&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="typeAliasesSuperType"><a href="#typeAliasesSuperType" class="headerlink" title="typeAliasesSuperType"></a>typeAliasesSuperType</h3><p>​    该配置请和 <code>typeAliasesPackage</code> 一起使用，如果配置了该属性，则仅仅会扫描路径下以该类作为父类的域对象 。 </p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
-<li><p>代码生成</p>
-<p>参照官方文档进行配置，基本不会出幺蛾子。模板选项有<code>freemarker</code>，<code>String templatePath = &quot;/templates/mapper.xml.ftl&quot;</code>    和<code>velocity</code>， <code>String templatePath = &quot;/templates/mapper.xml.vm&quot;</code></p>
-<p>也可自定义模板。代码示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">// 数据库 URL</span><br><span class="line">private static final String URL = &quot;jdbc:mysql://127.0.0.1:3306/sixpence?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&quot;;</span><br><span class="line">// 数据库驱动</span><br><span class="line">private static final String DRIVER_NAME = &quot;com.mysql.jdbc.Driver&quot;;</span><br><span class="line">// 数据库用户名</span><br><span class="line">private static final String USERNAME = &quot;root&quot;;</span><br><span class="line">// 数据库密码</span><br><span class="line">private static final String PASSWORD = &quot;root&quot;;</span><br><span class="line">// @author 值</span><br><span class="line">private static final String AUTHOR = &quot;sixpence&quot;;</span><br><span class="line">// 包的基础路径</span><br><span class="line">private static final String BASE_PACKAGE_URL = &quot;com.sixpence.mp&quot;;</span><br><span class="line">// xml文件路径</span><br><span class="line">private static final String XML_PACKAGE_URL = &quot;/src/main/resources/mapper/&quot;;</span><br><span class="line">// xml 文件模板</span><br><span class="line">private static final String XML_MAPPER_TEMPLATE_PATH = &quot;generator/templates/mapper.xml&quot;;</span><br><span class="line">// mapper 文件模板</span><br><span class="line">private static final String MAPPER_TEMPLATE_PATH = &quot;generator/templates/mapper.java&quot;;</span><br><span class="line">// entity 文件模板</span><br><span class="line">private static final String ENTITY_TEMPLATE_PATH = &quot;generator/templates/entity.java&quot;;</span><br><span class="line">// service 文件模板</span><br><span class="line">private static final String SERVICE_TEMPLATE_PATH = &quot;generator/templates/service.java&quot;;</span><br><span class="line">// serviceImpl 文件模板</span><br><span class="line">private static final String SERVICE_IMPL_TEMPLATE_PATH = &quot;generator/templates/serviceImpl.java&quot;;</span><br><span class="line">// controller 文件模板</span><br><span class="line">private static final String CONTROLLER_TEMPLATE_PATH = &quot;generator/templates/controller.java&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    // 代码生成器</span><br><span class="line">    AutoGenerator generator = new AutoGenerator();</span><br><span class="line"></span><br><span class="line">    // 全局配置</span><br><span class="line">    GlobalConfig globalConfig = new GlobalConfig();</span><br><span class="line">    String projectPath = System.getProperty(&quot;user.dir&quot;);</span><br><span class="line">    globalConfig.setOutputDir(projectPath + &quot;/src/main/java&quot;);</span><br><span class="line">    globalConfig.setAuthor(AUTHOR);</span><br><span class="line">    globalConfig.setOpen(false);</span><br><span class="line">    globalConfig.setFileOverride(false);</span><br><span class="line">    generator.setGlobalConfig(globalConfig);</span><br><span class="line"></span><br><span class="line">    // 数据源配置</span><br><span class="line">    DataSourceConfig dataSourceConfig = new DataSourceConfig();</span><br><span class="line">    dataSourceConfig.setUrl(URL);</span><br><span class="line">    // dataSourceConfig.setSchemaName(&quot;public&quot;);</span><br><span class="line">    dataSourceConfig.setDriverName(DRIVER_NAME);</span><br><span class="line">    dataSourceConfig.setUsername(USERNAME);</span><br><span class="line">    dataSourceConfig.setPassword(PASSWORD);</span><br><span class="line">    generator.setDataSource(dataSourceConfig);</span><br><span class="line"></span><br><span class="line">    // 包配置</span><br><span class="line">    PackageConfig packageConfig = new PackageConfig();</span><br><span class="line">    packageConfig.setModuleName(&quot;gen&quot;);</span><br><span class="line">    packageConfig.setParent(BASE_PACKAGE_URL);</span><br><span class="line">    generator.setPackageInfo(packageConfig);</span><br><span class="line"></span><br><span class="line">    // 配置自定义代码模板</span><br><span class="line">    TemplateConfig templateConfig = new TemplateConfig();</span><br><span class="line">    templateConfig.setXml(XML_MAPPER_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setMapper(MAPPER_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setEntity(ENTITY_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setService(SERVICE_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setServiceImpl(SERVICE_IMPL_TEMPLATE_PATH);</span><br><span class="line">    templateConfig.setController(CONTROLLER_TEMPLATE_PATH);</span><br><span class="line">    generator.setTemplate(templateConfig);</span><br><span class="line"></span><br><span class="line">    // 策略配置</span><br><span class="line">    StrategyConfig strategy = new StrategyConfig();</span><br><span class="line">    strategy.setNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">    strategy.setColumnNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">    //strategy.setSuperEntityClass(&quot;com.baomidou.ant.common.BaseEntity&quot;);</span><br><span class="line">    strategy.setEntityLombokModel(true);</span><br><span class="line">    strategy.setRestControllerStyle(true);</span><br><span class="line">    //strategy.setSuperControllerClass(&quot;com.baomidou.ant.common.BaseController&quot;);</span><br><span class="line">    strategy.setInclude(scanner(&quot;表名，多个英文逗号分割&quot;).split(&quot;,&quot;));</span><br><span class="line">    strategy.setSuperEntityColumns(&quot;id&quot;);</span><br><span class="line">    strategy.setControllerMappingHyphenStyle(true);</span><br><span class="line">    strategy.setTablePrefix(packageConfig.getModuleName() + &quot;_&quot;);</span><br><span class="line">    generator.setStrategy(strategy);</span><br><span class="line">    generator.setTemplateEngine(new FreemarkerTemplateEngine());</span><br><span class="line">    generator.execute();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static String scanner(String tip) &#123;</span><br><span class="line">    Scanner scanner = new Scanner(System.in);</span><br><span class="line">    System.out.println((&quot;请输入&quot; + tip + &quot;：&quot;));</span><br><span class="line">    if (scanner.hasNext()) &#123;</span><br><span class="line">        String ipt = scanner.next();</span><br><span class="line">        if (StringUtils.isNotBlank(ipt)) return ipt;</span><br><span class="line">    &#125;</span><br><span class="line">    throw new MybatisPlusException(&quot;请输入正确的&quot; + tip + &quot;！&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><h3 id="CRUD接口"><a href="#CRUD接口" class="headerlink" title="CRUD接口"></a>CRUD接口</h3><ul>
-<li><p>Mapper的CRUD接口</p>
-<p>说明:</p>
-<ul>
-<li>通用 CRUD 封装<a href="https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-core/src/main/java/com/baomidou/mybatisplus/core/mapper/BaseMapper.java" target="_blank" rel="noopener">BaseMapper</a>接口，为 <code>Mybatis-Plus</code> 启动时自动解析实体表关系映射转换为 <code>Mybatis</code> 内部对象注入容器</li>
-<li>泛型 <code>T</code> 为任意实体对象</li>
-<li>参数 <code>Serializable</code> 为任意类型主键 <code>Mybatis-Plus</code> 不推荐使用复合主键约定每一张表都有自己的唯一 <code>id</code> 主键</li>
-<li>对象 <code>Wrapper</code> 为 <em>条件构造器</em></li>
-</ul>
-<p>以下为部分接口方法：</p>
-<ul>
-<li><p>insert</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 插入一条记录</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param entity 实体对象</span><br><span class="line"> * @return 插入成功记录数</span><br><span class="line"> */</span><br><span class="line">int insert(T entity);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>- delete
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 根据 entity 条件，删除记录</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param wrapper 实体对象封装操作类（可以为 null）</span><br><span class="line"> * @return 删除成功记录数</span><br><span class="line"> */</span><br><span class="line">int delete(@Param(Constants.WRAPPER) Wrapper&lt;T&gt; wrapper);</span><br></pre></td></tr></table></figure>
-
-- updateById
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 根据 ID 修改</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param entity 实体对象</span><br><span class="line"> * @return 修改成功记录数</span><br><span class="line"> */</span><br><span class="line">int updateById(@Param(Constants.ENTITY) T entity);</span><br></pre></td></tr></table></figure>
-
-- selectMaps
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * 根据 Wrapper 条件，查询全部记录</span><br><span class="line"> * &lt;/p&gt;</span><br><span class="line"> *</span><br><span class="line"> * @param queryWrapper 实体对象封装操作类（可以为 null）</span><br><span class="line"> * @return 字段映射对象 Map 集合</span><br><span class="line"> */</span><br><span class="line">List&lt;Map&lt;String, Object&gt;&gt; selectMaps(@Param(Constants.WRAPPER) Wrapper&lt;T&gt; queryWrapper);</span><br></pre></td></tr></table></figure>
-</code></pre><ul>
-<li><p>Service的CRUD接口</p>
-<p>说明:</p>
-<ul>
-<li>通用 Service CRUD 封装<a href="https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-extension/src/main/java/com/baomidou/mybatisplus/extension/service/IService.java" target="_blank" rel="noopener">IService</a>接口，进一步封装 CRUD 采用 <code>get 查询单行</code> <code>remove 删除`</code>list 查询集合<code></code>page 分页<code>前缀命名方式区分</code>Mapper` 层避免混淆，</li>
-<li>泛型 <code>T</code> 为任意实体对象</li>
-<li>建议如果存在自定义通用 Service 方法的可能，请创建自己的 <code>IBaseService</code> 继承 <code>Mybatis-Plus</code> 提供的基类</li>
-<li>对象 <code>Wrapper</code> 为 <code>条件构造器</code></li>
-</ul>
-<p>关于接口内容不再赘述，偶需要看文档。</p>
-</li>
-<li><p>条件构造器</p>
-<p><a href="https://mp.baomidou.com/guide/wrapper.html#abstractwrapper" target="_blank" rel="noopener">详见文档</a></p>
-</li>
-<li><p>分页插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- spring xml 方式 --&gt;</span><br><span class="line">&lt;plugins&gt;</span><br><span class="line">    &lt;plugin interceptor=&quot;com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;sqlParser&quot; ref=&quot;自定义解析类、可以没有&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;dialectClazz&quot; value=&quot;自定义方言类、可以没有&quot; /&gt;</span><br><span class="line">    &lt;/plugin&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//Spring boot方式</span><br><span class="line">@EnableTransactionManagement</span><br><span class="line">@Configuration</span><br><span class="line">@MapperScan(&quot;com.baomidou.cloud.service.*.mapper*&quot;)</span><br><span class="line">public class MybatisPlusConfig &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 分页插件</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public PaginationInterceptor paginationInterceptor() &#123;</span><br><span class="line">        return new PaginationInterceptor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>自定义分页</strong></p>
-<ul>
-<li><p>UserMapper.java方法内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public interface UserMapper&#123;//可以继承或者不继承BaseMapper</span><br><span class="line">    /**</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 查询 : 根据state状态查询用户列表，分页显示</span><br><span class="line">     * 注意!!: 如果入参是有多个,需要加注解指定参数名才能在xml中取值</span><br><span class="line">     * &lt;/p&gt;</span><br><span class="line">     *</span><br><span class="line">     * @param page 分页对象,xml中可以从里面进行取值,传递参数 Page 即自动分页,必须放在第一位(你可以继承Page实现自己的分页对象)</span><br><span class="line">     * @param state 状态</span><br><span class="line">     * @return 分页对象</span><br><span class="line">     */</span><br><span class="line">    IPage&lt;User&gt; selectPageVo(Page page, @Param(&quot;state&quot;) Integer state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>UserMapper.xml编写一个list查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;selectPageVo&quot; resultType=&quot;com.baomidou.cloud.entity.UserVo&quot;&gt;</span><br><span class="line">    SELECT id,name FROM user WHERE state=#&#123;state&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>UserServiceImpl调用分页方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public IPage&lt;User&gt; selectUserPage(Page&lt;User&gt; page, Integer state) &#123;</span><br><span class="line">    // 不进行 count sql 优化，解决 MP 无法自动优化 SQL 问题，这时候你需要自己查询 count 部分</span><br><span class="line">    // page.setOptimizeCountSql(false);</span><br><span class="line">    // 当 total 为非 0 时(默认为 0),分页插件不会进行 count 查询</span><br><span class="line">    // 要点!! 分页返回的对象与传入的对象是同一个</span><br><span class="line">    return userMapper.selectPageVo(page, state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>代码示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class PaginationTest &#123;</span><br><span class="line"></span><br><span class="line">    @Resource</span><br><span class="line">    private UserMapper mapper;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void tests() &#123;</span><br><span class="line">        System.out.println(&quot;----- baseMapper 自带分页 ------&quot;);</span><br><span class="line">        Page&lt;User&gt; page = new Page&lt;&gt;(1, 5);</span><br><span class="line">        IPage&lt;User&gt; userIPage = mapper.selectPage(page, new QueryWrapper&lt;User&gt;()</span><br><span class="line">                .eq(&quot;age&quot;, 20).eq(&quot;name&quot;, &quot;Jack&quot;));</span><br><span class="line">        assertThat(page).isSameAs(userIPage);</span><br><span class="line">        System.out.println(&quot;总条数 ------&gt; &quot; + userIPage.getTotal());</span><br><span class="line">        System.out.println(&quot;当前页数 ------&gt; &quot; + userIPage.getCurrent());</span><br><span class="line">        System.out.println(&quot;当前每页显示数 ------&gt; &quot; + userIPage.getSize());</span><br><span class="line">        print(userIPage.getRecords());</span><br><span class="line">        System.out.println(&quot;----- baseMapper 自带分页 ------&quot;);</span><br><span class="line">        System.out.println(&quot;json 正反序列化 begin&quot;);</span><br><span class="line">        String json = JSON.toJSONString(page);</span><br><span class="line">        Page&lt;User&gt; page1 = JSON.parseObject(json, 		  TypeBuilder.newInstance(Page.class).addTypeParam(User.class).build());</span><br><span class="line">        print(page1.getRecords());</span><br><span class="line">        System.out.println(&quot;json 正反序列化 end&quot;);</span><br><span class="line">        System.out.println(&quot;----- 自定义 XML 分页 ------&quot;);</span><br><span class="line">        MyPage&lt;User&gt; myPage = new MyPage&lt;User&gt;(1, 5).setSelectInt(20).setSelectStr(&quot;Jack&quot;);</span><br><span class="line">        ParamSome paramSome = new ParamSome(20, &quot;Jack&quot;);</span><br><span class="line">        MyPage&lt;User&gt; userMyPage = mapper.mySelectPage(myPage, paramSome);</span><br><span class="line">        assertThat(myPage).isSameAs(userMyPage);</span><br><span class="line">        System.out.println(&quot;总条数 ------&gt; &quot; + userMyPage.getTotal());</span><br><span class="line">        System.out.println(&quot;当前页数 ------&gt; &quot; + userMyPage.getCurrent());</span><br><span class="line">        System.out.println(&quot;当前每页显示数 ------&gt; &quot; + userMyPage.getSize());</span><br><span class="line">        print(userMyPage.getRecords());</span><br><span class="line">        System.out.println(&quot;----- 自定义 XML 分页 ------&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<pre><code>### sql分析打印
-
-​    该功能依赖 `p6spy` 组件，完美的输出打印 SQL 及执行时长 `3.1.0` 以上版本 
-
-- p6spy 依赖引入
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;p6spy&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;p6spy&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;最新版本&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-- application.yml配置
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    dynamic:</span><br><span class="line">      # 是否开启 SQL日志输出，生产环境建议关闭，有性能损耗</span><br><span class="line">      p6spy: true</span><br></pre></td></tr></table></figure>
-
-- spy.properties配置
-
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># p6spy配置，文档 https://p6spy.readthedocs.io/en/latest/configandusage.html</span><br><span class="line"># 使用日志系统记录 sql</span><br><span class="line">appender=com.p6spy.engine.spy.appender.Slf4JLogger</span><br><span class="line"># 自定义日志打印</span><br><span class="line">logMessageFormat=cc.mrbird.febs.common.config.P6spySqlFormatConfig</span><br><span class="line"># 是否开启慢 SQL记录</span><br><span class="line">outagedetection=true</span><br><span class="line"># 慢 SQL记录标准 2 秒</span><br><span class="line">outagedetectioninterval=2</span><br><span class="line"># 开启过滤</span><br><span class="line">filter=true</span><br><span class="line"># 包含 QRTZ的不打印</span><br><span class="line">exclude=QRTZ</span><br></pre></td></tr></table></figure>
-</code></pre> 
+  <p>这是一片关于Mybatis-Plus的学习笔记，记录学习的过程与感悟。仅适用于自身。 
+      <a class="article-more-link" href="/2019/04/26/Mybatis-Plus学习/">阅读更多...</a>
+       
       <!-- reward -->
       
-    </div>
+    </p></div>
     
 
     <!-- copyright -->

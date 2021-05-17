@@ -58,7 +58,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">239</span>
+            <span class="post-count">242</span>
         </span>
     </span>
 
@@ -82,7 +82,8 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Docker镜像"><a href="#Docker镜像" class="headerlink" title="Docker镜像"></a>Docker镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#查看当前镜像</span><br><span class="line">docker image ls</span><br><span class="line">#拉取镜像</span><br><span class="line">docker pull ubuntu</span><br><span class="line">#通过tag拉取指定版本</span><br><span class="line">docker pull ubuntu:16.04</span><br><span class="line">#查看image的构建历史(图层)</span><br><span class="line">docker history ubuntu 或 docker history 94e814e2efa8(id，可简写为94e)</span><br><span class="line">#删除镜像</span><br><span class="line">docker rmi ubuntu</span><br><span class="line">##强制删除</span><br><span class="line">docker rmi -f ubuntu</span><br><span class="line">##多个镜像删除</span><br><span class="line">docker rmi -f ubuntu redis tomcat</span><br><span class="line">##删除本地全部镜像</span><br><span class="line">docker rmi -f $(docker images -q)</span><br></pre></td></tr></table></figure>
+  <p>docker命令<a id="more"></a></p>
+<h2 id="Docker镜像"><a href="#Docker镜像" class="headerlink" title="Docker镜像"></a>Docker镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#查看当前镜像</span><br><span class="line">docker image ls</span><br><span class="line">#拉取镜像</span><br><span class="line">docker pull ubuntu</span><br><span class="line">#通过tag拉取指定版本</span><br><span class="line">docker pull ubuntu:16.04</span><br><span class="line">#查看image的构建历史(图层)</span><br><span class="line">docker history ubuntu 或 docker history 94e814e2efa8(id，可简写为94e)</span><br><span class="line">#删除镜像</span><br><span class="line">docker rmi ubuntu</span><br><span class="line">##强制删除</span><br><span class="line">docker rmi -f ubuntu</span><br><span class="line">##多个镜像删除</span><br><span class="line">docker rmi -f ubuntu redis tomcat</span><br><span class="line">##删除本地全部镜像</span><br><span class="line">docker rmi -f $(docker images -q)</span><br></pre></td></tr></table></figure>
 <h2 id="Docker容器"><a href="#Docker容器" class="headerlink" title="Docker容器"></a>Docker容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">##查看当前运行容器</span><br><span class="line">docker container ls</span><br><span class="line">##运行容器</span><br><span class="line">docker run ubuntu</span><br><span class="line">##查看所有状态的容器</span><br><span class="line">docker container ls -a</span><br><span class="line">##运行容器并常驻</span><br><span class="line">docker run -it ubuntu</span><br><span class="line">##删除容器</span><br><span class="line">docker rm dd1(容器id)</span><br><span class="line">##删除所有容器</span><br><span class="line">docker rm $(docker container ls -aq)</span><br><span class="line">##删除指定状态的容器</span><br><span class="line">docker rm $(docker container ls -f &quot;status=exited&quot; -q)</span><br><span class="line">##启动exited状态的容器</span><br><span class="line">docker container start ubuntu 或 docker container start id</span><br><span class="line">##进入运行中容器</span><br><span class="line">docker container attach ubuntu 或 docker container attach id</span><br><span class="line">##暂停容器</span><br><span class="line">docker container pause ubuntu</span><br><span class="line">##恢复容器</span><br><span class="line">docker container unpause ubuntu</span><br><span class="line">##停止容器</span><br><span class="line">docker container stop ubuntu</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
@@ -159,9 +160,9 @@
       </a>
     
     
-      <a href="/2020/10/21/ELK日志收集/" class="article-nav-link">
+      <a href="/2020/10/20/Sleuth-Zipkin链路追踪/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">ELK日志收集</div>
+        <div class="article-nav-title">Sleuth Zipkin链路追踪</div>
       </a>
     
   </nav>
