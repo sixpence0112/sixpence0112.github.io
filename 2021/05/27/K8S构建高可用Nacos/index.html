@@ -142,7 +142,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f nacos-server.yml</span><br></pre></td></tr></table></figure>
 <p>查看Pod创建情况，过程需要拉取镜像，镜像比较大，可能需要一段时间（根据你的网速而定）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -w | grep nacos</span><br></pre></td></tr></table></figure>
-<p><img src="K8S构建高可用Nacos/images/image-20210528114346238-1622173427914.png" alt="image-20210528114346238"></p>
+<p><img src="images/image-20210528114346238-1622173427914.png" alt="image-20210528114346238"></p>
 <p>Pod运行起来了，我们可以进入nacos-0容器内部看看Nacos启动日志：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl exec -it pod/nacos-0 sh</span><br></pre></td></tr></table></figure>
 <p><img src="K8S构建高可用Nacos/images/image-20210528114600598-1622173562887.png" alt="image-20210528114600598"></p>
