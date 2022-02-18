@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="Sixpence" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    &#39;Nginx入门学习&#39; |  Sixpence
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/dist/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article id="post-Nginx入门学习" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  &#39;Nginx入门学习&#39;
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2019/06/18/Nginx入门学习/" class="article-date">
+  <time datetime="2019-06-18T07:44:53.000Z" itemprop="datePublished">2019-06-18</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="Nginx入门学习"><a href="#Nginx入门学习" class="headerlink" title="Nginx入门学习"></a>Nginx入门学习<a id="more"></a></h4><ul>
+<li><p><strong>下载安装</strong></p>
+<p>Nginx官网：<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a> </p>
+<p>Github项目地址：<a href="https://github.com/nginx/nginx" target="_blank" rel="noopener">https://github.com/nginx/nginx</a> </p>
+<p><img src="E:\blog\source\images\1560845819222.png" alt="1560845819222"></p>
+<p>Mainline version: Mainline 是 Nginx 目前主力在做的版本，可以说是开发版</p>
+<p><strong>Stable version: 最新稳定版，生产环境上建议使用的版本</strong></p>
+<p>Legacy versions:遗留的老版本的稳定版</p>
+<p>下载完成之后解压，目录如下，</p>
+<p><img src="E:\blog\source\images\1560846289856.png" alt="1560846289856"></p>
+<p>Nginx解压完毕之后，直接双击<code>nginx.exe</code> 即可启动，当Nginx启动之后，通过<code>nginx -s</code> 命令可以实现停止nginx和重新加载配置文件。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop # 立即停止</span><br><span class="line">nginx -s quit # 停止，在Nginx停止前会等待当前正在进行的任务</span><br><span class="line">nginx -s reload # 重新加载配置文件</span><br><span class="line">nginx –v # 查看nginx版本</span><br><span class="line">nginx -t # 测试当前配置文件是否正确</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="Nginx作为普通HttpServer"><a href="#Nginx作为普通HttpServer" class="headerlink" title="Nginx作为普通HttpServer"></a>Nginx作为普通HttpServer</h3><p>简单来说，任何可以通过Http请求的方式访问IO资源（文件是对磁盘IO的一种抽象）服务都可以称为HttpServer。你可以自己写一个程序监听一个端口，当使用浏览器输入ip:port/path 访问，程序获取浏览器获取到Http请求报文，然后对URI部分（也就是path部分）进行解析，在本地文件系统或者其他IO资源中找到对应的资源，通过封装一个Http响应报文，将资源内容放入响应体中写回给浏览器，浏览器就会对其进行解析并展示（或者下载），这就完成了最简单的Http服务器。但我们平时应用的Http服务器需要处理的细节是很多的，如IO复用，安全性等，在此不再赘述。</p>
+<p>首先复制<code>conf/nginx.conf</code> 为<code>conf/nginx_bak.conf</code> 备份原有的配置文件文件，在nginx的根目录下创建<code>www</code> 目录，并使用<code>echo 01 &gt; index.html</code> 命令，在www目录下创建<code>index.html</code>，作为HttpServer的静态资源。 </p>
+<p>删除<code>nginx.conf</code> 的内容并写入如下配置： </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">error_log  D:/nginx-1.14.0/error.log;</span><br><span class="line">http &#123;</span><br><span class="line">    access_log  D:/nginx-1.14.0/access.log;</span><br><span class="line">    server &#123;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root D:/nginx-1.14.0/www;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    打开浏览器输入<code>http://localhost/</code> 结果如下图： </p>
+<p>​    <img src="E:\blog\source\images\1560851095423.png" alt="1560851095423"></p>
+<p>​    至此， 配置Nginx最基本的功能已经成功运行 </p>
+<ul>
+<li><h3 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h3><p>Nginx配置文件中配置项有两种结构</p>
+<ul>
+<li>简单指令（simple directive），形如<code>key value;</code></li>
+<li>块指令（block directive）， 形如<code>key {simple_key simple_value;}</code> 块指令中包含有简单指令。</li>
+</ul>
+<p>形如json，又不是json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>worker_processes</code> <strong>为工作进程的数量</strong>，这里如果不填的话默认为CPU核心数，事实上数量为CPU核心数也是最优配置，因为此时，理论上操作系统发生进程切换的的代价最小。 </p>
+<p><code>events.worker_connections</code> <strong>每个工作进程的最大连接数</strong>，events有很多复杂的配置，详情点击<a href="http://nginx.org/en/docs/ngx_core_module.html#event" target="_blank" rel="noopener">这里</a> </p>
+<p><code>error_log</code> <strong>为发生错误时的日志输出路径</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    access_log  D:/Tools/nginx-1.17.0/logs/access.log;</span><br><span class="line">    server &#123;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root D:/Tools/nginx-1.17.0/www;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这一部分是映射的主体，包含在一个块级指令<code>http{}</code>中，<code>access_log</code>指定该http的日志路径 （也可配置在<code>server{}</code>内），所有server访问日志都会输出到此。<code>server{}</code>内有<code>location / {}</code>项，nginx会根据location后面的路径和<code>ip:port/path</code>中的path做匹配，如果匹配到， 则从里面配置的<code>D:/Tools/nginx-1.17.0/www</code>本地目录下寻找请求的资源。 </p>
+<p><strong>注意：一个<code>server{}</code>下可以有多个location配置，且location配置可以跟正则表达式，如下</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;    </span><br><span class="line">    location / &#123;       </span><br><span class="line">        root D:/Tools/nginx-1.17.0/www;   </span><br><span class="line">    &#125;    </span><br><span class="line">    location /static/ &#123;        </span><br><span class="line">        root D:/Tools/nginx-1.17.0/static;   </span><br><span class="line">    &#125;   </span><br><span class="line">    location ~ \.(gif|jpg|png)$&#123;        </span><br><span class="line">        root D:/Tools/nginx-1.17.0/images;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>nginx的匹配优先级为：正则、长路径、短路径。正则必须以<code>~</code>开头，后面跟要匹配的文件名正则表达式，这里以<code>localhost/01.png</code>为例， nginx会找到符合文件名的第三项配置，然后会从<code>D:/Tools/nginx-1.17.0/images</code>中找<code>01.png</code>文件，这里没有任何问题。 </p>
+<p>如果路径 为/static/file.suffix，匹配到location /之后，还会往更深的location /static/配置的root目录下匹配资源，此时会在本地找到<code>D:/Tools/nginx-1.17.0/static/file.suffix</code>文件。此时如果删除<code>location /static/</code>的配置，就会从<code>location /</code>的<code>root</code>目录下寻找配置文件，即此时的匹配路径为<code>D:/Tools/nginx-1.17.0/www/static/file.suffix</code>。这点符合nginx优先匹配深层次的<code>location</code>配置这一特性。  </p>
+<p>有意思的是当路径为<code>/static/01.png</code>时，此时符合<code>location ~ \.(gif|jpg|png)$</code>和<code>location /static/</code>两项配置，但由于正则优先，会寻找本地文件系统中<code>D:/Tools/nginx-1.17.0/images/static/01.png</code>文件 。</p>
+</li>
+<li><h3 id="Nginx作为代理服务器"><a href="#Nginx作为代理服务器" class="headerlink" title="Nginx作为代理服务器"></a>Nginx作为代理服务器</h3><p>Nginx经常作为代理服务器，作为代理的访问逻辑如下图： </p>
+<p><img src="E:\blog\source\images\1560935683996.png" alt="1560935683996"></p>
+<p>这里将上面配置好的静态文件服务器作为目标WebServer，首先将配置文件的<code>http{}</code>块中追加以下内容 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 8080;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://localhost:80;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后使用<code>nginx -s reload</code>重新加载配置文件，在浏览器中输入<code>localhost:8080/index.html</code>可以看到浏览器输出如下：  </p>
+<p><img src="E:\blog\source\images\1560935949216.png" alt="1560935949216"></p>
+<p>这里对上面的配置进行简单解释：</p>
+<p>server{listen 8080;}表明启动一个http-server监听在8080端口（注：此项不填默认为80端口，但前面的静态服务器已经占用了80端口，此处就为其他端口）。 <code>location / {proxy_pass http://localhost:80;}</code> <code>location</code>的匹配规则前文已经讲过，这里当匹配上<code>location /</code>之后，就会从请求<code>proxy_pass</code>的URL，然后在将结果返回给浏览器。此时的<code>localhost:8080/index.html</code>请求相当于在请求<code>localhost:80/index.html</code></p>
+</li>
+<li><h3 id="Nginx负载均衡"><a href="#Nginx负载均衡" class="headerlink" title="Nginx负载均衡"></a>Nginx负载均衡</h3><ol>
+<li><h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>Nginx配置负载均衡工作在TCP/IP协议的第七层，即应用层，属于七层负载均衡。 </p>
+<p>Nginx使用反向代理达到负载均衡 </p>
+</li>
+<li><h4 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h4><p>nginx的负载均衡策略可以划分为两大类：<code>内置策略</code>和<code>扩展策略</code>。</p>
+<p>内置策略包含<code>加权轮询</code>和<code>ip hash</code>，在默认情况下这两种策略会编译进nginx内核，只需在nginx配置中指明参数即可。</p>
+<p> 扩展策略有很多，如fair、通用hash、consistent hash等，默认不编译进nginx内核 。</p>
+<ul>
+<li><h5 id="轮询策略"><a href="#轮询策略" class="headerlink" title="轮询策略"></a>轮询策略</h5><p>轮询（默认）：每个请求按时间顺序逐一分配到不同的后端服务器，如果后端某台服务器宕机，故障系统被自动剔除，使用户访问不受影响。<code>Weight</code> 指定轮询权值，<strong><code>Weight</code>值越大，分配到的访问机率越高</strong>，主要用于后端每个服务器性能不均的情况下。 </p>
+</li>
+<li><h5 id="ip-hash策略"><a href="#ip-hash策略" class="headerlink" title="ip_hash策略"></a>ip_hash策略</h5><p>ip_hash：每个请求按访问IP的hash结果分配，这样来<strong>自同一个IP的访客固定访问一个后端服务器，有效解决了动态网页存在的session共享问题</strong>。但目前大部份应用的客户端都是共享上网方式，所以此策略在实际运用过程中，往往达不到效果。 </p>
+</li>
+<li><h5 id="扩展策略"><a href="#扩展策略" class="headerlink" title="扩展策略"></a>扩展策略</h5><p>fair：这是比上面两个更加智能的负载均衡算法。此种算法可以依据页面大小和加载时间长短智能地进行负载均衡，也就是根据后端服务器的响应时间来分配请求，响应时间短的优先分配。Nginx本身是不支持fair的，如果需要使用这种调度算法，必须下载Nginx的upstream_fair模块 </p>
+<p>​    </p>
+<p>fair：这是比上面两个更加智能的负载均衡算法。此种算法可以依据页面大小和加载时间长短智能地进行负载均衡，也就是根据后端服务器的响应时间来分配请求，响应时间短的优先分配。Nginx本身是不支持fair的，如果需要使用这种调度算法，必须下载Nginx的upstream_fair模块 </p>
+</li>
+</ul>
+</li>
+<li><h4 id="负载均衡的优点"><a href="#负载均衡的优点" class="headerlink" title="负载均衡的优点"></a>负载均衡的优点</h4><p><strong>提高系统吞吐量</strong>  通过负载均衡，部署多个tomcat服务，提高系统的吞吐量 </p>
+<p><strong>降低单点故障</strong>  有效降低单点故障率，故障率随着后端服务的部署增多而下降，同时通过对HTTP报头的检查，自定义400\500等错误显示页面，提供更友好服务 </p>
+<p><strong>降低对外网端口的依赖</strong>  负载均衡下只需要一个外网端口，但可以负载到内网多个tomcat上 </p>
+<p><strong>降低网络带宽</strong>  通过nginx的动静资源分离root、缓存加速proxy_cache_path、压缩GZIP、客户端缓 存expires等功能，减少数据传输量，降低带宽要求 </p>
+<p><strong>不停机升级系统</strong>  很多情况下，我们升级服务端系统文件后，需要重启服务以应用最新程序，通过 <strong>Nginx负载实现不停服务完成重启</strong> </p>
+</li>
+<li><h4 id="负载均衡策略-1"><a href="#负载均衡策略-1" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h4></li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><h3 id="Nginx负载均衡-1"><a href="#Nginx负载均衡-1" class="headerlink" title="Nginx负载均衡"></a>Nginx负载均衡</h3></li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sixpence0112.github.io/2019/06/18/Nginx入门学习/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2019/07/27/tomcat配置IP访问/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            tomcat配置IP访问;
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/06/18/jsp页面获取session值/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">jsp页面获取session值</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Sixpence
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span></span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Sixpence"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<!-- Tocbot -->
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+<script src="/dist/main.js"></script>
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+<link rel="stylesheet" href="/css/clipboard.css">
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

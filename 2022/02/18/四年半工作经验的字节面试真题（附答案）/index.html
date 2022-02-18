@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="Sixpence" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    四年半工作经验的字节面试真题（附答案） |  Sixpence
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/dist/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article id="post-四年半工作经验的字节面试真题（附答案）" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  四年半工作经验的字节面试真题（附答案）
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/02/18/四年半工作经验的字节面试真题（附答案）/" class="article-date">
+  <time datetime="2022-02-18T06:12:56.000Z" itemprop="datePublished">2022-02-18</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">6.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">24 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>下午好，我是Guide，有位伙伴面试了字节（四年半工作经验），分享下面试真题，大家一起加油哈。</p>
+<ol>
+<li>说说Redis为什么快</li>
+<li>Redis有几种数据结构,底层分别是怎么存储的</li>
+<li>Redis有几种持久化方式</li>
+<li>多线程情况下,如何保证线程安全？</li>
+<li>用过volatile吗？底层原理是？</li>
+<li>MySQL的索引结构，聚簇索引和非聚簇索引的区别</li>
+<li>MySQL有几种高可用方案，你们用的是哪一种</li>
+<li>说说你做过最有挑战性的项目</li>
+<li>秒杀采用什么方案</li>
+<li>聊聊分库分表，需要停服嘛</li>
+<li>redis挂了怎么办？</li>
+<li>你怎么防止优惠券有人重复刷？</li>
+<li>抖音评论系统怎么设计</li>
+<li>怎么设计一个短链地址</li>
+<li>有一个数组，里面元素非重复，先升序再降序，找出里面最大的值</li>
+</ol>
+<h2 id="1-说说Redis为什么快"><a href="#1-说说Redis为什么快" class="headerlink" title="1.说说Redis为什么快"></a>1.说说Redis为什么快</h2><p><img src="../四年半工作经验的字节面试真题（附答案）/640.webp" alt="图片"></p>
+<h3 id="1-1-基于内存存储实现"><a href="#1-1-基于内存存储实现" class="headerlink" title="1.1 基于内存存储实现"></a>1.1 基于内存存储实现</h3><p>内存读写是比在磁盘快很多的，Redis基于内存存储实现的数据库，相对于数据存在磁盘的MySQL数据库，省去磁盘I/O的消耗。</p>
+<h3 id="1-2-高效的数据结构"><a href="#1-2-高效的数据结构" class="headerlink" title="1.2 高效的数据结构"></a>1.2 高效的数据结构</h3><p>Mysql索引为了提高效率，选择了B+树的数据结构。其实合理的数据结构，就是可以让你的应用/程序更快。先看下Redis的数据结构&amp;内部编码图：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-16451650536951.webp" alt="图片"></p>
+<h4 id="1-2-1-SDS简单动态字符串"><a href="#1-2-1-SDS简单动态字符串" class="headerlink" title="1.2.1 SDS简单动态字符串"></a>1.2.1 SDS简单动态字符串</h4><p><img src="../四年半工作经验的字节面试真题（附答案）/640-16451650536952.webp" alt="图片"></p>
+<ul>
+<li>字符串长度处理：Redis获取字符串长度，时间复杂度为O(1)，而C语言中，需要从头开始遍历，复杂度为O（n）;</li>
+<li>空间预分配：字符串修改越频繁的话，内存分配越频繁，就会消耗性能，而SDS修改和空间扩充，会额外分配未使用的空间，减少性能损耗。</li>
+<li>惰性空间释放：SDS 缩短时，不是回收多余的内存空间，而是free记录下多余的空间，后续有变更，直接使用free中记录的空间，减少分配。</li>
+</ul>
+<h4 id="1-2-2-字典"><a href="#1-2-2-字典" class="headerlink" title="1.2.2 字典"></a>1.2.2 字典</h4><p>Redis 作为 K-V 型内存数据库，所有的键值就是用字典来存储。字典就是哈希表，比如HashMap，通过key就可以直接获取到对应的value。而哈希表的特性，在O（1）时间复杂度就可以获得对应的值。</p>
+<h4 id="1-2-3-跳跃表"><a href="#1-2-3-跳跃表" class="headerlink" title="1.2.3 跳跃表"></a>1.2.3 跳跃表</h4><p><img src="../四年半工作经验的字节面试真题（附答案）/640-16451650536963.webp" alt="图片"></p>
+<ul>
+<li>跳跃表是Redis特有的数据结构，就是在链表的基础上，增加多级索引提升查找效率。</li>
+<li>跳跃表支持平均 O（logN）,最坏 O（N）复杂度的节点查找，还可以通过顺序性操作批量处理节点。</li>
+</ul>
+<h3 id="1-3-合理的数据编码"><a href="#1-3-合理的数据编码" class="headerlink" title="1.3 合理的数据编码"></a>1.3 合理的数据编码</h3><p>Redis 支持多种数据类型，每种基本类型，可能对多种数据结构。什么时候,使用什么样数据结构，使用什么样编码，是redis设计者总结优化的结果。</p>
+<ul>
+<li>String：如果存储数字的话，是用int类型的编码;如果存储非数字，小于等于39字节的字符串，是embstr；大于39个字节，则是raw编码。</li>
+<li>List：如果列表的元素个数小于512个，列表每个元素的值都小于64字节（默认），使用ziplist编码，否则使用linkedlist编码</li>
+<li>Hash：哈希类型元素个数小于512个，所有值小于64字节的话，使用ziplist编码,否则使用hashtable编码。</li>
+<li>Set：如果集合中的元素都是整数且元素个数小于512个，使用intset编码，否则使用hashtable编码。</li>
+<li>Zset：当有序集合的元素个数小于128个，每个元素的值小于64字节时，使用ziplist编码，否则使用skiplist（跳跃表）编码</li>
+</ul>
+<h3 id="1-4-合理的线程模型"><a href="#1-4-合理的线程模型" class="headerlink" title="1.4 合理的线程模型"></a>1.4 合理的线程模型</h3><p>I/O 多路复用</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-16451650536964.webp" alt="图片"></p>
+<p>多路I/O复用技术可以让单个线程高效的处理多个连接请求，而Redis使用用epoll作为I/O多路复用技术的实现。并且，Redis自身的事件处理模型将epoll中的连接、读写、关闭都转换为事件，不在网络I/O上浪费过多的时间。</p>
+<h2 id="2-Redis有几种数据结构，底层分别是怎么存储的"><a href="#2-Redis有几种数据结构，底层分别是怎么存储的" class="headerlink" title="2. Redis有几种数据结构，底层分别是怎么存储的"></a>2. Redis有几种数据结构，底层分别是怎么存储的</h2><p>常用的，Redis有以下这五种基本类型：</p>
+<ul>
+<li>String（字符串）</li>
+<li>Hash（哈希）</li>
+<li>List（列表）</li>
+<li>Set（集合）</li>
+<li>zset（有序集合） 它还有三种特殊的数据结构类型</li>
+<li>Geospatial</li>
+<li>Hyperloglog</li>
+<li>Bitmap</li>
+</ul>
+<h3 id="2-1-Redis-的五种基本数据类型"><a href="#2-1-Redis-的五种基本数据类型" class="headerlink" title="2.1 Redis 的五种基本数据类型"></a>2.1 Redis 的五种基本数据类型</h3><p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516509481910.webp" alt="图片"></p>
+<p><strong>String（字符串）</strong></p>
+<ul>
+<li>简介:String是Redis最基础的数据结构类型，它是二进制安全的，可以存储图片或者序列化的对象，值最大存储为512M</li>
+<li>简单使用举例: set key value、get key等</li>
+<li>应用场景：共享session、分布式锁，计数器、限流。</li>
+<li>内部编码有3种，int（8字节长整型）/embstr（小于等于39字节字符串）/raw（大于39个字节字符串）</li>
+</ul>
+<p><strong>Hash（哈希）</strong></p>
+<ul>
+<li>简介：在Redis中，哈希类型是指v（值）本身又是一个键值对（k-v）结构</li>
+<li>简单使用举例：hset key field value 、hget key field</li>
+<li>内部编码：ziplist（压缩列表） 、hashtable（哈希表）</li>
+<li>应用场景：缓存用户信息等。</li>
+</ul>
+<p><strong>List（列表）</strong></p>
+<ul>
+<li>简介：列表（list）类型是用来存储多个有序的字符串，一个列表最多可以存储2^32-1个元素。</li>
+<li>简单实用举例：<code>lpush key value [value ...] 、lrange key start end</code></li>
+<li>内部编码：ziplist（压缩列表）、linkedlist（链表）</li>
+<li>应用场景：消息队列，文章列表</li>
+</ul>
+<p><strong>Set（集合）</strong></p>
+<ul>
+<li>简介：集合（set）类型也是用来保存多个的字符串元素，但是不允许重复元素</li>
+<li>简单使用举例：sadd key element [element …]、smembers key</li>
+<li>内部编码：intset（整数集合）、hashtable（哈希表）</li>
+<li>应用场景：用户标签,生成随机数抽奖、社交需求。</li>
+</ul>
+<p><strong>有序集合（zset）</strong></p>
+<ul>
+<li>简介：已排序的字符串集合，同时元素不能重复</li>
+<li>简单格式举例：<code>zadd key score member [score member ...]，zrank key member</code></li>
+<li>底层内部编码：ziplist（压缩列表）、skiplist（跳跃表）</li>
+<li>应用场景：排行榜，社交需求（如用户点赞）。</li>
+</ul>
+<h3 id="2-2-Redis-的三种特殊数据类型"><a href="#2-2-Redis-的三种特殊数据类型" class="headerlink" title="2.2 Redis 的三种特殊数据类型"></a>2.2 Redis 的三种特殊数据类型</h3><ul>
+<li>Geo：Redis3.2推出的，地理位置定位，用于存储地理位置信息，并对存储的信息进行操作。</li>
+<li>HyperLogLog：用来做基数统计算法的数据结构，如统计网站的UV。</li>
+<li>Bitmaps ：用一个比特位来映射某个元素的状态，在Redis中，它的底层是基于字符串类型实现的，可以把bitmaps成作一个以比特位为单位的数组</li>
+</ul>
+<h2 id="3-Redis有几种持久化方式"><a href="#3-Redis有几种持久化方式" class="headerlink" title="3. Redis有几种持久化方式"></a>3. Redis有几种持久化方式</h2><p>Redis是基于内存的非关系型K-V数据库，既然它是基于内存的，如果Redis服务器挂了，数据就会丢失。为了避免数据丢失了，Redis提供了持久化，即把数据保存到磁盘。</p>
+<p>Redis提供了RDB和AOF两种持久化机制，它持久化文件加载流程如下：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516512997912.webp" alt="图片"></p>
+<h3 id="3-1-RDB"><a href="#3-1-RDB" class="headerlink" title="3.1 RDB"></a>3.1 RDB</h3><p>RDB，就是把内存数据以快照的形式保存到磁盘上。</p>
+<blockquote>
+<p>什么是快照?可以这样理解，给当前时刻的数据，拍一张照片，然后保存下来。</p>
+</blockquote>
+<p>RDB持久化，是指在指定的时间间隔内，执行指定次数的写操作，将内存中的数据集快照写入磁盘中，它是Redis默认的持久化方式。执行完操作后，在指定目录下会生成一个dump.rdb文件，Redis 重启的时候，通过加载dump.rdb文件来恢复数据。RDB触发机制主要有以下几种：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516512997913.webp" alt="图片"></p>
+<p><strong>RDB 的优点</strong></p>
+<p>适合大规模的数据恢复场景，如备份，全量复制等</p>
+<p><strong>RDB缺点</strong></p>
+<ul>
+<li>没办法做到实时持久化/秒级持久化。</li>
+<li>新老版本存在RDB格式兼容问题</li>
+</ul>
+<h3 id="3-2-AOF"><a href="#3-2-AOF" class="headerlink" title="3.2 AOF"></a>3.2 AOF</h3><p>AOF（append only file） 持久化，采用日志的形式来记录每个写操作，追加到文件中，重启时再重新执行AOF文件中的命令来恢复数据。它主要解决数据持久化的实时性问题。默认是不开启的。</p>
+<p>AOF的工作流程如下：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516512998014.webp" alt="图片"></p>
+<p><strong>AOF的优点</strong></p>
+<p>数据的一致性和完整性更高</p>
+<p><strong>AOF的缺点</strong></p>
+<p>AOF记录的内容越多，文件越大，数据恢复变慢。</p>
+<h2 id="4-多线程情况下-如何保证线程安全？"><a href="#4-多线程情况下-如何保证线程安全？" class="headerlink" title="4. 多线程情况下,如何保证线程安全？"></a>4. 多线程情况下,如何保证线程安全？</h2><p>加锁，比如悲观锁<code>select for update，sychronized</code>等，如，乐观锁，乐观锁如<code>CAS</code>等，还有<code>redis分布式锁</code>等等。</p>
+<h2 id="5-用过volatile吗？它是如何保证可见性的，原理是什么"><a href="#5-用过volatile吗？它是如何保证可见性的，原理是什么" class="headerlink" title="5. 用过volatile吗？它是如何保证可见性的，原理是什么"></a>5. 用过volatile吗？它是如何保证可见性的，原理是什么</h2><p><code>volatile</code>关键字是Java虚拟机提供的的最轻量级的同步机制，它作为一个修饰符， 用来修饰变量。它保证变量对所有线程可见性，禁止指令重排，但是不保证原子性。</p>
+<p>我们先来看下java内存模型（jmm）：</p>
+<ul>
+<li>Java虚拟机规范试图定义一种Java内存模型,来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台上都能达到一致的内存访问效果。</li>
+<li>Java内存模型规定所有的变量都是存在主内存当中，每个线程都有自己的工作内存。这里的变量包括实例变量和静态变量，但是不包括局部变量，因为局部变量是线程私有的。</li>
+<li>线程的工作内存保存了被该线程使用的变量的主内存副本，线程对变量的所有操作都必须在工作内存中进行，而不能直接操作操作主内存。并且每个线程不能访问其他线程的工作内存。<img src="../四年半工作经验的字节面试真题（附答案）/640-164516517284018.webp" alt="图片"></li>
+</ul>
+<p>volatile变量，保证新值能立即同步回主内存，以及每次使用前立即从主内存刷新，所以我们说volatile保证了多线程操作变量的可见性。</p>
+<p>volatile保证可见性跟内存屏障有关。我们来看一段volatile使用的demo代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;  </span><br><span class="line">    private volatile static Singleton instance;  </span><br><span class="line">    private Singleton ()&#123;&#125;  </span><br><span class="line">    public static Singleton getInstance() &#123;  </span><br><span class="line">    if (instance == null) &#123;  </span><br><span class="line">        synchronized (Singleton.class) &#123;  </span><br><span class="line">        if (instance == null) &#123;  </span><br><span class="line">            instance = new Singleton();  </span><br><span class="line">        &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    return instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译后，对比有<code>volatile</code>关键字和没有<code>volatile</code>关键字时所生成的汇编代码，发现有<code>volatile</code>关键字修饰时，会多出一个<code>lock addl $0x0,(%esp)</code>，即多出一个lock前缀指令，lock指令相当于一个<strong>内存屏障</strong></p>
+<p>lock指令相当于一个内存屏障，它保证以下这几点：</p>
+<ol>
+<li>重排序时不能把后面的指令重排序到内存屏障之前的位置</li>
+<li>将本处理器的缓存写入内存</li>
+<li>如果是写入动作，会导致其他处理器中对应的缓存无效。</li>
+</ol>
+<p>第2点和第3点就是保证volatile保证可见性的体现嘛</p>
+<h2 id="6-MySQL的索引结构，聚簇索引和非聚簇索引的区别"><a href="#6-MySQL的索引结构，聚簇索引和非聚簇索引的区别" class="headerlink" title="6. MySQL的索引结构，聚簇索引和非聚簇索引的区别"></a>6. MySQL的索引结构，聚簇索引和非聚簇索引的区别</h2><ul>
+<li>一个表中只能拥有一个聚集索引，而非聚集索引一个表可以存在多个。</li>
+<li>索引是通过二叉树的数据结构来描述的，我们可以这么理解聚簇索引：索引的叶节点就是数据节点。而非聚簇索引的叶节点仍然是索引节点，只不过有一个指针指向对应的数据块。</li>
+<li>聚集索引：物理存储按照索引排序；非聚集索引：物理存储不按照索引排序</li>
+</ul>
+<h2 id="7-MySQL有几种高可用方案，你们用的是哪一种"><a href="#7-MySQL有几种高可用方案，你们用的是哪一种" class="headerlink" title="7. MySQL有几种高可用方案，你们用的是哪一种"></a>7. MySQL有几种高可用方案，你们用的是哪一种</h2><ul>
+<li>主从或主主半同步复制</li>
+<li>半同步复制优化</li>
+<li>高可用架构优化</li>
+<li>共享存储</li>
+<li>分布式协议</li>
+</ul>
+<h3 id="7-1-主从或主主半同步复制"><a href="#7-1-主从或主主半同步复制" class="headerlink" title="7.1 主从或主主半同步复制"></a>7.1 主从或主主半同步复制</h3><p>用双节点数据库，搭建单向或者双向的半同步复制。架构如下：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516517284119.webp" alt="图片"></p>
+<p>通常会和proxy、keepalived等第三方软件同时使用，即可以用来监控数据库的健康，又可以执行一系列管理命令。如果主库发生故障，切换到备库后仍然可以继续使用数据库。</p>
+<p><strong>这种方案优点</strong>是架构、部署比较简单，主机宕机直接切换即可。<strong>缺点</strong>是完全依赖于半同步复制，半同步复制退化为异步复制，无法保证数据一致性；另外，还需要额外考虑<strong>haproxy、keepalived</strong>的高可用机制。</p>
+<h3 id="7-2-半同步复制优化"><a href="#7-2-半同步复制优化" class="headerlink" title="7.2 半同步复制优化"></a>7.2 半同步复制优化</h3><p>半同步复制机制是可靠的，可以保证数据一致性的。但是如果网络发生波动，半同步复制发生超时会切换为异步复制，异复制是无法保证数据的一致性的。因此，可以在半同复制的基础上优化一下，尽可能保证半同复制。如<strong>双通道复制</strong>方案</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516517284120.webp" alt="图片"></p>
+<ul>
+<li>优点：这种方案架构、部署也比较简单，主机宕机也是直接切换即可。比方案1的半同步复制，更能保证数据的一致性。</li>
+<li>缺点：需要修改内核源码或者使用mysql通信协议，没有从根本上解决数据一致性问题。</li>
+</ul>
+<h3 id="7-3-高可用架构优化"><a href="#7-3-高可用架构优化" class="headerlink" title="7.3 高可用架构优化"></a>7.3 高可用架构优化</h3><p>保证高可用，可以把主从双节点数据库扩展为数据库集群。Zookeeper可以作为集群管理，它使用分布式算法保证集群数据的一致性，可以较好的避免网络分区现象的产生。</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516517284121.webp" alt="图片"></p>
+<ul>
+<li>优点：保证了整个系统的高可用性，扩展性也较好，可以扩展为大规模集群。</li>
+<li>缺点：数据一致性<strong>仍然依赖于原生的mysql半同步复制</strong>；引入Zookeeper使系统逻辑更复杂。</li>
+</ul>
+<h3 id="7-4-共享存储"><a href="#7-4-共享存储" class="headerlink" title="7.4 共享存储"></a>7.4 共享存储</h3><blockquote>
+<p>共享存储实现了数据库服务器和存储设备的解耦，不同数据库之间的数据同步不再依赖于MySQL的原生复制功能，而是通过磁盘数据同步的手段，来保证数据的一致性。</p>
+</blockquote>
+<p><strong>DRBD磁盘复制</strong></p>
+<p>DRBD是一个用软件实现的、无共享的、服务器之间镜像块设备内容的存储复制解决方案。主要用于对服务器之间的磁盘、分区、逻辑卷等进行数据镜像，当用户将数据写入本地磁盘时，还会将数据发送到网络中另一台主机的磁盘上，这样的本地主机(主节点)与远程主机(备节点)的数据就可以保证实时同步。常用架构如下：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516517284122.webp" alt="图片"></p>
+<p>当本地主机出现问题，远程主机上还保留着一份相同的数据，即可以继续使用，保证了数据的安全。</p>
+<ul>
+<li>优点：部署简单，价格合适，保证数据的强一致性</li>
+<li>缺点：对IO性能影响较大，从库不提供读操作</li>
+</ul>
+<h3 id="7-5-分布式协议"><a href="#7-5-分布式协议" class="headerlink" title="7.5 分布式协议"></a>7.5 分布式协议</h3><p>分布式协议可以很好解决数据一致性问题。常见的部署方案就是<strong>MySQL cluster</strong>，它是官方集群的部署方案，通过使用NDB存储引擎实时备份冗余数据，实现数据库的高可用性和数据一致性。如下：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516517284123.webp" alt="图片"></p>
+<ul>
+<li>优点：不依赖于第三方软件，可以实现数据的强一致性；</li>
+<li>缺点：配置较复杂；需要使用NDB储存引擎；至少三节点；</li>
+</ul>
+<h2 id="8-说说你做过最有挑战性的项目-你负责那个模块-哪些最有挑战性，说说你做了哪些优化"><a href="#8-说说你做过最有挑战性的项目-你负责那个模块-哪些最有挑战性，说说你做了哪些优化" class="headerlink" title="8. 说说你做过最有挑战性的项目, 你负责那个模块,哪些最有挑战性，说说你做了哪些优化"></a>8. 说说你做过最有挑战性的项目, 你负责那个模块,哪些最有挑战性，说说你做了哪些优化</h2><p>项目这块的话，大家可以结合自己实际做的项目说哈。也可以加我微信，跟我一起交流哈，加油加油。</p>
+<h2 id="9-秒杀采用什么方案。"><a href="#9-秒杀采用什么方案。" class="headerlink" title="9.秒杀采用什么方案。"></a>9.秒杀采用什么方案。</h2><p>设计一个秒杀系统，需要考虑这些问题：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865730.webp" alt="图片"></p>
+<p><strong>如何解决这些问题呢？</strong></p>
+<ul>
+<li>页面静态化</li>
+<li>按钮至灰控制</li>
+<li>服务单一职责</li>
+<li>秒杀链接加盐</li>
+<li>限流</li>
+<li>分布式锁</li>
+<li>MQ异步处理</li>
+<li>限流&amp;降级&amp;熔断</li>
+</ul>
+<h3 id="9-1-页面静态化"><a href="#9-1-页面静态化" class="headerlink" title="9.1 页面静态化"></a>9.1 页面静态化</h3><p>秒杀活动的页面，大多数内容都是固定不变的，如商品名称，商品图片等等，可以对活动页面做静态化处理，减少访问服务端的请求。秒杀用户会分布在全国各地，有的在上海，有的在深圳，地域相差很远，网速也各不相同。为了让用户最快访问到活动页面，可以使用CDN（Content Delivery Network，内容分发网络）。CDN可以让用户就近获取所需内容。</p>
+<h3 id="9-2-按钮至灰控制"><a href="#9-2-按钮至灰控制" class="headerlink" title="9.2 按钮至灰控制"></a>9.2 按钮至灰控制</h3><p>秒杀活动开始前，按钮一般需要置灰的。只有时间到了，才能变得可以点击。这是防止，秒杀用户在时间快到的前几秒，疯狂请求服务器，然后秒杀时间点还没到，服务器就自己挂了。</p>
+<h3 id="9-3-服务单一职责"><a href="#9-3-服务单一职责" class="headerlink" title="9.3 服务单一职责"></a>9.3 服务单一职责</h3><p>我们都知道微服务设计思想，也就是把各个功能模块拆分，功能那个类似的放一起，再用分布式的部署方式。</p>
+<blockquote>
+<p>如用户登录相关的，就设计个用户服务，订单相关的就搞个订单服务，再到礼物相关的就搞个礼物服务等等。那么，秒杀相关的业务逻辑也可以放到一起，搞个秒杀服务，单独给它搞个秒杀数据库。” 服务单一职责有个好处：如果秒杀没抗住高并发的压力，秒杀库崩了，服务挂了，也不会影响到系统的其他服务。</p>
+</blockquote>
+<h3 id="9-4-秒杀链接加盐"><a href="#9-4-秒杀链接加盐" class="headerlink" title="9.4 秒杀链接加盐"></a>9.4 秒杀链接加盐</h3><p>链接如果明文暴露的话，会有人获取到请求Url，提前秒杀了。因此，需要给秒杀链接加盐。可以把URL动态化，如通过MD5加密算法加密随机的字符串去做url。</p>
+<h3 id="9-5-限流"><a href="#9-5-限流" class="headerlink" title="9.5 限流"></a>9.5 限流</h3><p>一般有两种方式限流：nginx限流和redis限流。</p>
+<ul>
+<li>为了防止某个用户请求过于频繁，我们可以对同一用户限流；</li>
+<li>为了防止黄牛模拟几个用户请求，我们可以对某个IP进行限流；</li>
+<li>为了防止有人使用代理，每次请求都更换IP请求，我们可以对接口进行限流。</li>
+<li>为了防止瞬时过大的流量压垮系统，还可以使用阿里的Sentinel、Hystrix组件进行限流。</li>
+</ul>
+<h3 id="9-6-分布式锁"><a href="#9-6-分布式锁" class="headerlink" title="9.6 分布式锁"></a>9.6 分布式锁</h3><p>可以使用redis分布式锁解决超卖问题。</p>
+<p>使用Redis的SET EX PX NX + 校验唯一随机值,再删除释放锁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if（jedis.set(key_resource_id, uni_request_id, &quot;NX&quot;, &quot;EX&quot;, 100s) == 1）&#123; //加锁</span><br><span class="line">    try &#123;</span><br><span class="line">        do something  //业务处理</span><br><span class="line">    &#125;catch()&#123;</span><br><span class="line">  &#125;</span><br><span class="line">  finally &#123;</span><br><span class="line">       //判断是不是当前线程加的锁,是才释放</span><br><span class="line">       if (uni_request_id.equals(jedis.get(key_resource_id))) &#123;</span><br><span class="line">        jedis.del(lockKey); //释放锁</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里，判断是不是当前线程加的锁和释放锁不是一个原子操作。如果调用jedis.del()释放锁的时候，可能这把锁已经不属于当前客户端，会解除他人加的锁。</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865731.webp" alt="图片"></p>
+<p>为了更严谨，一般也是用lua脚本代替。lua脚本如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if redis.call(&apos;get&apos;,KEYS[1]) == ARGV[1] then </span><br><span class="line">   return redis.call(&apos;del&apos;,KEYS[1]) </span><br><span class="line">else</span><br><span class="line">   return 0</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<h3 id="9-7-MQ异步处理"><a href="#9-7-MQ异步处理" class="headerlink" title="9.7 MQ异步处理"></a>9.7 MQ异步处理</h3><p>如果瞬间流量特别大，可以使用消息队列削峰，异步处理。用户请求过来的时候，先放到消息队列，再拿出来消费。</p>
+<h3 id="9-8-限流-amp-降级-amp-熔断"><a href="#9-8-限流-amp-降级-amp-熔断" class="headerlink" title="9.8 限流&amp;降级&amp;熔断"></a>9.8 限流&amp;降级&amp;熔断</h3><ul>
+<li>限流，就是限制请求，防止过大的请求压垮服务器；</li>
+<li>降级，就是秒杀服务有问题了，就降级处理，不要影响别的服务；</li>
+<li>熔断，服务有问题就熔断，一般熔断降级是一起出现。</li>
+</ul>
+<h2 id="10-聊聊分库分表-分表为什么要停服这种操作，如果不停服可以怎么做"><a href="#10-聊聊分库分表-分表为什么要停服这种操作，如果不停服可以怎么做" class="headerlink" title="10. 聊聊分库分表,分表为什么要停服这种操作，如果不停服可以怎么做"></a>10. 聊聊分库分表,分表为什么要停服这种操作，如果不停服可以怎么做</h2><h3 id="10-1-分库分表方案"><a href="#10-1-分库分表方案" class="headerlink" title="10.1 分库分表方案"></a>10.1 分库分表方案</h3><ul>
+<li>水平分库：以字段为依据，按照一定策略（hash、range等），将一个库中的数据拆分到多个库中。</li>
+<li>水平分表：以字段为依据，按照一定策略（hash、range等），将一个表中的数据拆分到多个表中。</li>
+<li>垂直分库：以表为依据，按照业务归属不同，将不同的表拆分到不同的库中。</li>
+<li>垂直分表：以字段为依据，按照字段的活跃性，将表中字段拆到不同的表（主表和扩展表）中。</li>
+</ul>
+<h3 id="10-2-常用的分库分表中间件："><a href="#10-2-常用的分库分表中间件：" class="headerlink" title="10.2 常用的分库分表中间件："></a>10.2 常用的分库分表中间件：</h3><ul>
+<li>sharding-jdbc（当当）</li>
+<li>Mycat</li>
+<li>TDDL（淘宝）</li>
+<li>Oceanus(58同城数据库中间件)</li>
+<li>vitess（谷歌开发的数据库中间件）</li>
+<li>Atlas(Qihoo 360)</li>
+</ul>
+<h3 id="10-3-分库分表可能遇到的问题"><a href="#10-3-分库分表可能遇到的问题" class="headerlink" title="10.3 分库分表可能遇到的问题"></a>10.3 分库分表可能遇到的问题</h3><ul>
+<li>事务问题：需要用分布式事务啦</li>
+<li>跨节点Join的问题：解决这一问题可以分两次查询实现</li>
+<li>跨节点的count,order by,group by以及聚合函数问题：分别在各个节点上得到结果后在应用程序端进行合并。</li>
+<li>数据迁移，容量规划，扩容等问题</li>
+<li>ID问题：数据库被切分后，不能再依赖数据库自身的主键生成机制啦，最简单可以考虑UUID</li>
+<li>跨分片的排序分页问题（后台加大pagesize处理？）</li>
+</ul>
+<h3 id="10-4-分表要停服嘛？不停服怎么做？"><a href="#10-4-分表要停服嘛？不停服怎么做？" class="headerlink" title="10.4 分表要停服嘛？不停服怎么做？"></a>10.4 分表要停服嘛？不停服怎么做？</h3><p>不用。不停服的时候，应该怎么做呢，分五个步骤：</p>
+<ol>
+<li>编写代理层，加个开关（控制访问新的DAO还是老的DAO，或者是都访问），灰度期间，还是访问老的DAO。</li>
+<li>发版全量后，开启双写，既在旧表新增和修改，也在新表新增和修改。日志或者临时表记下新表ID起始值，旧表中小于这个值的数据就是存量数据，这批数据就是要迁移的。</li>
+<li>通过脚本把旧表的存量数据写入新表。</li>
+<li>停读旧表改读新表，此时新表已经承载了所有读写业务，但是这时候不要立刻停写旧表，需要保持双写一段时间。</li>
+<li>当读写新表一段时间之后，如果没有业务问题，就可以停写旧表啦</li>
+</ol>
+<h2 id="11-redis挂了怎么办？"><a href="#11-redis挂了怎么办？" class="headerlink" title="11. redis挂了怎么办？"></a>11. redis挂了怎么办？</h2><p>Redis是基于内存的非关系型K-V数据库，既然它是基于内存的，如果Redis服务器挂了，数据就会丢失。为了避免数据丢失了，Redis提供了持久化，即把数据保存到磁盘。</p>
+<p>Redis提供了<strong>RDB和AOF</strong>两种持久化机制，它持久化文件加载流程如下：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865832.webp" alt="图片"></p>
+<h3 id="11-1-RDB"><a href="#11-1-RDB" class="headerlink" title="11.1 RDB"></a>11.1 RDB</h3><p>RDB，就是把内存数据以快照的形式保存到磁盘上。</p>
+<p><strong>什么是快照?</strong> 可以这样理解，给当前时刻的数据，拍一张照片，然后保存下来。</p>
+<p><strong>RDB持久化</strong>，是指在指定的时间间隔内，执行指定次数的写操作，将内存中的数据集快照写入磁盘中，它是Redis默认的持久化方式。执行完操作后，在指定目录下会生成一个dump.rdb文件，Redis 重启的时候，通过加载dump.rdb文件来恢复数据。RDB触发机制主要有以下几种：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865833.webp" alt="图片"></p>
+<p><strong>RDB 的优点</strong></p>
+<ul>
+<li>适合大规模的数据恢复场景，如备份，全量复制等</li>
+</ul>
+<p><strong>RDB缺点</strong></p>
+<ul>
+<li>没办法做到实时持久化/秒级持久化。</li>
+<li>新老版本存在RDB格式兼容问题</li>
+</ul>
+<h3 id="11-2-AOF"><a href="#11-2-AOF" class="headerlink" title="11.2 AOF"></a>11.2 AOF</h3><p>AOF（append only file） 持久化，采用日志的形式来记录每个写操作，追加到文件中，重启时再重新执行AOF文件中的命令来恢复数据。它主要解决数据持久化的实时性问题。默认是不开启的。</p>
+<p>AOF的工作流程如下：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865834.webp" alt="图片"></p>
+<p><strong>AOF的优点</strong></p>
+<ul>
+<li>数据的一致性和完整性更高</li>
+</ul>
+<p><strong>AOF的缺点</strong></p>
+<ul>
+<li>AOF记录的内容越多，文件越大，数据恢复变慢。</li>
+</ul>
+<h2 id="12-你怎么防止优惠券有人重复刷？"><a href="#12-你怎么防止优惠券有人重复刷？" class="headerlink" title="12.你怎么防止优惠券有人重复刷？"></a>12.你怎么防止优惠券有人重复刷？</h2><p>对于重复请求，要考虑<strong>接口幂等</strong>和<strong>接口防重</strong>。</p>
+<p>大家可以看下之前我写的这篇文章哈：<a href="https://mp.weixin.qq.com/s?__biz=Mzg3NzU5NTIwNg==&amp;mid=2247497427&amp;idx=1&amp;sn=2ed160c9917ad989eee1ac60d6122855&amp;chksm=cf2229faf855a0ecf5eb34c7335acdf6420426490ee99fc2b602d54ff4ffcecfdab24eeab0a3&amp;token=529683793&amp;lang=zh_CN&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">聊聊幂等设计</a></p>
+<p>防刷的话，可以限流以及加入黑名单处理。</p>
+<ul>
+<li>为了防止某个用户请求优惠券过于频繁，我们可以对同一用户限流。</li>
+<li>为了防止黄牛等模拟几个用户请求，我们可以对某个IP进行限流。</li>
+<li>为了防止有人使用代理，每次请求都更换IP请求，我们可以对接口进行限流。</li>
+</ul>
+<h2 id="13-抖音评论系统怎么设计，如果加入好友关系呢？"><a href="#13-抖音评论系统怎么设计，如果加入好友关系呢？" class="headerlink" title="13. 抖音评论系统怎么设计，如果加入好友关系呢？"></a>13. 抖音评论系统怎么设计，如果加入好友关系呢？</h2><p>需要考虑性能，以及可扩展性。大家平时有没有做过评论、好友关注等项目需求呀，发挥你聪明的小脑袋瓜，怎么去回答好这道题吧。</p>
+<h2 id="14-怎么设计一个短链地址，要考虑跨机房部署问题"><a href="#14-怎么设计一个短链地址，要考虑跨机房部署问题" class="headerlink" title="14. 怎么设计一个短链地址，要考虑跨机房部署问题"></a>14. 怎么设计一个短链地址，要考虑跨机房部署问题</h2><h3 id="14-1-为什么需要短连接？"><a href="#14-1-为什么需要短连接？" class="headerlink" title="14.1 为什么需要短连接？"></a>14.1 为什么需要短连接？</h3><p>为什么需要<strong>短连接</strong>呢？长链接不香吗？因为有些平台有<strong>长度限制</strong>，并且<strong>链接太长容易被识别</strong>为超链接等等。</p>
+<h3 id="14-2-短链接的原理"><a href="#14-2-短链接的原理" class="headerlink" title="14.2 短链接的原理"></a>14.2 短链接的原理</h3><p>其实就是一个<strong>302重定向</strong>而已。</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865835.webp" alt="图片"></p>
+<p>302状态码表示<strong>临时重定向</strong>。</p>
+<h3 id="14-3-短链接生成的方法"><a href="#14-3-短链接生成的方法" class="headerlink" title="14.3 短链接生成的方法"></a>14.3 短链接生成的方法</h3><p>可以用哈希算法生成短链，但是会存在<strong>哈希冲突</strong>。怎么解决呢？可以用布隆过滤器。</p>
+<p>有没有别的方案？自增序列算法，每次收到一个长链时，就分配一个ID，并转成62进制拼接到短域后面。因为高并发下，ID 自增生成器可能成为瓶颈。</p>
+<p>一般有四种分布式ID生成方法：</p>
+<ol>
+<li>uuid，它保证对在同一时空中的所有机器都是唯一的，但是这种方式生成的id比较长，并且是无序的，插入浪费空间。</li>
+<li>Snowflake雪花算法，这种方案不错，但是如果某台机器的系统时钟回拨，有可能造成ID冲突重复，或者ID乱序（考虑跨机房部署问题）</li>
+<li>Mysql 自增主键，在高并发下，db的写压力会很大</li>
+<li>用Redis做自增id生成器，性能高，但要考虑持久性的问题；或者改造雪花算法，通过改造workId解决时钟回拨的问题）</li>
+</ol>
+<h2 id="15-有一个整型数组，数组元素不重复，数组元素先升序后降序，找出最大值。"><a href="#15-有一个整型数组，数组元素不重复，数组元素先升序后降序，找出最大值。" class="headerlink" title="15.有一个整型数组，数组元素不重复，数组元素先升序后降序，找出最大值。"></a>15.有一个整型数组，数组元素不重复，数组元素先升序后降序，找出最大值。</h2><blockquote>
+<p>例如：1,3,5,7,9,8,6,4,2，请写一个函数找出数组最大的元素</p>
+</blockquote>
+<p>这道题大家都会觉得很简单，因为用快速排序排一下，时间复杂是O(nlgn)，面试官可能不是很满意。其实可以用二分查找法，只要找到升序最后一个元素即可。</p>
+<p>我们以<code>1,6,5,4,2</code>为例子，用二分法图解一下哈：</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865936.webp" alt="图片"></p>
+<p>如何用二分法缩小空间呢？只要比较中间元素与其下一个元素大小即可</p>
+<blockquote>
+<ol>
+<li>如果中间元素大于其下一个元素大小，证明最大值在左侧，因此右指针左移</li>
+<li>如果中间元素小于其下一个元素大小，证明最大值在左侧，因此右指针左移</li>
+</ol>
+</blockquote>
+<p>因为<code>nums[mid]=5&gt;nums[mid+1]=4</code>,因此右指针左移，<code>right=mid-1=2-1=1</code></p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865937.webp" alt="图片"></p>
+<p><code>mid = left+ (right-left)/2=left=0</code>,因为<code>nums[mid]=1&lt;nums[mid+1]=6</code>,所以左指针右移，<code>left = mid+1=1</code>；</p>
+<p><img src="../四年半工作经验的字节面试真题（附答案）/640-164516523865938.webp" alt="图片"></p>
+<p>最后得出最大值是<code>nums[left] =nums[1]=6</code></p>
+<p>实现代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] nums = &#123;1,3,5,7,9,8,6,4,2&#125;;</span><br><span class="line">        System.out.println(getLargestNumInArray(nums));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static int getLargestNumInArray(int[] nums) &#123;</span><br><span class="line">        if (nums == null || nums.length == 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int left = 0, right = nums.length - 1;</span><br><span class="line">        while (left &lt;= right) &#123;</span><br><span class="line">            int mid = left + ((right - left) / 2);</span><br><span class="line">            if (nums[mid] &lt; nums[mid + 1]) &#123;</span><br><span class="line">                left = mid + 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                right = mid - 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>·········· END ··············</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sixpence0112.github.io/2022/02/18/四年半工作经验的字节面试真题（附答案）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/01/17/自我修养/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">自我修养</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Sixpence
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span></span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Sixpence"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<!-- Tocbot -->
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+<script src="/dist/main.js"></script>
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+<link rel="stylesheet" href="/css/clipboard.css">
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>
